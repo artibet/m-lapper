@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">lapper</string>
+    <string name="username">Όνομα χρήστη</string>
+    <string name="password">Κωδικός</string>
+    <string name="login">Σύνδεση</string>
+    <string name="member_login">Σύνδεση μέλους</string>
+</resources>

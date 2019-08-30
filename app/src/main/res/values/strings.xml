@@ -4,4 +4,6 @@
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="member_login">Member Login</string>
+    <string name="username_required">Username is required</string>
+    <string name="password_required">Password required</string>
 </resources>

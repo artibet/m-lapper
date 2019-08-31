@@ -7,4 +7,5 @@
     <string name="member_login">Σύνδεση μέλους</string>
     <string name="username_required">Το όνομα χρήστη είναι υποχρεωτικό</string>
     <string name="password_required">Ο κωδικός πρόβασης είναι υποχρεωτικός</string>
+    <string name="invalid_credentials">Μη έγκυρα διαπιστευτήρια</string>
 </resources>

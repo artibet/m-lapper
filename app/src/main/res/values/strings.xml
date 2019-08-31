@@ -6,4 +6,5 @@
     <string name="member_login">Member Login</string>
     <string name="username_required">Username is required</string>
     <string name="password_required">Password required</string>
+    <string name="invalid_credentials">Invalid credentials</string>
 </resources>

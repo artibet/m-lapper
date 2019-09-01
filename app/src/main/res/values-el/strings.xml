@@ -18,4 +18,7 @@
     <string name="vehicles">Οχήματα</string>
     <string name="sensors">Αισθητήρες</string>
     <string name="users">Χρήστες</string>
+    <string name="exit">Έξοδος</string>
+    <string name="exit_application">Τερματισμός εφαρμογής?</string>
+    <string name="cancel_exit">Επιστροφή</string>
 </resources>

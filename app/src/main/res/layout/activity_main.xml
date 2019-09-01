@@ -13,11 +13,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:background="?colorPrimary"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+<!--        <androidx.appcompat.widget.Toolbar-->
+<!--            android:id="@+id/toolbar"-->
+<!--            android:background="?colorPrimary"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"/>-->
 
         <fragment
             android:id="@+id/fragment"

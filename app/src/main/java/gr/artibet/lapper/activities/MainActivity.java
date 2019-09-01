@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import android.content.DialogInterface;
@@ -18,6 +19,8 @@ import com.google.android.material.navigation.NavigationView;
 
 import gr.artibet.lapper.R;
 import gr.artibet.lapper.storage.SharedPrefManager;
+
+import static androidx.navigation.ui.AppBarConfiguration.*;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
         // Setup action bar
         mDrawerLayout = findViewById(R.id.drawer_layout);
         NavigationUI.setupActionBarWithNavController(this, mNavController, mDrawerLayout);
-
     }
 
     // Navigation drawer

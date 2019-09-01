@@ -1,5 +1,7 @@
 apply plugin: 'com.android.application'
 
+apply plugin: "androidx.navigation.safeargs"
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -22,6 +24,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
@@ -29,4 +32,9 @@ dependencies {
     // Rerofit/GSON
     implementation 'com.squareup.retrofit2:retrofit:2.6.1'
     implementation 'com.squareup.retrofit2:converter-gson:2.6.1'
+
+    // NavigationUI
+    def nav_version = "2.1.0-rc01"
+    implementation "androidx.navigation:navigation-fragment:$nav_version"
+    implementation "androidx.navigation:navigation-ui:$nav_version"
 }

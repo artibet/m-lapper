@@ -8,4 +8,14 @@
     <string name="username_required">Το όνομα χρήστη είναι υποχρεωτικό</string>
     <string name="password_required">Ο κωδικός πρόβασης είναι υποχρεωτικός</string>
     <string name="invalid_credentials">Μη έγκυρα διαπιστευτήρια</string>
+    <string name="logout">Αποσύνδεση</string>
+    <string name="dashboard">Επισκόπηση</string>
+    <string name="pending_races">Εκκρεμείς αγώνες</string>
+    <string name="active_races">Ενεργοί αγώνες</string>
+    <string name="inprogress_races">Αγώνες σε εξέλιξη</string>
+    <string name="completed_races">Ολοκληρωμένοι αγώνες</string>
+    <string name="canceled_races">Ακυρωμένοι αγώνες</string>
+    <string name="vehicles">Οχήματα</string>
+    <string name="sensors">Αισθητήρες</string>
+    <string name="users">Χρήστες</string>
 </resources>

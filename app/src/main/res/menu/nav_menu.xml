@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:id="@+id/grp1">
+        <item
+            android:id="@+id/dashboardFragment"
+            android:title="@string/dashboard" />
+    </group>
+
+    <group android:id="@+id/grp2">
+
+        <item
+            android:id="@+id/pendingRacesFragment"
+            android:title="@string/pending_races" />
+
+        <item
+            android:id="@+id/activeRacesFragment"
+            android:title="@string/active_races" />
+
+        <item
+            android:id="@+id/inProgressRacesFragment"
+            android:title="@string/inprogress_races" />
+
+        <item
+            android:id="@+id/completedRacesFragment"
+            android:title="@string/completed_races" />
+
+        <item
+            android:id="@+id/canceledRacesFragment"
+            android:title="@string/canceled_races" />
+
+    </group>
+
+    <group android:id="@+id/grp3">
+
+        <item
+            android:id="@+id/vehiclesFragment"
+            android:title="@string/vehicles" />
+
+        <item
+            android:id="@+id/sensorsFragment"
+            android:title="@string/sensors" />
+
+        <item
+            android:id="@+id/usersFragment"
+            android:title="@string/users" />
+
+    </group>
+
+</menu>

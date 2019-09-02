@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <group android:id="@+id/grp1">
 
         <item
             android:id="@+id/action_logout"
-            android:title="@string/logout" />
+            android:title="@string/logout"
+            android:icon="@drawable/ic_logout"/>
 
     </group>
 
@@ -13,7 +15,8 @@
 
         <item
             android:id="@+id/action_exit"
-            android:title="@string/exit" />
+            android:title="@string/exit"
+            android:icon="@drawable/ic_exit" />
 
     </group>
 

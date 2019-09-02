@@ -1,7 +1,10 @@
 package gr.artibet.lapper.activities;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -34,6 +37,33 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         // Set click listener for login button
         findViewById(R.id.buttonLogin).setOnClickListener(this);
 
+    }
+
+    // Option menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.login_menu, menu);
+        return true;
+    }
+
+    // Option menu item actions
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+
+            case R.id.action_exit:
+                actionExit();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    // If back button pressed and drawer is open close it
+    @Override
+    public void onBackPressed() {
+        actionExit();
     }
 
     // If users is already logged in start main activity
@@ -122,6 +152,32 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
         };
 
+    }
+
+    // Exit action with confirmation
+    private void actionExit() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.app_name);
+        builder.setMessage(R.string.exit_application);
+
+        // Exit button
+        builder.setPositiveButton(R.string.exit, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+
+        // Cancel button
+        builder.setNegativeButton(R.string.cancel_exit, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+
+        // Show confirmation dialog
+        builder.show();
     }
 
 

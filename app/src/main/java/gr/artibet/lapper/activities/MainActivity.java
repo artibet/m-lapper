@@ -63,6 +63,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        // Set menu items visibility for admin/user
+        setMenuItemsVisible();
+
         // Set dashboard fragment if no fragment exist
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new DashboardFragment()).commit();
@@ -209,6 +212,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    // Hide menu items if user is not admin
+    private void setMenuItemsVisible() {
+        if (!SharedPrefManager.getInstance(this).isAdmin()) {
+            NavigationView navView = findViewById(R.id.nav_view);
+            Menu menu = navView.getMenu();
+            menu.findItem(R.id.sensorsFragment).setVisible(false);
+            menu.findItem(R.id.usersFragment).setVisible(false);
+        }
     }
 
 }

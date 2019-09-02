@@ -49,6 +49,12 @@ public class SharedPrefManager {
         return sharedPreferences.getInt("id", -1) != -1;
     }
 
+    // Check if user is admin
+    public boolean isAdmin() {
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getBoolean("isSuperuser", false);
+    }
+
     // Get logged in user - It's an instance of LoginResponse
     public LoginResponse getLoggedInUser() {
         SharedPreferences sharedPreferences = mContext.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);

@@ -1,48 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:id="@+id/grp1">
+    <group android:id="@+id/grp1" android:checkableBehavior="single">
         <item
             android:id="@+id/dashboardFragment"
+            android:icon="@drawable/ic_dashboard"
             android:title="@string/dashboard" />
-    </group>
-
-    <group android:id="@+id/grp2">
 
         <item
             android:id="@+id/pendingRacesFragment"
+            android:icon="@drawable/ic_pending_races"
             android:title="@string/pending_races" />
 
         <item
             android:id="@+id/activeRacesFragment"
+            android:icon="@drawable/ic_active_races"
             android:title="@string/active_races" />
 
         <item
             android:id="@+id/inProgressRacesFragment"
+            android:icon="@drawable/ic_inprogress_races"
             android:title="@string/inprogress_races" />
 
         <item
             android:id="@+id/completedRacesFragment"
+            android:icon="@drawable/ic_completed_races"
             android:title="@string/completed_races" />
 
         <item
             android:id="@+id/canceledRacesFragment"
+            android:icon="@drawable/ic_canceled_races"
             android:title="@string/canceled_races" />
-
-    </group>
-
-    <group android:id="@+id/grp3">
 
         <item
             android:id="@+id/vehiclesFragment"
+            android:icon="@drawable/ic_vehicle"
             android:title="@string/vehicles" />
 
         <item
             android:id="@+id/sensorsFragment"
+            android:icon="@drawable/ic_sensor"
             android:title="@string/sensors" />
 
         <item
             android:id="@+id/usersFragment"
+            android:icon="@drawable/ic_users"
             android:title="@string/users" />
 
     </group>

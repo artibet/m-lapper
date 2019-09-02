@@ -21,4 +21,7 @@
     <string name="exit">Έξοδος</string>
     <string name="exit_application">Τερματισμός εφαρμογής?</string>
     <string name="cancel_exit">Επιστροφή</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="navigation_drawer_close">Άνοιγμα του μενού επιλογών</string>
+    <string name="navigation_drawer_open">Κλείσιμο του μενού επιλογών</string>
 </resources>

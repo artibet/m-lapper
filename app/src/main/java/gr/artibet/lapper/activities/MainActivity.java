@@ -1,8 +1,11 @@
 package gr.artibet.lapper.activities;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -18,14 +21,21 @@ import android.view.MenuItem;
 import com.google.android.material.navigation.NavigationView;
 
 import gr.artibet.lapper.R;
+import gr.artibet.lapper.fragments.ActiveRacesFragment;
+import gr.artibet.lapper.fragments.CanceledRacesFragment;
+import gr.artibet.lapper.fragments.CompletedRacesFragment;
+import gr.artibet.lapper.fragments.DashboardFragment;
+import gr.artibet.lapper.fragments.InProgressRacesFragment;
+import gr.artibet.lapper.fragments.PendingRacesFragment;
+import gr.artibet.lapper.fragments.SensorsFragment;
+import gr.artibet.lapper.fragments.UsersFragment;
+import gr.artibet.lapper.fragments.VehiclesFragment;
 import gr.artibet.lapper.storage.SharedPrefManager;
 
 import static androidx.navigation.ui.AppBarConfiguration.*;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private NavController mNavController;
-    private NavigationView mNavView;
     private DrawerLayout mDrawerLayout;
 
     @Override
@@ -33,23 +43,44 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Toolbar toolbar = findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
+        // Set action bar
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-        // Setup navigationUI
-        mNavController = Navigation.findNavController(this, R.id.fragment);
-        mNavView = findViewById(R.id.nav_view);
-        NavigationUI.setupWithNavController(mNavView, mNavController);
-
-        // Setup action bar
+        // Setup navigation drawer hamburger icon
         mDrawerLayout = findViewById(R.id.drawer_layout);
-        NavigationUI.setupActionBarWithNavController(this, mNavController, mDrawerLayout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+               this,
+               mDrawerLayout,
+               toolbar,
+               R.string.navigation_drawer_open,
+               R.string.navigation_drawer_close
+        );
+        mDrawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+        // Navigation view listener
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        // Set dashboard fragment if no fragment exist
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new DashboardFragment()).commit();
+            getSupportActionBar().setTitle(R.string.dashboard);
+            navigationView.setCheckedItem(R.id.dashboardFragment);
+        }
+
     }
 
-    // Navigation drawer
+    // If back button pressed and drawer is open close it
     @Override
-    public boolean onSupportNavigateUp() {
-        return NavigationUI.navigateUp(mNavController, mDrawerLayout);
+    public void onBackPressed() {
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            mDrawerLayout.closeDrawer(GravityCompat.START);
+        }
+        else {
+            actionExit();
+        }
     }
 
     // Option menu
@@ -123,4 +154,61 @@ public class MainActivity extends AppCompatActivity {
         // Show confirmation dialog
         builder.show();
     }
+
+    // Navigation drawer items selected listener
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        switch(menuItem.getItemId()) {
+
+            case R.id.dashboardFragment:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new DashboardFragment()).commit();
+                getSupportActionBar().setTitle(R.string.dashboard);
+                break;
+
+            case R.id.pendingRacesFragment:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new PendingRacesFragment()).commit();
+                getSupportActionBar().setTitle(R.string.pending_races);
+                break;
+
+            case R.id.activeRacesFragment:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ActiveRacesFragment()).commit();
+                getSupportActionBar().setTitle(R.string.active_races);
+                break;
+
+            case R.id.inProgressRacesFragment:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new InProgressRacesFragment()).commit();
+                getSupportActionBar().setTitle(R.string.inprogress_races);
+                break;
+
+            case R.id.completedRacesFragment:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CompletedRacesFragment()).commit();
+                getSupportActionBar().setTitle(R.string.completed_races);
+                break;
+
+            case R.id.canceledRacesFragment:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CanceledRacesFragment()).commit();
+                getSupportActionBar().setTitle(R.string.canceled_races);
+                break;
+
+            case R.id.vehiclesFragment:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new VehiclesFragment()).commit();
+                getSupportActionBar().setTitle(R.string.vehicles);
+                break;
+
+            case R.id.sensorsFragment:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SensorsFragment()).commit();
+                getSupportActionBar().setTitle(R.string.sensors);
+                break;
+
+            case R.id.usersFragment:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new UsersFragment()).commit();
+                getSupportActionBar().setTitle(R.string.users);
+                break;
+
+        }
+
+        mDrawerLayout.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
 }

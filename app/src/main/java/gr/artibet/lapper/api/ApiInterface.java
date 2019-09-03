@@ -1,6 +1,6 @@
 package gr.artibet.lapper.api;
 
-import gr.artibet.lapper.models.response.LoginResponse;
+import gr.artibet.lapper.models.LoginUser;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -11,7 +11,7 @@ public interface ApiInterface {
     // Login POST request
     @FormUrlEncoded
     @POST("api/auth-token/")
-    Call<LoginResponse> login(
+    Call<LoginUser> login(
             @Field("username") String username,
             @Field("password") String password
     );

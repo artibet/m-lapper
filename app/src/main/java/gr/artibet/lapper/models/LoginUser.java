@@ -1,8 +1,8 @@
-package gr.artibet.lapper.models.response;
+package gr.artibet.lapper.models;
 
 import com.google.gson.annotations.SerializedName;
 
-public class LoginResponse {
+public class LoginUser {
 
     // -------------------------------------------------------------------------------------
     // CLASS FIELDS
@@ -35,7 +35,7 @@ public class LoginResponse {
     // -------------------------------------------------------------------------------------
     // CONSTRUCTOR - INITIALIZE ALL FIELDS
     // -------------------------------------------------------------------------------------
-    public LoginResponse(String token, int id, String username, String firstName, String lastName, String email, boolean isSuperuser, boolean isStaff) {
+    public LoginUser(String token, int id, String username, String firstName, String lastName, String email, boolean isSuperuser, boolean isStaff) {
         this.token = token;
         this.id = id;
         this.username = username;

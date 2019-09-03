@@ -3,7 +3,7 @@ package gr.artibet.lapper.storage;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import gr.artibet.lapper.models.response.LoginResponse;
+import gr.artibet.lapper.models.LoginUser;
 
 // Shared preferences  client SINGLETON class
 public class SharedPrefManager {
@@ -27,7 +27,7 @@ public class SharedPrefManager {
     }
 
     // Store logged in user
-    public void saveLoggedInUser(LoginResponse loginUser) {
+    public void saveLoggedInUser(LoginUser loginUser) {
         SharedPreferences sharedPreferences = mContext.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
@@ -55,10 +55,10 @@ public class SharedPrefManager {
         return sharedPreferences.getBoolean("isSuperuser", false);
     }
 
-    // Get logged in user - It's an instance of LoginResponse
-    public LoginResponse getLoggedInUser() {
+    // Get logged in user - It's an instance of LoginUser
+    public LoginUser getLoggedInUser() {
         SharedPreferences sharedPreferences = mContext.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        return new LoginResponse(
+        return new LoginUser(
                 sharedPreferences.getString("token", null),
                 sharedPreferences.getInt("id", -1),
                 sharedPreferences.getString("username", null),

@@ -2,7 +2,6 @@ package gr.artibet.lapper.activities;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,11 +10,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import gr.artibet.lapper.R;
+import gr.artibet.lapper.Util;
 import gr.artibet.lapper.api.RetrofitClient;
-import gr.artibet.lapper.models.response.LoginResponse;
+import gr.artibet.lapper.models.LoginUser;
 import gr.artibet.lapper.storage.SharedPrefManager;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -99,22 +98,22 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
 
         // Do user login through api
-        Call<LoginResponse> call = RetrofitClient
+        Call<LoginUser> call = RetrofitClient
                 .getInstance()
                 .getApi()
                 .login(username, password);
 
-        call.enqueue(new Callback<LoginResponse>() {
+        call.enqueue(new Callback<LoginUser>() {
             @Override
-            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+            public void onResponse(Call<LoginUser> call, Response<LoginUser> response) {
 
                 if (!response.isSuccessful()) {
                     String errorMessage = getString(R.string.invalid_credentials);
-                    Toast.makeText(LoginActivity.this, errorMessage, Toast.LENGTH_LONG).show();
+                    Util.errorToast(LoginActivity.this, errorMessage);
                     return;
                 }
                 else {
-                    LoginResponse resp = response.body();
+                    LoginUser resp = response.body();
 
                     // Store logged in user into shared preferences
                     SharedPrefManager.getInstance(LoginActivity.this).saveLoggedInUser(resp);
@@ -126,8 +125,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
 
             @Override
-            public void onFailure(Call<LoginResponse> call, Throwable t) {
-                Toast.makeText(LoginActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+            public void onFailure(Call<LoginUser> call, Throwable t) {
+                String errorMessage = "Αδυναμία σύνδεσης στον διακομιστή εξυπηρέτησης";
+                Util.errorToast(LoginActivity.this, errorMessage);
             }
         });
 

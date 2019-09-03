@@ -50,7 +50,7 @@ public class DashboardFragment extends Fragment {
         Call<List<LiveData>> call = RetrofitClient
                 .getInstance()
                 .getApi()
-                .getLiveData();
+                .getLiveData(SharedPrefManager.getInstance(getActivity()).getToken());
 
         call.enqueue(new Callback<List<LiveData>>() {
             @Override

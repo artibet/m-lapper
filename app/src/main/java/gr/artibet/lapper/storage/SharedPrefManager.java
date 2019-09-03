@@ -86,4 +86,15 @@ public class SharedPrefManager {
 
         editor.apply();
     }
+
+    // Return token header: Token XXXXX...
+    public String getToken() {
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        String token = sharedPreferences.getString("token", null);
+        if (token != null) {
+            token = "Token " + token;
+        }
+
+        return token;
+    }
 }

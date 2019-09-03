@@ -6,64 +6,64 @@ public class LiveData {
 
     // MEMBERS
 
-    @SerializedName("")
+    @SerializedName("id")
     private int id;
 
-    @SerializedName("")
+    @SerializedName("rv")
     private int rvId;
 
-    @SerializedName("")
+    @SerializedName("race")
     private NestedRace race;
 
-    @SerializedName("")
+    @SerializedName("vehicle")
     private Vehicle vehicle;
 
-    @SerializedName("")
+    @SerializedName("state")
     private RaceVehicleState rvState;
 
-    @SerializedName("")
+    @SerializedName("prev_sensor")
     private Sensor prevSensor;
 
-    @SerializedName("")
+    @SerializedName("last_sensor")
     private Sensor lastSensor;
 
-    @SerializedName("")
+    @SerializedName("prev_ts")
     private double prevTs;
 
-    @SerializedName("")
+    @SerializedName("last_ts")
     private double lastTs;
 
-    @SerializedName("")
+    @SerializedName("last_dt")
     private String lastDt;
 
-    @SerializedName("")
+    @SerializedName("lap")
     private int lap;
 
-    @SerializedName("")
+    @SerializedName("interval")
     private double interval;
 
-    @SerializedName("")
+    @SerializedName("interval_str")
     private String intervalString;
 
-    @SerializedName("")
+    @SerializedName("best_interval_str")
     private String bestIntervalString;
 
-    @SerializedName("")
+    @SerializedName("prev_interval")
     private double prevInterval;
 
-    @SerializedName("")
+    @SerializedName("lap_interval")
     private double lapInterval;
 
-    @SerializedName("")
+    @SerializedName("lap_interval_str")
     private String lapIntervalString;
 
-    @SerializedName("")
+    @SerializedName("best_lap_interval_str")
     private String bestLapIntervalString;
 
-    @SerializedName("")
+    @SerializedName("prev_lap_interval")
     private double prevLapInterval;
 
-    @SerializedName("")
+    @SerializedName("uflag")
     private boolean uflag;
 
     // GETTERS

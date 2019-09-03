@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -37,6 +38,7 @@ import static androidx.navigation.ui.AppBarConfiguration.*;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout mDrawerLayout;
+    private Fragment mCurrentFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -164,50 +166,76 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch(menuItem.getItemId()) {
 
             case R.id.dashboardFragment:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new DashboardFragment()).commit();
-                getSupportActionBar().setTitle(R.string.dashboard);
+                if (!(mCurrentFragment instanceof DashboardFragment)) {
+                    mCurrentFragment = new DashboardFragment();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, mCurrentFragment).commit();
+                    getSupportActionBar().setTitle(R.string.dashboard);
+                }
                 break;
 
             case R.id.pendingRacesFragment:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new PendingRacesFragment()).commit();
-                getSupportActionBar().setTitle(R.string.pending_races);
+                if (!(mCurrentFragment instanceof PendingRacesFragment)) {
+                    mCurrentFragment = new PendingRacesFragment();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, mCurrentFragment).commit();
+                    getSupportActionBar().setTitle(R.string.pending_races);
+                }
                 break;
 
             case R.id.activeRacesFragment:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ActiveRacesFragment()).commit();
-                getSupportActionBar().setTitle(R.string.active_races);
+                if (!(mCurrentFragment instanceof ActiveRacesFragment)) {
+                    mCurrentFragment = new ActiveRacesFragment();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, mCurrentFragment).commit();
+                    getSupportActionBar().setTitle(R.string.active_races);
+                }
                 break;
 
             case R.id.inProgressRacesFragment:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new InProgressRacesFragment()).commit();
-                getSupportActionBar().setTitle(R.string.inprogress_races);
+                if (!(mCurrentFragment instanceof InProgressRacesFragment)) {
+                    mCurrentFragment = new InProgressRacesFragment();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, mCurrentFragment).commit();
+                    getSupportActionBar().setTitle(R.string.inprogress_races);
+                }
                 break;
 
             case R.id.completedRacesFragment:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CompletedRacesFragment()).commit();
-                getSupportActionBar().setTitle(R.string.completed_races);
+                if (!(mCurrentFragment instanceof CompletedRacesFragment)) {
+                    mCurrentFragment = new CompletedRacesFragment();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, mCurrentFragment).commit();
+                    getSupportActionBar().setTitle(R.string.completed_races);
+                }
                 break;
 
             case R.id.canceledRacesFragment:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CanceledRacesFragment()).commit();
-                getSupportActionBar().setTitle(R.string.canceled_races);
+                if (!(mCurrentFragment instanceof CanceledRacesFragment)) {
+                    mCurrentFragment = new CanceledRacesFragment();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, mCurrentFragment).commit();
+                    getSupportActionBar().setTitle(R.string.canceled_races);
+                }
                 break;
 
             case R.id.vehiclesFragment:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new VehiclesFragment()).commit();
-                getSupportActionBar().setTitle(R.string.vehicles);
+                if (!(mCurrentFragment instanceof VehiclesFragment)) {
+                    mCurrentFragment = new VehiclesFragment();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, mCurrentFragment).commit();
+                    getSupportActionBar().setTitle(R.string.vehicles);
+                }
                 break;
 
             case R.id.sensorsFragment:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SensorsFragment()).commit();
-                getSupportActionBar().setTitle(R.string.sensors);
+                if (!(mCurrentFragment instanceof SensorsFragment)) {
+                    mCurrentFragment = new SensorsFragment();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, mCurrentFragment).commit();
+                    getSupportActionBar().setTitle(R.string.sensors);
+                }
                 break;
 
             case R.id.usersFragment:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new UsersFragment()).commit();
-                getSupportActionBar().setTitle(R.string.users);
+                if (!(mCurrentFragment instanceof UsersFragment)) {
+                    mCurrentFragment = new UsersFragment();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, mCurrentFragment).commit();
+                    getSupportActionBar().setTitle(R.string.users);
+                }
                 break;
-
         }
 
         mDrawerLayout.closeDrawer(GravityCompat.START);

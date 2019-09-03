@@ -8,6 +8,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.TimeZone;
+
 public class Util {
 
     // ---------------------------------------------------------------------------------------
@@ -40,5 +44,18 @@ public class Util {
         toast.setDuration(Toast.LENGTH_SHORT);
         toast.setView(layout);
         toast.show();
+    }
+
+    // ---------------------------------------------------------------------------------------
+    // Convert timestamp to HH:mm:ss.mmm
+    // ---------------------------------------------------------------------------------------
+    public static String TimestampToTime(double timestamp) {
+        long timeMills = (long)(timestamp * 1000);
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(timeMills);
+        TimeZone tz = cal.getTimeZone();
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss.SSS");
+        sdf.setTimeZone(tz);
+        return sdf.format(timeMills);
     }
 }

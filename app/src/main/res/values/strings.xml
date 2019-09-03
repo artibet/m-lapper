@@ -25,4 +25,8 @@
     <string name="exit">Exit</string>
     <string name="exit_application">Exit application?</string>
     <string name="cancel_exit">Cancel</string>
+    <string name="race">Race:</string>
+    <string name="sector">Sector:</string>
+    <string name="race_start">START</string>
+    <string name="no_race_in_progress">There isn\'t any race in progress</string>
 </resources>

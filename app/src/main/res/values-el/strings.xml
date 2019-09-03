@@ -24,4 +24,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="navigation_drawer_close">Άνοιγμα του μενού επιλογών</string>
     <string name="navigation_drawer_open">Κλείσιμο του μενού επιλογών</string>
+    <string name="race">Αγώνας:</string>
+    <string name="sector">Τομέας</string>
+    <string name="race_start">ΕΚΚΙΝΗΣΗ</string>
+    <string name="no_race_in_progress">Δεν υπάρχουν αγώνες σε εξέλιξη</string>
 </resources>

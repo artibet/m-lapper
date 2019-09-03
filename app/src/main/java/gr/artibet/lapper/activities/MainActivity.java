@@ -70,7 +70,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         // Set dashboard fragment if no fragment exist
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new DashboardFragment()).commit();
+            mCurrentFragment = new DashboardFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, mCurrentFragment).commit();
             getSupportActionBar().setTitle(R.string.dashboard);
             navigationView.setCheckedItem(R.id.dashboardFragment);
         }

@@ -14,7 +14,7 @@ import gr.artibet.lapper.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ActiveRacesFragment extends Fragment {
+public class ActiveRacesFragment extends MyFragment {
 
 
     public ActiveRacesFragment() {
@@ -29,4 +29,8 @@ public class ActiveRacesFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_active_races, container, false);
     }
 
+    @Override
+    public void refresh() {
+
+    }
 }

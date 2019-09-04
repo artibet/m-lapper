@@ -27,6 +27,7 @@ import gr.artibet.lapper.fragments.CanceledRacesFragment;
 import gr.artibet.lapper.fragments.CompletedRacesFragment;
 import gr.artibet.lapper.fragments.DashboardFragment;
 import gr.artibet.lapper.fragments.InProgressRacesFragment;
+import gr.artibet.lapper.fragments.MyFragment;
 import gr.artibet.lapper.fragments.PendingRacesFragment;
 import gr.artibet.lapper.fragments.SensorsFragment;
 import gr.artibet.lapper.fragments.UsersFragment;
@@ -38,7 +39,7 @@ import static androidx.navigation.ui.AppBarConfiguration.*;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout mDrawerLayout;
-    private Fragment mCurrentFragment;
+    private MyFragment mCurrentFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,6 +109,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 actionExit();
                 return true;
 
+            case R.id.action_refresh:
+                actionRefresh();
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -159,6 +164,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         // Show confirmation dialog
         builder.show();
+    }
+
+    // Send refresh to current fragment
+    private void actionRefresh() {
+        if (mCurrentFragment != null) {
+            mCurrentFragment.refresh();
+        }
     }
 
     // Navigation drawer items selected listener

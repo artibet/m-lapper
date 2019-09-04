@@ -30,7 +30,7 @@ import retrofit2.Response;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DashboardFragment extends Fragment {
+public class DashboardFragment extends MyFragment {
 
     private List<LiveData> mLiveDataList;
     private ProgressBar mProgressBar;
@@ -107,8 +107,10 @@ public class DashboardFragment extends Fragment {
             }
         });
 
-
-
     }
 
+    @Override
+    public void refresh() {
+        fetchLiveData();
+    }
 }

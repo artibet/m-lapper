@@ -29,4 +29,5 @@
     <string name="race_start">ΕΚΚΙΝΗΣΗ</string>
     <string name="no_race_in_progress">Δεν υπάρχουν αγώνες σε εξέλιξη</string>
     <string name="refresh">Ανανέωση</string>
+    <string name="unable_to_connect">Αποτυχία σύνδεσης με τον διακομιστή</string>
 </resources>

@@ -34,7 +34,7 @@ public class DashboardFragment extends Fragment {
 
     private List<LiveData> mLiveDataList;
     private ProgressBar mProgressBar;
-    private TextView mNoData;
+    private TextView mTvMessage;
 
     // Recycler view members
     private RecyclerView mRecyclerView;
@@ -56,7 +56,7 @@ public class DashboardFragment extends Fragment {
 
         // Initialize views and layouts
         mProgressBar = v.findViewById(R.id.progressBar);
-        mNoData = v.findViewById(R.id.tvNoData);
+        mTvMessage = v.findViewById(R.id.tvMessage);
         mRecyclerView = v.findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
@@ -69,8 +69,9 @@ public class DashboardFragment extends Fragment {
     // FETCH LIVE DATA
     public void fetchLiveData() {
 
-        // Show progress bar
+        // Show progress bar and hide message text
         mProgressBar.setVisibility(View.VISIBLE);
+        mTvMessage.setVisibility(View.INVISIBLE);
 
         Call<List<LiveData>> call = RetrofitClient
                 .getInstance()
@@ -82,8 +83,9 @@ public class DashboardFragment extends Fragment {
             public void onResponse(Call<List<LiveData>> call, Response<List<LiveData>> response) {
 
                 if (!response.isSuccessful()) {
-                    String errorMessage = response.message();
-                    Util.errorToast(getActivity(), errorMessage);
+                    mTvMessage.setText(response.message());
+                    mTvMessage.setVisibility(View.VISIBLE);
+                    //Util.errorToast(getActivity(), response.message);
                 }
                 else {
                     mLiveDataList = response.body();
@@ -91,10 +93,11 @@ public class DashboardFragment extends Fragment {
                     mRecyclerView.setLayoutManager(mLayoutManager);
                     mRecyclerView.setAdapter(mAdapter);
                     if (mLiveDataList.size() == 0) {
-                        mNoData.setVisibility(View.VISIBLE);
+                        mTvMessage.setText(getResources().getString(R.string.no_race_in_progress));
+                        mTvMessage.setVisibility(View.VISIBLE);
                     }
                     else {
-                        mNoData.setVisibility(View.INVISIBLE);
+                        mTvMessage.setVisibility(View.INVISIBLE);
                     }
                 }
 
@@ -105,8 +108,8 @@ public class DashboardFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<LiveData>> call, Throwable t) {
-                String errorMessage = "Unable to connect to API Server";
-                Util.errorToast(getActivity(), t.getMessage());
+                mTvMessage.setText(getString(R.string.unable_to_connect));
+                mTvMessage.setVisibility(View.VISIBLE);
                 mProgressBar.setVisibility(View.INVISIBLE);
             }
         });

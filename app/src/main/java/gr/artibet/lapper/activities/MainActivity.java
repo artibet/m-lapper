@@ -8,10 +8,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -27,19 +23,16 @@ import gr.artibet.lapper.fragments.CanceledRacesFragment;
 import gr.artibet.lapper.fragments.CompletedRacesFragment;
 import gr.artibet.lapper.fragments.DashboardFragment;
 import gr.artibet.lapper.fragments.InProgressRacesFragment;
-import gr.artibet.lapper.fragments.MyFragment;
 import gr.artibet.lapper.fragments.PendingRacesFragment;
 import gr.artibet.lapper.fragments.SensorsFragment;
 import gr.artibet.lapper.fragments.UsersFragment;
 import gr.artibet.lapper.fragments.VehiclesFragment;
 import gr.artibet.lapper.storage.SharedPrefManager;
 
-import static androidx.navigation.ui.AppBarConfiguration.*;
-
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout mDrawerLayout;
-    private MyFragment mCurrentFragment;
+    private Fragment mCurrentFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -168,9 +161,44 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     // Send refresh to current fragment
     private void actionRefresh() {
-        if (mCurrentFragment != null) {
-            mCurrentFragment.refresh();
+        if (mCurrentFragment == null || mCurrentFragment instanceof DashboardFragment) {
+            mCurrentFragment = new DashboardFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, mCurrentFragment).commit();
+            getSupportActionBar().setTitle(R.string.dashboard);
         }
+        else if (mCurrentFragment instanceof PendingRacesFragment) {
+            mCurrentFragment = new PendingRacesFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, mCurrentFragment).commit();
+        }
+        else if (mCurrentFragment instanceof ActiveRacesFragment) {
+            mCurrentFragment = new ActiveRacesFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, mCurrentFragment).commit();
+        }
+        else if (mCurrentFragment instanceof InProgressRacesFragment) {
+            mCurrentFragment = new InProgressRacesFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, mCurrentFragment).commit();
+        }
+        else if (mCurrentFragment instanceof CompletedRacesFragment) {
+            mCurrentFragment = new CompletedRacesFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, mCurrentFragment).commit();
+        }
+        else if (mCurrentFragment instanceof CanceledRacesFragment) {
+            mCurrentFragment = new CanceledRacesFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, mCurrentFragment).commit();
+        }
+        else if (mCurrentFragment instanceof VehiclesFragment) {
+            mCurrentFragment = new VehiclesFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, mCurrentFragment).commit();
+        }
+        else if (mCurrentFragment instanceof SensorsFragment) {
+            mCurrentFragment = new SensorsFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, mCurrentFragment).commit();
+        }
+        else if (mCurrentFragment instanceof UsersFragment) {
+            mCurrentFragment = new UsersFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, mCurrentFragment).commit();
+        }
+
     }
 
     // Navigation drawer items selected listener
@@ -254,6 +282,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    // Create - Recreate fragments
 
     // Hide menu items if user is not admin
     private void setMenuItemsVisible() {

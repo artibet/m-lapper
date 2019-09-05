@@ -30,7 +30,7 @@ import retrofit2.Response;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DashboardFragment extends MyFragment {
+public class DashboardFragment extends Fragment {
 
     private List<LiveData> mLiveDataList;
     private ProgressBar mProgressBar;
@@ -69,6 +69,9 @@ public class DashboardFragment extends MyFragment {
     // FETCH LIVE DATA
     public void fetchLiveData() {
 
+        // Show progress bar
+        mProgressBar.setVisibility(View.VISIBLE);
+
         Call<List<LiveData>> call = RetrofitClient
                 .getInstance()
                 .getApi()
@@ -97,6 +100,7 @@ public class DashboardFragment extends MyFragment {
 
                 // Hide progress bar
                 mProgressBar.setVisibility(View.INVISIBLE);
+
             }
 
             @Override
@@ -107,10 +111,8 @@ public class DashboardFragment extends MyFragment {
             }
         });
 
+
+
     }
 
-    @Override
-    public void refresh() {
-        fetchLiveData();
-    }
 }

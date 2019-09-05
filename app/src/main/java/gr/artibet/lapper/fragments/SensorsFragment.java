@@ -14,7 +14,7 @@ import gr.artibet.lapper.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SensorsFragment extends MyFragment {
+public class SensorsFragment extends Fragment {
 
 
     public SensorsFragment() {
@@ -29,8 +29,4 @@ public class SensorsFragment extends MyFragment {
         return inflater.inflate(R.layout.fragment_sensors, container, false);
     }
 
-    @Override
-    public void refresh() {
-
-    }
 }

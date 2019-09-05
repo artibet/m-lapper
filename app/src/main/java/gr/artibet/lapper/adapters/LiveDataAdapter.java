@@ -95,4 +95,9 @@ public class LiveDataAdapter extends RecyclerView.Adapter<LiveDataAdapter.LiveDa
     public int getItemCount() {
         return mLiveDataList.size();
     }
+
+    public void setmLiveDataList(List<LiveData> liveDataList) {
+        mLiveDataList = liveDataList;
+        notifyDataSetChanged();
+    }
 }

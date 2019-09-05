@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import gr.artibet.lapper.R;
@@ -32,7 +33,7 @@ import retrofit2.Response;
  */
 public class DashboardFragment extends Fragment {
 
-    private List<LiveData> mLiveDataList;
+    private List<LiveData> mLiveDataList = new ArrayList<LiveData>();
     private ProgressBar mProgressBar;
     private TextView mTvMessage;
 
@@ -58,8 +59,11 @@ public class DashboardFragment extends Fragment {
         mProgressBar = v.findViewById(R.id.progressBar);
         mTvMessage = v.findViewById(R.id.tvMessage);
         mRecyclerView = v.findViewById(R.id.recyclerView);
-        mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
+        mAdapter = new LiveDataAdapter(getActivity(), mLiveDataList);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setAdapter(mAdapter);
 
         // Fetch data from API and return
         fetchLiveData();
@@ -89,9 +93,8 @@ public class DashboardFragment extends Fragment {
                 }
                 else {
                     mLiveDataList = response.body();
-                    mAdapter = new LiveDataAdapter(getActivity(), mLiveDataList);
-                    mRecyclerView.setLayoutManager(mLayoutManager);
-                    mRecyclerView.setAdapter(mAdapter);
+                    mAdapter.setmLiveDataList(mLiveDataList);
+
                     if (mLiveDataList.size() == 0) {
                         mTvMessage.setText(getResources().getString(R.string.no_race_in_progress));
                         mTvMessage.setVisibility(View.VISIBLE);

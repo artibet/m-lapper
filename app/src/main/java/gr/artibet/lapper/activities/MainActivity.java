@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import com.google.android.material.navigation.NavigationView;
 
 import gr.artibet.lapper.R;
+import gr.artibet.lapper.api.SocketIO;
 import gr.artibet.lapper.fragments.ActiveRacesFragment;
 import gr.artibet.lapper.fragments.CanceledRacesFragment;
 import gr.artibet.lapper.fragments.CompletedRacesFragment;
@@ -69,6 +70,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             getSupportActionBar().setTitle(R.string.dashboard);
             navigationView.setCheckedItem(R.id.dashboardFragment);
         }
+
+        // TEST WEBSOCKETS
+        SocketIO.getInstance();
 
     }
 

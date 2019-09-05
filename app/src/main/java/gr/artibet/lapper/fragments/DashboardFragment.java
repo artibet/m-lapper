@@ -1,6 +1,9 @@
 package gr.artibet.lapper.fragments;
 
 
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,16 +16,18 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.github.nkzawa.emitter.Emitter;
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import gr.artibet.lapper.R;
 import gr.artibet.lapper.Util;
-import gr.artibet.lapper.activities.LoginActivity;
 import gr.artibet.lapper.adapters.LiveDataAdapter;
 import gr.artibet.lapper.api.RetrofitClient;
+import gr.artibet.lapper.api.SocketIO;
 import gr.artibet.lapper.models.LiveData;
-import gr.artibet.lapper.models.LoginUser;
 import gr.artibet.lapper.storage.SharedPrefManager;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -67,6 +72,11 @@ public class DashboardFragment extends Fragment {
 
         // Fetch data from API and return
         fetchLiveData();
+
+        // Subscribe on "checkpoint" socket message
+        SocketIO.getInstance().getSocket().on("checkpoint", onCheckPoint);
+
+        // Return view
         return v;
     }
 
@@ -116,9 +126,37 @@ public class DashboardFragment extends Fragment {
                 mProgressBar.setVisibility(View.INVISIBLE);
             }
         });
-
-
-
     }
 
+    // On checkpoint socket message
+    private Emitter.Listener onCheckPoint = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Gson gson = new Gson();
+                    LiveData ld = gson.fromJson((String)args[0].toString(), LiveData.class);
+
+                    // Show data only if connected user is superuser, or race is public
+                    // or race is private but connected user has vehicle into it.
+                    if (SharedPrefManager.getInstance(getActivity()).isAdmin() || ld.getRace().isPublic()) {
+                        mLayoutManager.scrollToPosition(0);
+                        mLiveDataList.add(0, ld);
+                        mAdapter.notifyItemInserted(0);
+                        Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+                        Ringtone r = RingtoneManager.getRingtone(getActivity().getApplicationContext(), notification);
+                        r.play();
+                    }
+                }
+            });
+        }
+    };
+
+    // Unsubscribe from socket events on destroy
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        SocketIO.getInstance().getSocket().off("checkpoint", onCheckPoint);
+    }
 }

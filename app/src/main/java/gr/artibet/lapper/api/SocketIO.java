@@ -1,5 +1,7 @@
 package gr.artibet.lapper.api;
 
+import android.content.Context;
+
 import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.Socket;
 import com.github.nkzawa.socketio.client.IO;
@@ -38,5 +40,5 @@ public class SocketIO {
     public Socket getSocket() {
         return mSocket;
     }
-
+    
 }

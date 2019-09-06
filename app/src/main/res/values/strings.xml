@@ -8,7 +8,7 @@
     <string name="password_required">Password required</string>
     <string name="invalid_credentials">Invalid credentials</string>
     <string name="logout">Logout</string>
-    <string name="dashboard">Dashboard</string>
+    <string name="live_data">Live data</string>
     <string name="pending_races">Pending races</string>
     <string name="active_races">Active races</string>
     <string name="inprogress_races">In progress races</string>
@@ -31,4 +31,6 @@
     <string name="no_race_in_progress">There isn\'t any race in progress</string>
     <string name="refresh">Refresh</string>
     <string name="unable_to_connect">Unable to connect to API Server</string>
+    <string name="lap">Lap</string>
+    <string name="lap_interval">Lap interval</string>
 </resources>

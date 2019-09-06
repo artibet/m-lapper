@@ -9,7 +9,7 @@
     <string name="password_required">Ο κωδικός πρόβασης είναι υποχρεωτικός</string>
     <string name="invalid_credentials">Μη έγκυρα διαπιστευτήρια</string>
     <string name="logout">Αποσύνδεση</string>
-    <string name="dashboard">Επισκόπηση</string>
+    <string name="live_data">Ροή δεδομένων</string>
     <string name="pending_races">Εκκρεμείς αγώνες</string>
     <string name="active_races">Ενεργοί αγώνες</string>
     <string name="inprogress_races">Αγώνες σε εξέλιξη</string>
@@ -30,4 +30,6 @@
     <string name="no_race_in_progress">Δεν υπάρχουν αγώνες σε εξέλιξη</string>
     <string name="refresh">Ανανέωση</string>
     <string name="unable_to_connect">Αποτυχία σύνδεσης με τον διακομιστή</string>
+    <string name="lap">Γύρος</string>
+    <string name="lap_interval">Χρόνος γύρου</string>
 </resources>

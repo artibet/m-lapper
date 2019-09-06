@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gr.artibet.lapper.R;
-import gr.artibet.lapper.Util;
 import gr.artibet.lapper.adapters.LiveDataAdapter;
 import gr.artibet.lapper.api.RetrofitClient;
 import gr.artibet.lapper.api.SocketIO;
@@ -36,7 +35,7 @@ import retrofit2.Response;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DashboardFragment extends Fragment {
+public class LiveDataFragment extends Fragment {
 
     private List<LiveData> mLiveDataList = new ArrayList<LiveData>();
     private ProgressBar mProgressBar;
@@ -48,7 +47,7 @@ public class DashboardFragment extends Fragment {
     private RecyclerView.LayoutManager mLayoutManager;
 
 
-    public DashboardFragment() {
+    public LiveDataFragment() {
         // Required empty public constructor
     }
 
@@ -58,7 +57,7 @@ public class DashboardFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_dashboard, container, false);
+        View v = inflater.inflate(R.layout.fragment_live_data, container, false);
 
         // Initialize views and layouts
         mProgressBar = v.findViewById(R.id.progressBar);
@@ -141,6 +140,7 @@ public class DashboardFragment extends Fragment {
                     // Show data only if connected user is superuser, or race is public
                     // or race is private but connected user has vehicle into it.
                     if (SharedPrefManager.getInstance(getActivity()).isAdmin() || ld.getRace().isPublic()) {
+                        mTvMessage.setVisibility(View.INVISIBLE);
                         mLayoutManager.scrollToPosition(0);
                         mLiveDataList.add(0, ld);
                         mAdapter.notifyItemInserted(0);

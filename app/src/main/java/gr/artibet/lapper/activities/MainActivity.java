@@ -22,7 +22,7 @@ import gr.artibet.lapper.api.SocketIO;
 import gr.artibet.lapper.fragments.ActiveRacesFragment;
 import gr.artibet.lapper.fragments.CanceledRacesFragment;
 import gr.artibet.lapper.fragments.CompletedRacesFragment;
-import gr.artibet.lapper.fragments.DashboardFragment;
+import gr.artibet.lapper.fragments.LiveDataFragment;
 import gr.artibet.lapper.fragments.InProgressRacesFragment;
 import gr.artibet.lapper.fragments.PendingRacesFragment;
 import gr.artibet.lapper.fragments.SensorsFragment;
@@ -65,9 +65,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         // Set dashboard fragment if no fragment exist
         if (savedInstanceState == null) {
-            mCurrentFragment = new DashboardFragment();
+            mCurrentFragment = new LiveDataFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, mCurrentFragment).commit();
-            getSupportActionBar().setTitle(R.string.dashboard);
+            getSupportActionBar().setTitle(R.string.live_data);
             navigationView.setCheckedItem(R.id.dashboardFragment);
         }
 
@@ -165,10 +165,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     // Send refresh to current fragment
     private void actionRefresh() {
-        if (mCurrentFragment == null || mCurrentFragment instanceof DashboardFragment) {
-            mCurrentFragment = new DashboardFragment();
+        if (mCurrentFragment == null || mCurrentFragment instanceof LiveDataFragment) {
+            mCurrentFragment = new LiveDataFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, mCurrentFragment).commit();
-            getSupportActionBar().setTitle(R.string.dashboard);
+            getSupportActionBar().setTitle(R.string.live_data);
         }
         else if (mCurrentFragment instanceof PendingRacesFragment) {
             mCurrentFragment = new PendingRacesFragment();
@@ -211,10 +211,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch(menuItem.getItemId()) {
 
             case R.id.dashboardFragment:
-                if (!(mCurrentFragment instanceof DashboardFragment)) {
-                    mCurrentFragment = new DashboardFragment();
+                if (!(mCurrentFragment instanceof LiveDataFragment)) {
+                    mCurrentFragment = new LiveDataFragment();
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, mCurrentFragment).commit();
-                    getSupportActionBar().setTitle(R.string.dashboard);
+                    getSupportActionBar().setTitle(R.string.live_data);
                 }
                 break;
 

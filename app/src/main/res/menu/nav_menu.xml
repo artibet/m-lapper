@@ -5,7 +5,7 @@
         <item
             android:id="@+id/dashboardFragment"
             android:icon="@drawable/ic_dashboard"
-            android:title="@string/dashboard" />
+            android:title="@string/live_data" />
 
         <item
             android:id="@+id/pendingRacesFragment"

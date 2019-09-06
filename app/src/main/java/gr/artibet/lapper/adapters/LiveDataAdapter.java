@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,6 +18,8 @@ import java.util.List;
 import gr.artibet.lapper.R;
 import gr.artibet.lapper.Util;
 import gr.artibet.lapper.models.LiveData;
+import gr.artibet.lapper.models.RaceVehicle;
+import gr.artibet.lapper.models.RaceVehicleState;
 
 public class LiveDataAdapter extends RecyclerView.Adapter<LiveDataAdapter.LiveDataViewHolder> {
 
@@ -34,6 +37,11 @@ public class LiveDataAdapter extends RecyclerView.Adapter<LiveDataAdapter.LiveDa
         public TextView mRaceTag;
         public TextView mSector;
         public TextView mSectorInterval;
+        public TextView mLapLabel;
+        public TextView mLap;
+        public TextView mLapIntervalLabel;
+        public TextView mLapInterval;
+        public ImageView mFinishFlag;
 
         public LiveDataViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -43,6 +51,11 @@ public class LiveDataAdapter extends RecyclerView.Adapter<LiveDataAdapter.LiveDa
             mRaceTag = itemView.findViewById(R.id.tvRaceTag);
             mSector = itemView.findViewById(R.id.tvSector);
             mSectorInterval = itemView.findViewById(R.id.tvSectorInterval);
+            mLapLabel = itemView.findViewById(R.id.tvLapLabel);
+            mLap = itemView.findViewById(R.id.tvLap);
+            mLapIntervalLabel = itemView.findViewById(R.id.tvLapIntervalLabel);
+            mLapInterval = itemView.findViewById(R.id.tvLapInterval);
+            mFinishFlag = itemView.findViewById(R.id.ivFinishFlag);
         }
     }
 
@@ -83,12 +96,43 @@ public class LiveDataAdapter extends RecyclerView.Adapter<LiveDataAdapter.LiveDa
         holder.mSectorInterval.setText(liveData.getIntervalString());
         if (liveData.getPrevInterval() != 0) {
             if (liveData.getPrevInterval() > liveData.getInterval()) {
-                holder.mSectorInterval.setTextColor(Color.GREEN);
+                holder.mSectorInterval.setTextColor(Color.rgb(0, 128,0));
             }
             else {
                 holder.mSectorInterval.setTextColor(Color.RED);
             }
         }
+
+        // Lap
+        holder.mLapLabel.setText(mContext.getString(R.string.lap) + ":");
+        holder.mLap.setText(String.valueOf(liveData.getLap()) + "/" + String.valueOf(liveData.getRace().getLaps()));
+
+        // Lap interval - when passing start sensor
+        if (liveData.getLastSensor().isStart() && liveData.getLap() > 1) {
+            holder.mLapIntervalLabel.setText(mContext.getString(R.string.lap_interval) + ":");
+            holder.mLapInterval.setText(liveData.getLapIntervalString());
+            if (liveData.getPrevLapInterval() > 0) {
+                if (liveData.getPrevLapInterval() > liveData.getLapInterval()) {
+                    holder.mLapInterval.setTextColor(Color.rgb(0, 128,0));
+                }
+                else {
+                        holder.mLapInterval.setTextColor(Color.RED);
+                }
+            }
+        }
+        else {
+            holder.mLapIntervalLabel.setVisibility(View.INVISIBLE);
+            holder.mLapInterval.setVisibility(View.INVISIBLE);
+        }
+
+        // Finish flag visibility
+        if (liveData.getRvState().getId() == RaceVehicleState.STATE_FINISHED) {
+            holder.mFinishFlag.setVisibility(View.VISIBLE);
+        }
+        else {
+            holder.mFinishFlag.setVisibility(View.INVISIBLE);
+        }
+
      }
 
     @Override

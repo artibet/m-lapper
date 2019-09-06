@@ -7,10 +7,10 @@ public class Sensor {
     // MEMBERS
 
     @SerializedName("id")
-    private int id;
+    private long id;
 
     @SerializedName("aa")
-    private int aa;
+    private long aa;
 
     @SerializedName("tag")
     private String tag;
@@ -32,11 +32,11 @@ public class Sensor {
 
     // GETTERS
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public int getAa() {
+    public long getAa() {
         return aa;
     }
 

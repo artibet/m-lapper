@@ -33,4 +33,6 @@
     <string name="unable_to_connect">Unable to connect to API Server</string>
     <string name="lap">Lap</string>
     <string name="lap_interval">Lap interval</string>
+    <string name="the_race">Race</string>
+    <string name="has_been_started">has been started</string>
 </resources>

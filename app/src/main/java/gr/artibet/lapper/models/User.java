@@ -7,7 +7,7 @@ public class User {
     // MEMBERS
 
     @SerializedName("id")
-    private int id;
+    private long id;
 
     @SerializedName("username")
     private String username;
@@ -38,7 +38,7 @@ public class User {
 
     // GETTERS
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

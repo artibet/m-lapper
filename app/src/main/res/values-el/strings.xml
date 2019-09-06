@@ -32,4 +32,6 @@
     <string name="unable_to_connect">Αποτυχία σύνδεσης με τον διακομιστή</string>
     <string name="lap">Γύρος</string>
     <string name="lap_interval">Χρόνος γύρου</string>
+    <string name="the_race">Ο αγώνας</string>
+    <string name="has_been_started">Ξεκίνησε</string>
 </resources>

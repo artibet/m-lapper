@@ -10,7 +10,7 @@ public class RaceState {
     private int id;
 
     @SerializedName("descr")
-    private int description;
+    private String description;
 
     // GETTERS
 
@@ -19,7 +19,7 @@ public class RaceState {
         return id;
     }
 
-    public int getDescription() {
+    public String getDescription() {
 
         return description;
     }

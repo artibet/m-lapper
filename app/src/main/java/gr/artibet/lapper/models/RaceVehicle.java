@@ -7,13 +7,13 @@ public class RaceVehicle {
     // MEMBERS
 
     @SerializedName("id")
-    private int id;
+    private long id;
 
     @SerializedName("race_id")
-    private int raceId;
+    private long raceId;
 
     @SerializedName("race_creator_id")
-    private int raceCreatorId;
+    private long raceCreatorId;
 
     @SerializedName("race_ispublic")
     private boolean raceIsPublic;
@@ -34,16 +34,16 @@ public class RaceVehicle {
     private Sensor lastSensor;
 
     @SerializedName("start_ts")
-    private Sensor startTs;
+    private Double startTs;
 
     @SerializedName("finish_ts")
-    private double finishTs;
+    private Double finishTs;
 
     @SerializedName("prev_ts")
-    private double prevTs;
+    private Double prevTs;
 
     @SerializedName("last_ts")
-    private double lastTs;
+    private Double lastTs;
 
     @SerializedName("interval_str")
     private String IntervalString;
@@ -72,15 +72,15 @@ public class RaceVehicle {
 
     // GETTERS
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public int getRaceId() {
+    public long getRaceId() {
         return raceId;
     }
 
-    public int getRaceCreatorId() {
+    public long getRaceCreatorId() {
         return raceCreatorId;
     }
 
@@ -108,19 +108,19 @@ public class RaceVehicle {
         return lastSensor;
     }
 
-    public Sensor getStartTs() {
+    public Double getStartTs() {
         return startTs;
     }
 
-    public double getFinishTs() {
+    public Double getFinishTs() {
         return finishTs;
     }
 
-    public double getPrevTs() {
+    public Double getPrevTs() {
         return prevTs;
     }
 
-    public double getLastTs() {
+    public Double getLastTs() {
         return lastTs;
     }
 

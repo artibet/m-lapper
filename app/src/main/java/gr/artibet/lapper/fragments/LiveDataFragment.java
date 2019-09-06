@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -23,10 +24,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gr.artibet.lapper.R;
+import gr.artibet.lapper.Util;
 import gr.artibet.lapper.adapters.LiveDataAdapter;
 import gr.artibet.lapper.api.RetrofitClient;
 import gr.artibet.lapper.api.SocketIO;
 import gr.artibet.lapper.models.LiveData;
+import gr.artibet.lapper.models.Race;
 import gr.artibet.lapper.storage.SharedPrefManager;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -45,6 +48,7 @@ public class LiveDataFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private LiveDataAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    private FrameLayout mMainLayoutView;
 
 
     public LiveDataFragment() {
@@ -63,6 +67,7 @@ public class LiveDataFragment extends Fragment {
         mProgressBar = v.findViewById(R.id.progressBar);
         mTvMessage = v.findViewById(R.id.tvMessage);
         mRecyclerView = v.findViewById(R.id.recyclerView);
+        mMainLayoutView = v.findViewById(R.id.mainLayoutView);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mAdapter = new LiveDataAdapter(getActivity(), mLiveDataList);
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -74,9 +79,18 @@ public class LiveDataFragment extends Fragment {
 
         // Subscribe on "checkpoint" socket message
         SocketIO.getInstance().getSocket().on("checkpoint", onCheckPoint);
+        SocketIO.getInstance().getSocket().on("race_started", onRaceStart);
 
         // Return view
         return v;
+    }
+
+    // Unsubscribe from socket events on destroy
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        SocketIO.getInstance().getSocket().off("checkpoint", onCheckPoint);
+        SocketIO.getInstance().getSocket().off("race_started", onRaceStart);
     }
 
     // FETCH LIVE DATA
@@ -139,7 +153,8 @@ public class LiveDataFragment extends Fragment {
 
                     // Show data only if connected user is superuser, or race is public
                     // or race is private but connected user has vehicle into it.
-                    if (SharedPrefManager.getInstance(getActivity()).isAdmin() || ld.getRace().isPublic()) {
+                    long connectedUserid = SharedPrefManager.getInstance(getActivity()).getLoggedInUser().getId();
+                    if (SharedPrefManager.getInstance(getActivity()).isAdmin() || ld.getRace().isPublic() || ld.getRace().hasVehicle(connectedUserid)) {
                         mTvMessage.setVisibility(View.INVISIBLE);
                         mLayoutManager.scrollToPosition(0);
                         mLiveDataList.add(0, ld);
@@ -153,10 +168,26 @@ public class LiveDataFragment extends Fragment {
         }
     };
 
-    // Unsubscribe from socket events on destroy
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        SocketIO.getInstance().getSocket().off("checkpoint", onCheckPoint);
-    }
+    // On race start socket message
+    private Emitter.Listener onRaceStart = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Gson gson = new Gson();
+                    Race race = gson.fromJson((String)args[0].toString(), Race.class);
+
+                    // If connected user has rights to the race
+                    long connectedUserid = SharedPrefManager.getInstance(getActivity()).getLoggedInUser().getId();
+                    if (SharedPrefManager.getInstance(getActivity()).isAdmin() || race.isPublic() || race.userHasVehicleIntoRace(connectedUserid)) {
+                        Util.successToast(getActivity(), getActivity().getString(R.string.the_race) + " " + race.getTag() + " " + getActivity().getString(R.string.has_been_started));
+                    }
+
+                }
+            });
+        }
+    };
+
+
 }

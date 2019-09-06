@@ -9,7 +9,7 @@ public class Race {
     // MEMBERS
 
     @SerializedName("id")
-    private int id;
+    private long id;
 
     @SerializedName("tag")
     private String tag;
@@ -70,7 +70,7 @@ public class Race {
 
     // GETTERS
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -148,5 +148,13 @@ public class Race {
 
     public boolean isPublic() {
         return isPublic;
+    }
+
+    // Check if given userId has vehicle into race
+    public boolean userHasVehicleIntoRace(long userId) {
+        for (RaceVehicle rv : rvs) {
+            if (rv.getVehicle().getOwner().getId() == userId) return true;
+        }
+        return false;
     }
 }

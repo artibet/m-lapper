@@ -7,7 +7,7 @@ public class Vehicle {
     // MEMBERS
 
     @SerializedName("id")
-    private int id;
+    private long id;
 
     @SerializedName("tag")
     private String tag;
@@ -32,7 +32,7 @@ public class Vehicle {
 
     // GETTERS
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

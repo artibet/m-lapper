@@ -32,7 +32,7 @@ public class SharedPrefManager {
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         editor.putString("token", loginUser.getToken());
-        editor.putInt("id", loginUser.getId());
+        editor.putLong("id", loginUser.getId());
         editor.putString("username", loginUser.getUsername());
         editor.putString("firstName", loginUser.getFirstName());
         editor.putString("lastName", loginUser.getLastName());

@@ -12,7 +12,7 @@ public class LoginUser {
     private String token;
 
     @SerializedName("id")
-    private int id;
+    private long id;
 
     @SerializedName("username")
     private String username;
@@ -50,7 +50,7 @@ public class LoginUser {
     // GETTERS
     // -------------------------------------------------------------------------------------
     public String getToken() { return token; }
-    public int getId() { return id; }
+    public long getId() { return id; }
     public String getUsername() { return username; }
     public String getFirstName() { return firstName; }
     public String getLastName() { return lastName; }

@@ -7,10 +7,10 @@ public class LiveData {
     // MEMBERS
 
     @SerializedName("id")
-    private int id;
+    private long id;
 
     @SerializedName("rv")
-    private int rvId;
+    private long rvId;
 
     @SerializedName("race")
     private NestedRace race;
@@ -28,10 +28,10 @@ public class LiveData {
     private Sensor lastSensor;
 
     @SerializedName("prev_ts")
-    private double prevTs;
+    private Double prevTs;
 
     @SerializedName("last_ts")
-    private double lastTs;
+    private Double lastTs;
 
     @SerializedName("last_dt")
     private String lastDt;
@@ -40,7 +40,7 @@ public class LiveData {
     private int lap;
 
     @SerializedName("interval")
-    private double interval;
+    private Double interval;
 
     @SerializedName("interval_str")
     private String intervalString;
@@ -49,10 +49,10 @@ public class LiveData {
     private String bestIntervalString;
 
     @SerializedName("prev_interval")
-    private double prevInterval;
+    private Double prevInterval;
 
     @SerializedName("lap_interval")
-    private double lapInterval;
+    private Double lapInterval;
 
     @SerializedName("lap_interval_str")
     private String lapIntervalString;
@@ -61,18 +61,18 @@ public class LiveData {
     private String bestLapIntervalString;
 
     @SerializedName("prev_lap_interval")
-    private double prevLapInterval;
+    private Double prevLapInterval;
 
     @SerializedName("uflag")
     private boolean uflag;
 
     // GETTERS
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public int getRvId() {
+    public long getRvId() {
         return rvId;
     }
 
@@ -96,11 +96,11 @@ public class LiveData {
         return lastSensor;
     }
 
-    public double getPrevTs() {
+    public Double getPrevTs() {
         return prevTs;
     }
 
-    public double getLastTs() {
+    public Double getLastTs() {
         return lastTs;
     }
 
@@ -112,7 +112,7 @@ public class LiveData {
         return lap;
     }
 
-    public double getInterval() {
+    public Double getInterval() {
         return interval;
     }
 
@@ -124,11 +124,11 @@ public class LiveData {
         return bestIntervalString;
     }
 
-    public double getPrevInterval() {
+    public Double getPrevInterval() {
         return prevInterval;
     }
 
-    public double getLapInterval() {
+    public Double getLapInterval() {
         return lapInterval;
     }
 
@@ -140,7 +140,7 @@ public class LiveData {
         return bestLapIntervalString;
     }
 
-    public double getPrevLapInterval() {
+    public Double getPrevLapInterval() {
         return prevLapInterval;
     }
 

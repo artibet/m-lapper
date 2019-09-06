@@ -9,7 +9,7 @@ public class NestedRace {
     // MEMBERS
 
     @SerializedName("id")
-    private int id;
+    private long id;
 
     @SerializedName("tag")
     private String tag;
@@ -26,7 +26,7 @@ public class NestedRace {
 
     // GETTERS
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -44,5 +44,13 @@ public class NestedRace {
 
     public List<Integer> getVehicleUsers() {
         return vehicleUsers;
+    }
+
+    // Check if given user is into list of vehicleUsers
+    public boolean hasVehicle(long userId) {
+        for (long id : vehicleUsers) {
+            if (id == userId) return true;
+        }
+        return false;
     }
 }

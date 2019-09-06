@@ -80,6 +80,8 @@ public class LiveDataFragment extends Fragment {
         // Subscribe on "checkpoint" socket message
         SocketIO.getInstance().getSocket().on("checkpoint", onCheckPoint);
         SocketIO.getInstance().getSocket().on("race_started", onRaceStart);
+        SocketIO.getInstance().getSocket().on("race_activated", onRaceActivated);
+        SocketIO.getInstance().getSocket().on("race_deactivated", onRaceDeactivated);
 
         // Return view
         return v;
@@ -91,6 +93,8 @@ public class LiveDataFragment extends Fragment {
         super.onDestroy();
         SocketIO.getInstance().getSocket().off("checkpoint", onCheckPoint);
         SocketIO.getInstance().getSocket().off("race_started", onRaceStart);
+        SocketIO.getInstance().getSocket().off("race_activated", onRaceActivated);
+        SocketIO.getInstance().getSocket().off("race_deactivated", onRaceDeactivated);
     }
 
     // FETCH LIVE DATA
@@ -153,8 +157,8 @@ public class LiveDataFragment extends Fragment {
 
                     // Show data only if connected user is superuser, or race is public
                     // or race is private but connected user has vehicle into it.
-                    long connectedUserid = SharedPrefManager.getInstance(getActivity()).getLoggedInUser().getId();
-                    if (SharedPrefManager.getInstance(getActivity()).isAdmin() || ld.getRace().isPublic() || ld.getRace().hasVehicle(connectedUserid)) {
+                    long connectedUserΙd = SharedPrefManager.getInstance(getActivity()).getLoggedInUser().getId();
+                    if (SharedPrefManager.getInstance(getActivity()).isAdmin() || ld.getRace().isPublic() || ld.getRace().hasVehicle(connectedUserΙd)) {
                         mTvMessage.setVisibility(View.INVISIBLE);
                         mLayoutManager.scrollToPosition(0);
                         mLiveDataList.add(0, ld);
@@ -179,8 +183,8 @@ public class LiveDataFragment extends Fragment {
                     Race race = gson.fromJson((String)args[0].toString(), Race.class);
 
                     // If connected user has rights to the race
-                    long connectedUserid = SharedPrefManager.getInstance(getActivity()).getLoggedInUser().getId();
-                    if (SharedPrefManager.getInstance(getActivity()).isAdmin() || race.isPublic() || race.userHasVehicleIntoRace(connectedUserid)) {
+                    long connectedUserΙd = SharedPrefManager.getInstance(getActivity()).getLoggedInUser().getId();
+                    if (SharedPrefManager.getInstance(getActivity()).isAdmin() || race.isPublic() || race.userHasVehicleIntoRace(connectedUserΙd)) {
                         Util.successToast(getActivity(), getActivity().getString(R.string.the_race) + " " + race.getTag() + " " + getActivity().getString(R.string.has_been_started));
                     }
 
@@ -189,5 +193,44 @@ public class LiveDataFragment extends Fragment {
         }
     };
 
+    // On race activated socket message
+    private Emitter.Listener onRaceActivated = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Gson gson = new Gson();
+                    Race race = gson.fromJson((String)args[0].toString(), Race.class);
+
+                    // If connected user has rights to the race
+                    long connectedUserΙd = SharedPrefManager.getInstance(getActivity()).getLoggedInUser().getId();
+                    if (SharedPrefManager.getInstance(getActivity()).isAdmin() || race.isPublic() || race.userHasVehicleIntoRace(connectedUserΙd)) {
+                        Util.successToast(getActivity(), "Ο αγώνας " + race.getTag() + " ενεργοποιήθηκε");
+                    }
+                }
+            });
+        }
+    };
+
+    // On race deactivated socket message
+    private Emitter.Listener onRaceDeactivated = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Gson gson = new Gson();
+                    Race race = gson.fromJson((String)args[0].toString(), Race.class);
+
+                    // If connected user has rights to the race
+                    long connectedUserΙd = SharedPrefManager.getInstance(getActivity()).getLoggedInUser().getId();
+                    if (SharedPrefManager.getInstance(getActivity()).isAdmin() || race.isPublic() || race.userHasVehicleIntoRace(connectedUserΙd)) {
+                        Util.successToast(getActivity(), "Ο αγώνας " + race.getTag() + " απενεργοποιήθηκε");
+                    }
+                }
+            });
+        }
+    };
 
 }

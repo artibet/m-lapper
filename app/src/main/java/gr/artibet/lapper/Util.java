@@ -58,4 +58,15 @@ public class Util {
         sdf.setTimeZone(tz);
         return sdf.format(timeMills);
     }
+
+    // ---------------------------------------------------------------------------------------
+    // Convert datetime ISO into dd/mm/yyyy, HH:mm
+    // ---------------------------------------------------------------------------------------
+    public static String isoDateToString(String isoDate) {
+        Calendar cal = Calendar.getInstance();
+        TimeZone tz = cal.getTimeZone();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy, HH:mm");
+        sdf.setTimeZone(tz);
+        return sdf.format(isoDate);
+    }
 }

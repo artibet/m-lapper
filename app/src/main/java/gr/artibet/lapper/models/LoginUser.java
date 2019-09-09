@@ -35,7 +35,7 @@ public class LoginUser {
     // -------------------------------------------------------------------------------------
     // CONSTRUCTOR - INITIALIZE ALL FIELDS
     // -------------------------------------------------------------------------------------
-    public LoginUser(String token, int id, String username, String firstName, String lastName, String email, boolean isSuperuser, boolean isStaff) {
+    public LoginUser(String token, long id, String username, String firstName, String lastName, String email, boolean isSuperuser, boolean isStaff) {
         this.token = token;
         this.id = id;
         this.username = username;

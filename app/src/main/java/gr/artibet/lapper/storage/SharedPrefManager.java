@@ -46,7 +46,7 @@ public class SharedPrefManager {
     // Check if user is logged in - If yes, id exists and is greater than zero.
     public boolean isLoggedIn() {
         SharedPreferences sharedPreferences = mContext.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        return sharedPreferences.getInt("id", -1) != -1;
+        return sharedPreferences.getLong("id", -1) != -1;
     }
 
     // Check if user is admin
@@ -60,7 +60,7 @@ public class SharedPrefManager {
         SharedPreferences sharedPreferences = mContext.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         return new LoginUser(
                 sharedPreferences.getString("token", null),
-                sharedPreferences.getInt("id", -1),
+                sharedPreferences.getLong("id", -1),
                 sharedPreferences.getString("username", null),
                 sharedPreferences.getString("firstName", null),
                 sharedPreferences.getString("lastName", null),

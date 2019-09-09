@@ -40,5 +40,5 @@ public class SocketIO {
     public Socket getSocket() {
         return mSocket;
     }
-    
+
 }

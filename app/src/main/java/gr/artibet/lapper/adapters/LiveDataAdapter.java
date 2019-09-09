@@ -1,8 +1,6 @@
 package gr.artibet.lapper.adapters;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +16,6 @@ import java.util.List;
 import gr.artibet.lapper.R;
 import gr.artibet.lapper.Util;
 import gr.artibet.lapper.models.LiveData;
-import gr.artibet.lapper.models.RaceVehicle;
 import gr.artibet.lapper.models.RaceVehicleState;
 
 public class LiveDataAdapter extends RecyclerView.Adapter<LiveDataAdapter.LiveDataViewHolder> {
@@ -140,7 +137,7 @@ public class LiveDataAdapter extends RecyclerView.Adapter<LiveDataAdapter.LiveDa
         return mLiveDataList.size();
     }
 
-    public void setmLiveDataList(List<LiveData> liveDataList) {
+    public void setLiveDataList(List<LiveData> liveDataList) {
         mLiveDataList = liveDataList;
         notifyDataSetChanged();
     }

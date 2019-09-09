@@ -30,6 +30,9 @@ public class Sensor {
     @SerializedName("updated_at")
     private String updatedAt;
 
+    @SerializedName("updated_at_formated")
+    private String updatedAtFormated;
+
     // GETTERS
 
     public long getId() {
@@ -63,4 +66,8 @@ public class Sensor {
     public String getUpdatedAt() {
         return updatedAt;
     }
+
+    public String getUpdatedAtFormated() {return updatedAtFormated; }
+
+
 }

@@ -120,7 +120,7 @@ public class LiveDataFragment extends Fragment {
                 }
                 else {
                     mLiveDataList = response.body();
-                    mAdapter.setmLiveDataList(mLiveDataList);
+                    mAdapter.setLiveDataList(mLiveDataList);
 
                     if (mLiveDataList.size() == 0) {
                         mTvMessage.setText(getResources().getString(R.string.no_race_in_progress));

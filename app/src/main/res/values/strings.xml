@@ -35,4 +35,7 @@
     <string name="lap_interval">Lap interval</string>
     <string name="the_race">Race</string>
     <string name="has_been_started">has been started</string>
+    <string name="no_sensors">There are no sensors</string>
+    <string name="threshold">Threshold</string>
+    <string name="updated">Updated</string>
 </resources>

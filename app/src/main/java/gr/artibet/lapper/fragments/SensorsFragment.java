@@ -4,18 +4,41 @@ package gr.artibet.lapper.fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import gr.artibet.lapper.R;
+import gr.artibet.lapper.adapters.SensorAdapter;
+import gr.artibet.lapper.api.RetrofitClient;
+import gr.artibet.lapper.models.Sensor;
+import gr.artibet.lapper.storage.SharedPrefManager;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class SensorsFragment extends Fragment {
 
+    private List<Sensor> mSensorList = new ArrayList<Sensor>();
+    private ProgressBar mProgressBar;
+    private TextView mTvMessage;
+
+    // Recycler view members
+    private RecyclerView mRecyclerView;
+    private SensorAdapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
 
     public SensorsFragment() {
         // Required empty public constructor
@@ -26,7 +49,70 @@ public class SensorsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sensors, container, false);
+        View v = inflater.inflate(R.layout.fragment_sensors, container, false);
+
+        // Initialize views and layouts
+        mProgressBar = v.findViewById(R.id.progressBar);
+        mTvMessage = v.findViewById(R.id.tvMessage);
+        mRecyclerView = v.findViewById(R.id.recyclerView);
+        mLayoutManager = new LinearLayoutManager(getActivity());
+        mAdapter = new SensorAdapter(getActivity(), mSensorList);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setAdapter(mAdapter);
+
+        // Fetch data from API and return
+        fetchSensors();
+
+        // Return view
+        return v;
+    }
+
+    private void fetchSensors() {
+
+        // Show progress bar and hide message text
+        mProgressBar.setVisibility(View.VISIBLE);
+        mTvMessage.setVisibility(View.INVISIBLE);
+
+        Call<List<Sensor>> call = RetrofitClient
+                .getInstance()
+                .getApi()
+                .getSensors(SharedPrefManager.getInstance(getActivity()).getToken());
+
+        call.enqueue(new Callback<List<Sensor>>() {
+            @Override
+            public void onResponse(Call<List<Sensor>> call, Response<List<Sensor>> response) {
+
+                if (!response.isSuccessful()) {
+                    mTvMessage.setText(response.message());
+                    mTvMessage.setVisibility(View.VISIBLE);
+                    //Util.errorToast(getActivity(), response.message);
+                }
+                else {
+                    mSensorList = response.body();
+                    mAdapter.setSensorList(mSensorList);
+
+                    if (mSensorList.size() == 0) {
+                        mTvMessage.setText(getResources().getString(R.string.no_sensors));
+                        mTvMessage.setVisibility(View.VISIBLE);
+                    }
+                    else {
+                        mTvMessage.setVisibility(View.INVISIBLE);
+                    }
+                }
+
+                // Hide progress bar
+                mProgressBar.setVisibility(View.INVISIBLE);
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Sensor>> call, Throwable t) {
+                mTvMessage.setText(getString(R.string.unable_to_connect));
+                mTvMessage.setVisibility(View.VISIBLE);
+                mProgressBar.setVisibility(View.INVISIBLE);
+            }
+        });
     }
 
 }

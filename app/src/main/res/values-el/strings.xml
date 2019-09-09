@@ -34,4 +34,7 @@
     <string name="lap_interval">Χρόνος γύρου</string>
     <string name="the_race">Ο αγώνας</string>
     <string name="has_been_started">Ξεκίνησε</string>
+    <string name="no_sensors">Δεν υπάρχουν αισθητήρες</string>
+    <string name="threshold">Κατώφλι</string>
+    <string name="updated">Ενημερώθηκε</string>
 </resources>

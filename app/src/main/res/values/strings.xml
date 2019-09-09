@@ -39,4 +39,5 @@
     <string name="threshold">Threshold</string>
     <string name="updated">Updated</string>
     <string name="add">Add</string>
+    <string name="add_sensor">Add new sensor</string>
 </resources>

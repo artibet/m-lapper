@@ -1,6 +1,7 @@
 package gr.artibet.lapper.fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -22,6 +23,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gr.artibet.lapper.R;
+import gr.artibet.lapper.activities.LoginActivity;
+import gr.artibet.lapper.activities.MainActivity;
+import gr.artibet.lapper.activities.SensorAddActivity;
 import gr.artibet.lapper.adapters.SensorAdapter;
 import gr.artibet.lapper.api.RetrofitClient;
 import gr.artibet.lapper.models.Sensor;
@@ -138,6 +142,8 @@ public class SensorsFragment extends Fragment implements BottomNavigationView.On
 
     // Add new sensor
     private void actionAddSensor() {
-
+        Intent intent = new Intent(getActivity(), SensorAddActivity.class);
+        //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 }

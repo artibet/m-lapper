@@ -38,4 +38,5 @@
     <string name="threshold">Κατώφλι</string>
     <string name="updated">Ενημερώθηκε</string>
     <string name="add">Προσθήκη</string>
+    <string name="add_sensor">Προσθήκη αισθητήρα</string>
 </resources>

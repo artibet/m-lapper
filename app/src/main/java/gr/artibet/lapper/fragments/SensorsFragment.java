@@ -3,16 +3,20 @@ package gr.artibet.lapper.fragments;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +33,7 @@ import retrofit2.Response;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SensorsFragment extends Fragment {
+public class SensorsFragment extends Fragment implements BottomNavigationView.OnNavigationItemSelectedListener {
 
     private List<Sensor> mSensorList = new ArrayList<Sensor>();
     private ProgressBar mProgressBar;
@@ -63,6 +67,10 @@ public class SensorsFragment extends Fragment {
 
         // Fetch data from API and return
         fetchSensors();
+
+        // Set bottom navigation listener
+        BottomNavigationView bottomNav = v.findViewById(R.id.bottom_nav);
+        bottomNav.setOnNavigationItemSelectedListener(this);
 
         // Return view
         return v;
@@ -115,4 +123,21 @@ public class SensorsFragment extends Fragment {
         });
     }
 
+    // Bottom navigationview listener
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+        switch(menuItem.getItemId()) {
+            case R.id.action_add:
+                actionAddSensor();
+                break;
+        }
+
+        return true;
+    }
+
+    // Add new sensor
+    private void actionAddSensor() {
+
+    }
 }

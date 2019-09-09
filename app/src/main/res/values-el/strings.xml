@@ -37,4 +37,5 @@
     <string name="no_sensors">Δεν υπάρχουν αισθητήρες</string>
     <string name="threshold">Κατώφλι</string>
     <string name="updated">Ενημερώθηκε</string>
+    <string name="add">Προσθήκη</string>
 </resources>

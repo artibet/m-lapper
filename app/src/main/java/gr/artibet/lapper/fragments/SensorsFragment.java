@@ -143,7 +143,8 @@ public class SensorsFragment extends Fragment implements BottomNavigationView.On
     // Add new sensor
     private void actionAddSensor() {
         Intent intent = new Intent(getActivity(), SensorAddActivity.class);
-        //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        //getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        //intent.setFlags(FUL);
         startActivity(intent);
     }
 }

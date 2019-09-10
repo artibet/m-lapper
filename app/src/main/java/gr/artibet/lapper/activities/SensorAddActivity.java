@@ -38,7 +38,7 @@ public class SensorAddActivity extends AppCompatActivity {
         mThreshold = findViewById(R.id.sensor_threshold);
         mIsActive = findViewById(R.id.sensor_isactive);
 
-        // Set action bar's title
+        // Setup action bar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ImageView ivOk = toolbar.findViewById(R.id.ivOk);

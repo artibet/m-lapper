@@ -7,16 +7,16 @@ public class Sensor {
     // MEMBERS
 
     @SerializedName("id")
-    private long id;
+    private Long id;
 
     @SerializedName("aa")
-    private long aa;
+    private Long aa;
 
     @SerializedName("tag")
     private String tag;
 
     @SerializedName("threshold")
-    private int threshold;
+    private Integer threshold;
 
     @SerializedName("isactive")
     private boolean isActive;
@@ -35,11 +35,11 @@ public class Sensor {
 
     // GETTERS
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public long getAa() {
+    public Long getAa() {
         return aa;
     }
 
@@ -47,7 +47,7 @@ public class Sensor {
         return tag;
     }
 
-    public int getThreshold() {
+    public Integer getThreshold() {
         return threshold;
     }
 
@@ -69,5 +69,41 @@ public class Sensor {
 
     public String getUpdatedAtFormated() {return updatedAtFormated; }
 
+    // SETTERS
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setAa(Long aa) {
+        this.aa = aa;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
+    public void setThreshold(Integer threshold) {
+        this.threshold = threshold;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
+    public void setStart(boolean start) {
+        isStart = start;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public void setUpdatedAt(String updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public void setUpdatedAtFormated(String updatedAtFormated) {
+        this.updatedAtFormated = updatedAtFormated;
+    }
 }

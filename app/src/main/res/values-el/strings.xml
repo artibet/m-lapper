@@ -39,4 +39,7 @@
     <string name="updated">Ενημερώθηκε</string>
     <string name="add">Προσθήκη</string>
     <string name="add_sensor">Προσθήκη αισθητήρα</string>
+    <string name="required_field">Αυτό το πεδίο είναι υποχρεωτικό</string>
+    <string name="sensor_create_failed">Η δημιουργία του αισθητήρα απέτυχε</string>
+    <string name="sensor_create_success">Ο αισθητήρας δημιουργήθηκε με επιτυχία</string>
 </resources>

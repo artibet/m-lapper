@@ -6,6 +6,7 @@ import gr.artibet.lapper.models.LiveData;
 import gr.artibet.lapper.models.LoginUser;
 import gr.artibet.lapper.models.Sensor;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -29,6 +30,10 @@ public interface ApiInterface {
     // Sensor List
     @GET("api/sensors/")
     Call<List<Sensor>> getSensors(@Header("Authorization") String token);
+
+    // Sensor POST (create new)
+    @POST("api/sensors/")
+    Call<Sensor> createSensor(@Header("Authorization") String token, @Body Sensor sensor);
 
 
 }

@@ -40,4 +40,7 @@
     <string name="updated">Updated</string>
     <string name="add">Add</string>
     <string name="add_sensor">Add new sensor</string>
+    <string name="required_field">This field is required</string>
+    <string name="sensor_create_failed">Sensor creation failed</string>
+    <string name="sensor_create_success">Sensor created successfully</string>
 </resources>

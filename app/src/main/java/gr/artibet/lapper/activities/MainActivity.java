@@ -34,6 +34,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private DrawerLayout mDrawerLayout;
     private Fragment mCurrentFragment;
+    NavigationView mNavigationView;
+
+    // fragment constants
+    public static final int LIVEDATA = 1;
+    public static final int PENDING_RACES = 2;
+    public static final int ACTIVE_RACES = 3;
+    public static final int INPROGRESS_RACES = 4;
+    public static final int COMPLETED_RACES = 5;
+    public static final int CANCELED_RACES = 6;
+    public static final int VEHICLES = 7;
+    public static final int SENSORS = 8;
+    public static final int USERS = 9;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,18 +69,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
 
         // Navigation view listener
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        mNavigationView = findViewById(R.id.nav_view);
+        mNavigationView.setNavigationItemSelectedListener(this);
 
         // Set menu items visibility for admin/user
         setMenuItemsVisible();
 
         // Set dashboard fragment if no fragment exist
         if (savedInstanceState == null) {
-            mCurrentFragment = new LiveDataFragment();
+            Intent intent = getIntent();
+            int fragment = intent.getIntExtra("fragment", -1);
+            createFragment(fragment);
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, mCurrentFragment).commit();
-            getSupportActionBar().setTitle(R.string.live_data);
-            navigationView.setCheckedItem(R.id.dashboardFragment);
         }
 
         // TEST WEBSOCKETS
@@ -299,4 +311,59 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
+    // Create fragment
+    private void createFragment(Integer fragment) {
+        switch (fragment) {
+            case LIVEDATA:
+                mCurrentFragment = new LiveDataFragment();
+                getSupportActionBar().setTitle(R.string.live_data);
+                mNavigationView.setCheckedItem(R.id.dashboardFragment);
+                break;
+            case PENDING_RACES:
+                mCurrentFragment = new PendingRacesFragment();
+                getSupportActionBar().setTitle(R.string.pending_races);
+                mNavigationView.setCheckedItem(R.id.pendingRacesFragment);
+                break;
+            case ACTIVE_RACES:
+                mCurrentFragment = new ActiveRacesFragment();
+                getSupportActionBar().setTitle(R.string.active_races);
+                mNavigationView.setCheckedItem(R.id.activeRacesFragment);
+                break;
+            case INPROGRESS_RACES:
+                mCurrentFragment = new InProgressRacesFragment();
+                getSupportActionBar().setTitle(R.string.inprogress_races);
+                mNavigationView.setCheckedItem(R.id.inProgressRacesFragment);
+                break;
+            case COMPLETED_RACES:
+                mCurrentFragment = new CompletedRacesFragment();
+                getSupportActionBar().setTitle(R.string.completed_races);
+                mNavigationView.setCheckedItem(R.id.completedRacesFragment);
+                break;
+            case CANCELED_RACES:
+                mCurrentFragment = new CanceledRacesFragment();
+                getSupportActionBar().setTitle(R.string.canceled_races);
+                mNavigationView.setCheckedItem(R.id.canceledRacesFragment);
+                break;
+            case VEHICLES:
+                mCurrentFragment = new VehiclesFragment();
+                getSupportActionBar().setTitle(R.string.vehicles);
+                mNavigationView.setCheckedItem(R.id.vehiclesFragment);
+                break;
+            case SENSORS:
+                mCurrentFragment = new SensorsFragment();
+                getSupportActionBar().setTitle(R.string.sensors);
+                mNavigationView.setCheckedItem(R.id.sensorsFragment);
+                break;
+            case USERS:
+                mCurrentFragment = new UsersFragment();
+                getSupportActionBar().setTitle(R.string.users);
+                mNavigationView.setCheckedItem(R.id.usersFragment);
+                break;
+            default:
+                mCurrentFragment = new LiveDataFragment();
+                getSupportActionBar().setTitle(R.string.live_data);
+                mNavigationView.setCheckedItem(R.id.dashboardFragment);
+                break;
+        }
+    }
 }

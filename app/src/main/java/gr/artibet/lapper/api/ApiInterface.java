@@ -12,6 +12,8 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
+import retrofit2.http.Path;
 
 public interface ApiInterface {
 
@@ -34,6 +36,10 @@ public interface ApiInterface {
     // Sensor POST (create new)
     @POST("api/sensors/")
     Call<Sensor> createSensor(@Header("Authorization") String token, @Body Sensor sensor);
+
+    // Sensor PUT (update)
+    @PUT("api/sensors/{id}/")
+    Call<Sensor> updateSensor(@Header("Authorization") String token, @Path("id") long id, @Body Sensor sensor);
 
 
 }

@@ -42,4 +42,5 @@
     <string name="required_field">Αυτό το πεδίο είναι υποχρεωτικό</string>
     <string name="sensor_create_failed">Η δημιουργία του αισθητήρα απέτυχε</string>
     <string name="sensor_create_success">Ο αισθητήρας δημιουργήθηκε με επιτυχία</string>
+    <string name="edit_sensor">Επεξεργασία αισθητήρα</string>
 </resources>

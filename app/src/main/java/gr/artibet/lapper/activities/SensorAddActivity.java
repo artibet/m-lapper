@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.gson.Gson;
 
 import gr.artibet.lapper.R;
 import gr.artibet.lapper.Util;
@@ -32,12 +33,27 @@ public class SensorAddActivity extends AppCompatActivity {
     private TextInputEditText mThreshold;
     private Switch mIsActive;
 
+    private boolean mCreate = false;
+    Sensor mSensor = null;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sensor_form);
+
+        // If sensor extra exist edit, else create new
+        Intent intent = getIntent();
+        String json = intent.getStringExtra("sensor");
+        if (json != null) {
+            mSensor = new Gson().fromJson(json, Sensor.class);
+            mCreate = false;
+        }
+        else {
+            mSensor = new Sensor();
+            mCreate = true;
+        }
+
 
         // Get views
         mAa = findViewById(R.id.sensor_aa);
@@ -52,7 +68,19 @@ public class SensorAddActivity extends AppCompatActivity {
         ImageView ivOk = toolbar.findViewById(R.id.ivOk);
         ImageView ivCancel = toolbar.findViewById(R.id.ivCancel);
         TextView ivTitle = toolbar.findViewById(R.id.ivTitle);
-        ivTitle.setText(getString(R.string.add_sensor));
+
+        // Set actionbar and data if editing
+        if (mCreate) {
+            ivTitle.setText(getString(R.string.add_sensor));
+        }
+        else {
+            ivTitle.setText(getString(R.string.edit_sensor));
+            mAa.setText(String.valueOf(mSensor.getAa()));
+            mTag.setText(mSensor.getTag());
+            mIsStart.setChecked(mSensor.isStart());
+            mThreshold.setText(String.valueOf(mSensor.getThreshold()));
+            mIsActive.setChecked(mSensor.isActive());
+        }
 
         ivOk.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,16 +132,26 @@ public class SensorAddActivity extends AppCompatActivity {
             return;
         }
 
-        // Send post request to add new sensor
-        Sensor sensor = new Sensor();
-        sensor.setAa(Long.parseLong(aa));
-        sensor.setTag(tag);
-        sensor.setThreshold(Integer.parseInt(threshold));
-        sensor.setActive(isactive);
-        sensor.setStart(isstart);
+        // Update sensor fields
+        mSensor.setAa(Long.parseLong(aa));
+        mSensor.setTag(tag);
+        mSensor.setThreshold(Integer.parseInt(threshold));
+        mSensor.setActive(isactive);
+        mSensor.setStart(isstart);
 
+        if (mCreate) {
+            createSensor();
+        }
+        else {
+            updateSensor();
+        }
+
+    }
+
+    // Send post request to create new sensor
+    private void createSensor() {
         String token = SharedPrefManager.getInstance(this).getToken();
-        Call<Sensor> call = RetrofitClient.getInstance().getApi().createSensor(token, sensor);
+        Call<Sensor> call = RetrofitClient.getInstance().getApi().createSensor(token, mSensor);
         call.enqueue(new Callback<Sensor>() {
             @Override
             public void onResponse(Call<Sensor> call, Response<Sensor> response) {
@@ -123,7 +161,7 @@ public class SensorAddActivity extends AppCompatActivity {
                     Util.errorToast(SensorAddActivity.this, response.message());
                 }
                 else {
-                    Util.successToast(SensorAddActivity.this, getString(R.string.sensor_create_success));
+                    //Util.successToast(SensorAddActivity.this, getString(R.string.sensor_create_success));
 
                     // Open MainActivity and set fragment to sensors
                     Intent intent = new Intent(SensorAddActivity.this, MainActivity.class);
@@ -136,7 +174,39 @@ public class SensorAddActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Sensor> call, Throwable t) {
-                Util.errorToast(SensorAddActivity.this, getString(R.string.sensor_create_failed));
+                Util.errorToast(SensorAddActivity.this, t.getMessage());
+            }
+        });
+
+    }
+
+    // Sen put request to update existing sensor
+    private void updateSensor() {
+        String token = SharedPrefManager.getInstance(this).getToken();
+        Call<Sensor> call = RetrofitClient.getInstance().getApi().updateSensor(token, mSensor.getId(), mSensor);
+        call.enqueue(new Callback<Sensor>() {
+            @Override
+            public void onResponse(Call<Sensor> call, Response<Sensor> response) {
+
+                if (!response.isSuccessful()) {
+                    //Util.errorToast(SensorAddActivity.this, getString(R.string.sensor_create_failed));
+                    Util.errorToast(SensorAddActivity.this, response.message());
+                }
+                else {
+                    //Util.successToast(SensorAddActivity.this, getString(R.string.sensor_create_success));
+
+                    // Open MainActivity and set fragment to sensors
+                    Intent intent = new Intent(SensorAddActivity.this, MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    intent.putExtra("fragment", MainActivity.SENSORS);
+                    startActivity(intent);
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<Sensor> call, Throwable t) {
+                Util.errorToast(SensorAddActivity.this, t.getMessage());
             }
         });
 

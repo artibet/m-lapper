@@ -27,6 +27,19 @@ public class SensorAdapter extends RecyclerView.Adapter<SensorAdapter.SensorView
     // Sensor List
     private List<Sensor> mSensorList;
 
+    // item click listener member
+    private OnItemClickListener mItemListener;
+
+
+    // Item click interface
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        mItemListener = listener;
+    }
+
     // VIEW HOLDER CLASS
     public static class SensorViewHolder extends RecyclerView.ViewHolder {
 
@@ -38,7 +51,7 @@ public class SensorAdapter extends RecyclerView.Adapter<SensorAdapter.SensorView
         public ImageView mSensorStarter;
 
 
-        public SensorViewHolder(@NonNull View itemView) {
+        public SensorViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
 
             mSensorAa = itemView.findViewById(R.id.ivSensorAa);
@@ -47,6 +60,18 @@ public class SensorAdapter extends RecyclerView.Adapter<SensorAdapter.SensorView
             mSensorUpdatedAt = itemView.findViewById(R.id.tvSensorUpdatedAt);
             mSensorStatus = itemView.findViewById(R.id.ivSensorStatus);
             mSensorStarter = itemView.findViewById(R.id.ivSensorStarter);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onItemClick(position);
+                        }
+                    }
+                }
+            });
         }
     }
 
@@ -60,7 +85,7 @@ public class SensorAdapter extends RecyclerView.Adapter<SensorAdapter.SensorView
     @Override
     public SensorViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.sensor_item, parent, false);
-        SensorViewHolder viewHolder = new SensorViewHolder(v);
+        SensorViewHolder viewHolder = new SensorViewHolder(v, mItemListener);
         return viewHolder;
     }
 

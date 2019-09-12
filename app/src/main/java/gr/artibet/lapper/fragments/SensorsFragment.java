@@ -18,11 +18,13 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import gr.artibet.lapper.R;
+import gr.artibet.lapper.Util;
 import gr.artibet.lapper.activities.LoginActivity;
 import gr.artibet.lapper.activities.MainActivity;
 import gr.artibet.lapper.activities.SensorAddActivity;
@@ -68,6 +70,23 @@ public class SensorsFragment extends Fragment implements BottomNavigationView.On
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setAdapter(mAdapter);
+
+        // Set sensor item click listener
+        mAdapter.setOnItemClickListener(new SensorAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Sensor sensor = mSensorList.get(position);
+
+                // Open sensor form
+                String json = new Gson().toJson(sensor);
+                Intent intent = new Intent(getActivity(), SensorAddActivity.class);
+                intent.putExtra("sensor", json);
+                //getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+                //intent.setFlags(FUL);
+                startActivity(intent);
+                //Util.successToast(getActivity(), "Open form");
+            }
+        });
 
         // Fetch data from API and return
         fetchSensors();

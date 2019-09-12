@@ -13,7 +13,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -24,10 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gr.artibet.lapper.R;
-import gr.artibet.lapper.Util;
-import gr.artibet.lapper.activities.LoginActivity;
-import gr.artibet.lapper.activities.MainActivity;
-import gr.artibet.lapper.activities.SensorAddActivity;
+import gr.artibet.lapper.activities.SensorFormActivity;
 import gr.artibet.lapper.adapters.SensorAdapter;
 import gr.artibet.lapper.api.RetrofitClient;
 import gr.artibet.lapper.models.Sensor;
@@ -79,7 +75,7 @@ public class SensorsFragment extends Fragment implements BottomNavigationView.On
 
                 // Open sensor form
                 String json = new Gson().toJson(sensor);
-                Intent intent = new Intent(getActivity(), SensorAddActivity.class);
+                Intent intent = new Intent(getActivity(), SensorFormActivity.class);
                 intent.putExtra("sensor", json);
                 //getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
                 //intent.setFlags(FUL);
@@ -161,7 +157,7 @@ public class SensorsFragment extends Fragment implements BottomNavigationView.On
 
     // Add new sensor
     private void actionAddSensor() {
-        Intent intent = new Intent(getActivity(), SensorAddActivity.class);
+        Intent intent = new Intent(getActivity(), SensorFormActivity.class);
         //getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         //intent.setFlags(FUL);
         startActivity(intent);

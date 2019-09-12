@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".activities.SensorAddActivity"/>
+            android:name=".activities.SensorFormActivity"/>
         <activity
             android:name=".activities.StarterActivity"
             android:theme="@android:style/Theme.NoDisplay">

@@ -12,7 +12,6 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 
 import gr.artibet.lapper.R;
@@ -24,7 +23,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SensorAddActivity extends AppCompatActivity {
+public class SensorFormActivity extends AppCompatActivity {
 
     // Form views
     private TextInputEditText mAa;
@@ -157,14 +156,14 @@ public class SensorAddActivity extends AppCompatActivity {
             public void onResponse(Call<Sensor> call, Response<Sensor> response) {
 
                 if (!response.isSuccessful()) {
-                    //Util.errorToast(SensorAddActivity.this, getString(R.string.sensor_create_failed));
-                    Util.errorToast(SensorAddActivity.this, response.message());
+                    //Util.errorToast(SensorFormActivity.this, getString(R.string.sensor_create_failed));
+                    Util.errorToast(SensorFormActivity.this, response.message());
                 }
                 else {
-                    //Util.successToast(SensorAddActivity.this, getString(R.string.sensor_create_success));
+                    //Util.successToast(SensorFormActivity.this, getString(R.string.sensor_create_success));
 
                     // Open MainActivity and set fragment to sensors
-                    Intent intent = new Intent(SensorAddActivity.this, MainActivity.class);
+                    Intent intent = new Intent(SensorFormActivity.this, MainActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     intent.putExtra("fragment", MainActivity.SENSORS);
                     startActivity(intent);
@@ -174,7 +173,7 @@ public class SensorAddActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Sensor> call, Throwable t) {
-                Util.errorToast(SensorAddActivity.this, t.getMessage());
+                Util.errorToast(SensorFormActivity.this, t.getMessage());
             }
         });
 
@@ -189,14 +188,14 @@ public class SensorAddActivity extends AppCompatActivity {
             public void onResponse(Call<Sensor> call, Response<Sensor> response) {
 
                 if (!response.isSuccessful()) {
-                    //Util.errorToast(SensorAddActivity.this, getString(R.string.sensor_create_failed));
-                    Util.errorToast(SensorAddActivity.this, response.message());
+                    //Util.errorToast(SensorFormActivity.this, getString(R.string.sensor_create_failed));
+                    Util.errorToast(SensorFormActivity.this, response.message());
                 }
                 else {
-                    //Util.successToast(SensorAddActivity.this, getString(R.string.sensor_create_success));
+                    //Util.successToast(SensorFormActivity.this, getString(R.string.sensor_create_success));
 
                     // Open MainActivity and set fragment to sensors
-                    Intent intent = new Intent(SensorAddActivity.this, MainActivity.class);
+                    Intent intent = new Intent(SensorFormActivity.this, MainActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     intent.putExtra("fragment", MainActivity.SENSORS);
                     startActivity(intent);
@@ -206,7 +205,7 @@ public class SensorAddActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Sensor> call, Throwable t) {
-                Util.errorToast(SensorAddActivity.this, t.getMessage());
+                Util.errorToast(SensorFormActivity.this, t.getMessage());
             }
         });
 

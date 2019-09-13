@@ -37,9 +37,9 @@
             android:id="@+id/ivSensorStarter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:src="@drawable/ic_timer" />
+            android:src="@drawable/ic_timer"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvSensorThreshold" />
 
         <TextView
             android:id="@+id/ivSensorAa"
@@ -59,7 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="TextView"
-            android:textSize="12sp"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="@+id/ivSensorAa"
             app:layout_constraintTop_toBottomOf="@+id/tvSensorTag" />
 
@@ -69,9 +69,17 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="UpdatedAt"
-            android:textSize="12sp"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/tvSensorThreshold"
+            app:layout_constraintTop_toBottomOf="@+id/tvSensorThreshold" />
+
+        <ImageView
+            android:id="@+id/ivDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_delete"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ivSensorAa" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

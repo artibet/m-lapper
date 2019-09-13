@@ -7,6 +7,7 @@ import gr.artibet.lapper.models.LoginUser;
 import gr.artibet.lapper.models.Sensor;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -40,6 +41,10 @@ public interface ApiInterface {
     // Sensor PUT (update)
     @PUT("api/sensors/{id}/")
     Call<Sensor> updateSensor(@Header("Authorization") String token, @Path("id") long id, @Body Sensor sensor);
+
+    // Sensor DELETE
+    @DELETE("api/sensors/{id}/")
+    Call<Void> deleteSensor(@Header("Authorization") String token, @Path("id") long id);
 
 
 }

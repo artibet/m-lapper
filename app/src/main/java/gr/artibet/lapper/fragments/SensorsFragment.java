@@ -1,10 +1,12 @@
 package gr.artibet.lapper.fragments;
 
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gr.artibet.lapper.R;
+import gr.artibet.lapper.Util;
 import gr.artibet.lapper.activities.SensorFormActivity;
 import gr.artibet.lapper.adapters.SensorAdapter;
 import gr.artibet.lapper.api.RetrofitClient;
@@ -69,18 +72,15 @@ public class SensorsFragment extends Fragment implements BottomNavigationView.On
 
         // Set sensor item click listener
         mAdapter.setOnItemClickListener(new SensorAdapter.OnItemClickListener() {
+
             @Override
             public void onItemClick(int position) {
-                Sensor sensor = mSensorList.get(position);
+                editSensor(position);
+            }
 
-                // Open sensor form
-                String json = new Gson().toJson(sensor);
-                Intent intent = new Intent(getActivity(), SensorFormActivity.class);
-                intent.putExtra("sensor", json);
-                //getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-                //intent.setFlags(FUL);
-                startActivity(intent);
-                //Util.successToast(getActivity(), "Open form");
+            @Override
+            public void onDeleteClick(int position) {
+                deleteSensor(position);
             }
         });
 
@@ -161,5 +161,71 @@ public class SensorsFragment extends Fragment implements BottomNavigationView.On
         //getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         //intent.setFlags(FUL);
         startActivity(intent);
+    }
+
+    // Edit sensor
+    private void editSensor(int position) {
+        Sensor sensor = mSensorList.get(position);
+
+        // Open sensor form
+        String json = new Gson().toJson(sensor);
+        Intent intent = new Intent(getActivity(), SensorFormActivity.class);
+        intent.putExtra("sensor", json);
+        //getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        //intent.setFlags(FUL);
+        startActivity(intent);
+        //Util.successToast(getActivity(), "Open form");
+    }
+
+    // Delete sensor
+    private void deleteSensor(int position) {
+        Sensor sensor = mSensorList.get(position);
+
+        // Get confiramtion
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Delete sensor");
+        builder.setMessage("Do you want to delete sensor " + sensor.getTag());
+
+        // Exit button
+        builder.setPositiveButton(R.string.exit, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+
+        // Cancel button
+        builder.setNegativeButton(R.string.cancel_exit, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // do nothing
+            }
+        });
+
+        // Show confirmation dialog
+        builder.show();
+
+        String token = SharedPrefManager.getInstance(getActivity()).getToken();
+        Call<Void> call = RetrofitClient.getInstance().getApi().deleteSensor(token, sensor.getId());
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+
+                if (!response.isSuccessful()) {
+                    //Util.errorToast(SensorFormActivity.this, getString(R.string.sensor_create_failed));
+                    Util.errorToast(getActivity(), response.message());
+                }
+                else {
+                    Util.errorToast(getActivity(), "Delete successfully");
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Util.errorToast(getActivity(), t.getMessage());
+            }
+        });
     }
 }

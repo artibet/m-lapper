@@ -34,11 +34,13 @@ public class SensorAdapter extends RecyclerView.Adapter<SensorAdapter.SensorView
     // Item click interface
     public interface OnItemClickListener {
         void onItemClick(int position);
+        void onDeleteClick(int position);
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
         mItemListener = listener;
     }
+
 
     // VIEW HOLDER CLASS
     public static class SensorViewHolder extends RecyclerView.ViewHolder {
@@ -49,6 +51,7 @@ public class SensorAdapter extends RecyclerView.Adapter<SensorAdapter.SensorView
         public TextView mSensorUpdatedAt;
         public ImageView mSensorStatus;
         public ImageView mSensorStarter;
+        public ImageView mDelete;
 
 
         public SensorViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
@@ -60,7 +63,9 @@ public class SensorAdapter extends RecyclerView.Adapter<SensorAdapter.SensorView
             mSensorUpdatedAt = itemView.findViewById(R.id.tvSensorUpdatedAt);
             mSensorStatus = itemView.findViewById(R.id.ivSensorStatus);
             mSensorStarter = itemView.findViewById(R.id.ivSensorStarter);
+            mDelete = itemView.findViewById(R.id.ivDelete);
 
+            // Item click listener
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -72,6 +77,21 @@ public class SensorAdapter extends RecyclerView.Adapter<SensorAdapter.SensorView
                     }
                 }
             });
+
+            // Delete click listener
+            mDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onDeleteClick(position);
+                        }
+                    }
+                }
+            });
+
+
         }
     }
 

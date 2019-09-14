@@ -47,4 +47,8 @@
     <string name="delete_sensor_message">Do you want to delete the selected sensor?</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
+    <string name="administrator">Administrator</string>
+    <string name="no_users">There are no users</string>
+    <string name="delete_user_title">Delete user</string>
+    <string name="delete_user_message">Do you want to delete the selected user?</string>
 </resources>

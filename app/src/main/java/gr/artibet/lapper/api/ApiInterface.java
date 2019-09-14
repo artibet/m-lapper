@@ -5,6 +5,7 @@ import java.util.List;
 import gr.artibet.lapper.models.LiveData;
 import gr.artibet.lapper.models.LoginUser;
 import gr.artibet.lapper.models.Sensor;
+import gr.artibet.lapper.models.User;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -30,6 +31,10 @@ public interface ApiInterface {
     @GET("api/live-data/")
     Call<List<LiveData>> getLiveData(@Header("Authorization") String token);
 
+    // --------------------------------------------------------------------------
+    // SENSORS
+    // --------------------------------------------------------------------------
+
     // Sensor List
     @GET("api/sensors/")
     Call<List<Sensor>> getSensors(@Header("Authorization") String token);
@@ -46,5 +51,23 @@ public interface ApiInterface {
     @DELETE("api/sensors/{id}/")
     Call<Void> deleteSensor(@Header("Authorization") String token, @Path("id") long id);
 
+    // --------------------------------------------------------------------------
+    // USERS
+    // --------------------------------------------------------------------------
 
+    // User List
+    @GET("api/users/")
+    Call<List<User>> getUsers(@Header("Authorization") String token);
+
+    // User POST (create new)
+    @POST("api/users/")
+    Call<User> createUser(@Header("Authorization") String token, @Body User user);
+
+    // User PUT (update)
+    @PUT("api/users/{id}/")
+    Call<User> updateUser(@Header("Authorization") String token, @Path("id") long id, @Body User user);
+
+    // Sensor DELETE
+    @DELETE("api/users/{id}/")
+    Call<Void> deleteUser(@Header("Authorization") String token, @Path("id") long id);
 }

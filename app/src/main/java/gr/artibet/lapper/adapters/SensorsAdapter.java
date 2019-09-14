@@ -1,7 +1,6 @@
 package gr.artibet.lapper.adapters;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,12 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import gr.artibet.lapper.R;
-import gr.artibet.lapper.Util;
-import gr.artibet.lapper.models.LiveData;
-import gr.artibet.lapper.models.RaceVehicleState;
 import gr.artibet.lapper.models.Sensor;
 
-public class SensorAdapter extends RecyclerView.Adapter<SensorAdapter.SensorViewHolder> {
+public class SensorsAdapter extends RecyclerView.Adapter<SensorsAdapter.SensorViewHolder> {
 
     // Context
     private Context mContext;
@@ -58,10 +54,10 @@ public class SensorAdapter extends RecyclerView.Adapter<SensorAdapter.SensorView
             super(itemView);
 
             mSensorAa = itemView.findViewById(R.id.ivSensorAa);
-            mSensorTag = itemView.findViewById(R.id.tvSensorTag);
-            mSensorThreshold = itemView.findViewById(R.id.tvSensorThreshold);
-            mSensorUpdatedAt = itemView.findViewById(R.id.tvSensorUpdatedAt);
-            mSensorStatus = itemView.findViewById(R.id.ivSensorStatus);
+            mSensorTag = itemView.findViewById(R.id.tvUsername);
+            mSensorThreshold = itemView.findViewById(R.id.tvFullName);
+            mSensorUpdatedAt = itemView.findViewById(R.id.tvUserUpdatedAt);
+            mSensorStatus = itemView.findViewById(R.id.ivUserStatus);
             mSensorStarter = itemView.findViewById(R.id.ivSensorStarter);
             mDelete = itemView.findViewById(R.id.ivDelete);
 
@@ -96,7 +92,7 @@ public class SensorAdapter extends RecyclerView.Adapter<SensorAdapter.SensorView
     }
 
     // CONSTRUCTOR WITH AN ARRAY LIST OF Sensor
-    public SensorAdapter(Context context, List<Sensor> sensorList) {
+    public SensorsAdapter(Context context, List<Sensor> sensorList) {
         mContext = context;
         mSensorList = sensorList;
     }

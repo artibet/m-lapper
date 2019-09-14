@@ -2,12 +2,14 @@ package gr.artibet.lapper.models;
 
 import com.google.gson.annotations.SerializedName;
 
+import gr.artibet.lapper.R;
+
 public class User {
 
     // MEMBERS
 
     @SerializedName("id")
-    private long id;
+    private Long id;
 
     @SerializedName("username")
     private String username;
@@ -36,9 +38,12 @@ public class User {
     @SerializedName("last_login")
     private String lastLogin;
 
+    @SerializedName("updated_at_formated")
+    private String updatedAtFormated;
+
     // GETTERS
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -76,5 +81,60 @@ public class User {
 
     public String getLastLogin() {
         return lastLogin;
+    }
+
+    public String getUpdatedAtFormated() {return updatedAtFormated; }
+
+    // SETTERS
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
+    public void setStaff(boolean staff) {
+        isStaff = staff;
+    }
+
+    public void setSuperUser(boolean superUser) {
+        isSuperUser = superUser;
+    }
+
+    public void setDateJoined(String dateJoined) {
+        this.dateJoined = dateJoined;
+    }
+
+    public void setLastLogin(String lastLogin) {
+        this.lastLogin = lastLogin;
+    }
+
+    public void setUpdatedAtFormated(String updatedAtFormated) {
+        this.updatedAtFormated = updatedAtFormated;
+    }
+
+    // User FullName
+    public String getFullName() {
+        String fn = (firstName != null) ? firstName : "";
+        String ln = (lastName != null) ? lastName : "";
+        return (lastName + " " + firstName).trim();
     }
 }

@@ -27,7 +27,7 @@ import java.util.List;
 import gr.artibet.lapper.R;
 import gr.artibet.lapper.Util;
 import gr.artibet.lapper.activities.SensorFormActivity;
-import gr.artibet.lapper.adapters.SensorAdapter;
+import gr.artibet.lapper.adapters.SensorsAdapter;
 import gr.artibet.lapper.api.RetrofitClient;
 import gr.artibet.lapper.models.Sensor;
 import gr.artibet.lapper.storage.SharedPrefManager;
@@ -46,7 +46,7 @@ public class SensorsFragment extends Fragment implements BottomNavigationView.On
 
     // Recycler view members
     private RecyclerView mRecyclerView;
-    private SensorAdapter mAdapter;
+    private SensorsAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
     public SensorsFragment() {
@@ -65,13 +65,13 @@ public class SensorsFragment extends Fragment implements BottomNavigationView.On
         mTvMessage = v.findViewById(R.id.tvMessage);
         mRecyclerView = v.findViewById(R.id.recyclerView);
         mLayoutManager = new LinearLayoutManager(getActivity());
-        mAdapter = new SensorAdapter(getActivity(), mSensorList);
+        mAdapter = new SensorsAdapter(getActivity(), mSensorList);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setAdapter(mAdapter);
 
         // Set sensor item click listener
-        mAdapter.setOnItemClickListener(new SensorAdapter.OnItemClickListener() {
+        mAdapter.setOnItemClickListener(new SensorsAdapter.OnItemClickListener() {
 
             @Override
             public void onItemClick(int position) {
@@ -228,7 +228,6 @@ public class SensorsFragment extends Fragment implements BottomNavigationView.On
 
         // Show confirmation dialog
         builder.show();
-
 
     }
 }

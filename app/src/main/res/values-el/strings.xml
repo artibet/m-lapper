@@ -47,5 +47,9 @@
     <string name="delete_sensor_message">Να γίνει διαγραφή του επιλεγμένου αισθητήρα?</string>
     <string name="ok">ΟΚ</string>
     <string name="cancel">Ακύρωση</string>
+    <string name="administrator">Administrator</string>
+    <string name="no_users">Δεν υπάρχουν χρήστες</string>
+    <string name="delete_user_title">Διαγραφή χρήστη</string>
+    <string name="delete_user_message">Να γίνει διαγραφή του επιλεγμένου χρήστη?</string>
 
 </resources>

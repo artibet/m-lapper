@@ -178,24 +178,48 @@ public class SensorsFragment extends Fragment implements BottomNavigationView.On
     }
 
     // Delete sensor
-    private void deleteSensor(int position) {
-        Sensor sensor = mSensorList.get(position);
+    private void deleteSensor(final int position) {
 
-        // Get confiramtion
+        // Get confirmation
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Delete sensor");
-        builder.setMessage("Do you want to delete sensor " + sensor.getTag());
+        builder.setTitle(getString(R.string.delete_sensor_title));
+        builder.setMessage(getString(R.string.delete_sensor_message));
 
-        // Exit button
-        builder.setPositiveButton(R.string.exit, new DialogInterface.OnClickListener() {
+        // Ok button
+        builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                Sensor sensor = mSensorList.get(position);
+
+                String token = SharedPrefManager.getInstance(getActivity()).getToken();
+                Call<Void> call = RetrofitClient.getInstance().getApi().deleteSensor(token, sensor.getId());
+                call.enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+
+                        if (!response.isSuccessful()) {
+                            //Util.errorToast(SensorFormActivity.this, getString(R.string.sensor_create_failed));
+                            Util.errorToast(getActivity(), response.message());
+                        }
+                        else {
+                            //Util.successToast(getActivity(), "Delete successfully");
+                            mSensorList.remove(position);
+                            mAdapter.notifyItemRemoved(position);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+                        Util.errorToast(getActivity(), t.getMessage());
+                    }
+                });
+
 
             }
         });
 
         // Cancel button
-        builder.setNegativeButton(R.string.cancel_exit, new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // do nothing
@@ -205,27 +229,6 @@ public class SensorsFragment extends Fragment implements BottomNavigationView.On
         // Show confirmation dialog
         builder.show();
 
-        String token = SharedPrefManager.getInstance(getActivity()).getToken();
-        Call<Void> call = RetrofitClient.getInstance().getApi().deleteSensor(token, sensor.getId());
-        call.enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
 
-                if (!response.isSuccessful()) {
-                    //Util.errorToast(SensorFormActivity.this, getString(R.string.sensor_create_failed));
-                    Util.errorToast(getActivity(), response.message());
-                }
-                else {
-                    Util.errorToast(getActivity(), "Delete successfully");
-
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-                Util.errorToast(getActivity(), t.getMessage());
-            }
-        });
     }
 }

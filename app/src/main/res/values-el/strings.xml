@@ -43,4 +43,9 @@
     <string name="sensor_create_failed">Η δημιουργία του αισθητήρα απέτυχε</string>
     <string name="sensor_create_success">Ο αισθητήρας δημιουργήθηκε με επιτυχία</string>
     <string name="edit_sensor">Επεξεργασία αισθητήρα</string>
+    <string name="delete_sensor_title">Διαγραφή αισθητήρα</string>
+    <string name="delete_sensor_message">Να γίνει διαγραφή του επιλεγμένου αισθητήρα?</string>
+    <string name="ok">ΟΚ</string>
+    <string name="cancel">Ακύρωση</string>
+
 </resources>

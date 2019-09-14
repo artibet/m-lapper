@@ -67,7 +67,16 @@ public interface ApiInterface {
     @PUT("api/users/{id}/")
     Call<User> updateUser(@Header("Authorization") String token, @Path("id") long id, @Body User user);
 
-    // Sensor DELETE
+    // User DELETE
     @DELETE("api/users/{id}/")
     Call<Void> deleteUser(@Header("Authorization") String token, @Path("id") long id);
+
+    // Reset password
+    @POST("api/users/reset-password/")
+    @FormUrlEncoded
+    Call<Void> resetPassword(
+            @Header("Authorization") String token,
+            @Field("username") String username,
+            @Field("password") String password
+    );
 }

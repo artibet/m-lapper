@@ -48,6 +48,7 @@
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
     <string name="administrator">Administrator</string>
+    <string name="normal_user">Normal user</string>
     <string name="no_users">There are no users</string>
     <string name="delete_user_title">Delete user</string>
     <string name="delete_user_message">Do you want to delete the selected user?</string>
@@ -58,4 +59,9 @@
     <string name="edit_user">Edit user</string>
     <string name="active">Active</string>
     <string name="starter_sensor">Starter sensor</string>
+    <string name="date_joined">Created</string>
+    <string name="reset_password_title">Reset passwored</string>
+    <string name="new_password">New password</string>
+    <string name="no_empty_password">Password can\'t be empty</string>
+    <string name="password_reset_success">The password has been changed</string>
 </resources>

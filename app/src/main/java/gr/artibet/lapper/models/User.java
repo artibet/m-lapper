@@ -41,8 +41,8 @@ public class User {
     @SerializedName("last_login")
     private String lastLogin;
 
-    @SerializedName("updated_at_formated")
-    private String updatedAtFormated;
+    @SerializedName("date_joined_formated")
+    private String getDateJoinedFormated;
 
     // GETTERS
 
@@ -90,7 +90,7 @@ public class User {
         return lastLogin;
     }
 
-    public String getUpdatedAtFormated() {return updatedAtFormated; }
+    public String getDateJoinedFormated() {return getDateJoinedFormated; }
 
     // SETTERS
 
@@ -138,8 +138,8 @@ public class User {
         this.lastLogin = lastLogin;
     }
 
-    public void setUpdatedAtFormated(String updatedAtFormated) {
-        this.updatedAtFormated = updatedAtFormated;
+    public void setDateJoinedFormated(String dateJoinedFormated) {
+        this.getDateJoinedFormated = dateJoinedFormated;
     }
 
     // User FullName

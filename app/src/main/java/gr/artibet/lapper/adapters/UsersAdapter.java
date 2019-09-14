@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import gr.artibet.lapper.R;
-import gr.artibet.lapper.models.Sensor;
 import gr.artibet.lapper.models.User;
 
 public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHolder> {
@@ -32,6 +31,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
     public interface OnItemClickListener {
         void onItemClick(int position);
         void onDeleteClick(int position);
+        void onResetPassword(int position);
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
@@ -45,11 +45,10 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
         public TextView mUsername;
         public TextView mRole;
         public TextView mFullName;
-        public TextView mUpdatedAt;
+        public TextView mDateJoined;
         public ImageView mUserStatus;
-        public ImageView mSetPassword;
+        public ImageView mResetPassword;
         public ImageView mDelete;
-
 
         public UserViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
@@ -57,9 +56,9 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
             mUsername = itemView.findViewById(R.id.tvUsername);
             mRole = itemView.findViewById(R.id.tvUserRole);
             mFullName = itemView.findViewById(R.id.tvFullName);
-            mUpdatedAt = itemView.findViewById(R.id.tvUserUpdatedAt);
+            mDateJoined = itemView.findViewById(R.id.tvDateJoined);
             mUserStatus = itemView.findViewById(R.id.ivUserStatus);
-            mSetPassword = itemView.findViewById(R.id.ivSetPassword);
+            mResetPassword = itemView.findViewById(R.id.ivResetPassword);
             mDelete = itemView.findViewById(R.id.ivDelete);
 
             // Item click listener
@@ -83,6 +82,19 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
                         int position = getAdapterPosition();
                         if (position != RecyclerView.NO_POSITION) {
                             listener.onDeleteClick(position);
+                        }
+                    }
+                }
+            });
+
+            // Set Password click listener
+            mResetPassword.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onResetPassword(position);
                         }
                     }
                 }
@@ -122,13 +134,20 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
         holder.mUsername.setText(user.getUsername());
 
         // Role
-        holder.mRole.setText("(" + "role" + ")");
+        String role = "";
+        if (user.isSuperUser()) {
+            role = mContext.getString(R.string.administrator);
+        }
+        else {
+            role = mContext.getString(R.string.normal_user);
+        }
+        holder.mRole.setText("(" + role + ")");
 
         // Fullname
         holder.mFullName.setText(user.getFullName());
 
-        // UpdatedAt
-        holder.mUpdatedAt.setText(mContext.getString(R.string.updated)+ ": " + user.getUpdatedAtFormated());
+        // DateJoined
+        holder.mDateJoined.setText(mContext.getString(R.string.date_joined)+ ": " + user.getDateJoinedFormated());
 
      }
 

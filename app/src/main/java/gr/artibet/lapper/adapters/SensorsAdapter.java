@@ -56,7 +56,7 @@ public class SensorsAdapter extends RecyclerView.Adapter<SensorsAdapter.SensorVi
             mSensorAa = itemView.findViewById(R.id.ivSensorAa);
             mSensorTag = itemView.findViewById(R.id.tvUsername);
             mSensorThreshold = itemView.findViewById(R.id.tvFullName);
-            mSensorUpdatedAt = itemView.findViewById(R.id.tvUserUpdatedAt);
+            mSensorUpdatedAt = itemView.findViewById(R.id.tvDateJoined);
             mSensorStatus = itemView.findViewById(R.id.ivUserStatus);
             mSensorStarter = itemView.findViewById(R.id.ivSensorStarter);
             mDelete = itemView.findViewById(R.id.ivDelete);

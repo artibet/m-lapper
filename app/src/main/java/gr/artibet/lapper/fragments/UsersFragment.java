@@ -11,11 +11,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -32,6 +34,7 @@ import gr.artibet.lapper.activities.UserFormActivity;
 import gr.artibet.lapper.adapters.SensorsAdapter;
 import gr.artibet.lapper.adapters.UsersAdapter;
 import gr.artibet.lapper.api.RetrofitClient;
+import gr.artibet.lapper.dialogs.ResetPasswordDialog;
 import gr.artibet.lapper.models.Sensor;
 import gr.artibet.lapper.models.User;
 import gr.artibet.lapper.storage.SharedPrefManager;
@@ -86,6 +89,11 @@ public class UsersFragment extends Fragment implements BottomNavigationView.OnNa
             @Override
             public void onDeleteClick(int position) {
                 deleteUser(position);
+            }
+
+            @Override
+            public void onResetPassword(int position) {
+                resetPassword(position);
             }
         });
 
@@ -229,4 +237,49 @@ public class UsersFragment extends Fragment implements BottomNavigationView.OnNa
         builder.show();
 
     }
+
+    // Set password
+    private void resetPassword(final int potition) {
+
+        User user = mUserList.get(potition);
+        final String username = user.getUsername();
+
+        ResetPasswordDialog resetPasswordDialog = new ResetPasswordDialog(username);
+        resetPasswordDialog.show(getActivity().getSupportFragmentManager(), "reset password");
+        resetPasswordDialog.setResetPasswordListener(new ResetPasswordDialog.ResetPasswordListener() {
+            @Override
+            public void onResetPassword(String password) {
+
+                // If password is empty display toast message
+                if (password.isEmpty()) {
+                    Util.successToast(getActivity(), getString(R.string.no_empty_password));
+                    return;
+                }
+
+                // Send api request to reset password
+                String token = SharedPrefManager.getInstance(getActivity()).getToken();
+                Call<Void> call = RetrofitClient.getInstance().getApi().resetPassword(token, username, password);
+                call.enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+
+                        if (!response.isSuccessful()) {
+                            //Util.errorToast(SensorFormActivity.this, getString(R.string.sensor_create_failed));
+                            Util.errorToast(getActivity(), response.message());
+                        }
+                        else {
+                            Util.successToast(getActivity(), getString(R.string.password_reset_success));
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+                        Util.errorToast(getActivity(), t.getMessage());
+                    }
+                });
+            }
+        });
+    }
+
+
 }

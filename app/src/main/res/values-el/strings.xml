@@ -48,6 +48,7 @@
     <string name="ok">ΟΚ</string>
     <string name="cancel">Ακύρωση</string>
     <string name="administrator">Διαχειριστής</string>
+    <string name="normal_user">Απλός χρήστης</string>
     <string name="no_users">Δεν υπάρχουν χρήστες</string>
     <string name="delete_user_title">Διαγραφή χρήστη</string>
     <string name="delete_user_message">Να γίνει διαγραφή του επιλεγμένου χρήστη?</string>
@@ -58,4 +59,9 @@
     <string name="edit_user">Επεξεργασία χρήστη</string>
     <string name="active">Ενεργός</string>
     <string name="starter_sensor">Αισθητήρας εκκίνησης</string>
+    <string name="date_joined">Δημιουργήθηκε</string>
+    <string name="reset_password_title">Επαναφορά κωδικού πρόσβασης</string>
+    <string name="new_password">Νέος κωδικός</string>
+    <string name="no_empty_password">Ο κωδικός δεν μπορεί να είναι κενός</string>
+    <string name="password_reset_success">Επιτυχής αλλαγή κωδικού!</string>
 </resources>

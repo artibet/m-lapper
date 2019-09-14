@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -27,6 +28,7 @@ import java.util.List;
 import gr.artibet.lapper.R;
 import gr.artibet.lapper.Util;
 import gr.artibet.lapper.activities.SensorFormActivity;
+import gr.artibet.lapper.activities.UserFormActivity;
 import gr.artibet.lapper.adapters.SensorsAdapter;
 import gr.artibet.lapper.adapters.UsersAdapter;
 import gr.artibet.lapper.api.RetrofitClient;
@@ -159,10 +161,8 @@ public class UsersFragment extends Fragment implements BottomNavigationView.OnNa
 
     // Add new sensor
     private void actionAddUser() {
-        //Intent intent = new Intent(getActivity(), SensorFormActivity.class);
-        //getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        //intent.setFlags(FUL);
-        //startActivity(intent);
+        Intent intent = new Intent(getActivity(), UserFormActivity.class);
+        startActivity(intent);
     }
 
     // Edit sensor
@@ -171,9 +171,9 @@ public class UsersFragment extends Fragment implements BottomNavigationView.OnNa
 
         // Open sensor form
         String json = new Gson().toJson(user);
-        //Intent intent = new Intent(getActivity(), SensorFormActivity.class);
-        //intent.putExtra("sensor", json);
-        //startActivity(intent);
+        Intent intent = new Intent(getActivity(), UserFormActivity.class);
+        intent.putExtra("user", json);
+        startActivity(intent);
     }
 
     // Delete sensor

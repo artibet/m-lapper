@@ -13,6 +13,8 @@
         <activity
             android:name=".activities.SensorFormActivity"/>
         <activity
+            android:name=".activities.UserFormActivity"/>
+        <activity
             android:name=".activities.StarterActivity"
             android:theme="@android:style/Theme.NoDisplay">
             <intent-filter>

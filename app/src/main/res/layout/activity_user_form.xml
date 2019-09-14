@@ -23,64 +23,103 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+<!-- Username-->
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/sensor_aa_layout"
+                android:id="@+id/username_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:errorEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/sensor_aa"
+                    android:id="@+id/editTextUsername"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="A/A"
-                    android:inputType="number" />
+                    android:hint="@string/username"
+                    android:inputType="text" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
+<!-- Password -->
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/sensor_tag_layout"
+                android:id="@+id/password_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:errorEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/sensor_tag"
+                    android:id="@+id/editTextPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Tag"
-                    android:inputType="text"/>
+                    android:hint="@string/password"
+                    android:inputType="textPassword" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
+<!-- Last name-->
             <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:errorEnabled="true">
-
-            <CheckBox
-                android:id="@+id/sensor_isstart"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/starter_sensor"
-                android:layout_marginBottom="16dp"/>
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/sensor_threshold_layout"
+                android:id="@+id/lastName_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:errorEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/sensor_threshold"
+                    android:id="@+id/editTextLastName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/threshold"
-                    android:inputType="number" />
+                    android:hint="@string/last_name"
+                    android:inputType="text" />
 
             </com.google.android.material.textfield.TextInputLayout>
+
+<!-- First name-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/firstName_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:errorEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextFirstName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/first_name"
+                    android:inputType="text" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+<!-- Email-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/email_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:errorEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/email"
+                    android:inputType="textEmailAddress" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+<!-- Is admin-->
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:errorEnabled="true">
+
+                <CheckBox
+                    android:id="@+id/checkBoxIsAdmin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/administrator"
+                    android:layout_marginBottom="16dp"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+<!-- Is active-->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -89,7 +128,7 @@
                 android:layout_marginTop="16dp">
 
                 <Switch
-                    android:id="@+id/sensor_isactive"
+                    android:id="@+id/switchIsActive"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="true" />

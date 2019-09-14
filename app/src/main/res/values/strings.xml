@@ -51,4 +51,11 @@
     <string name="no_users">There are no users</string>
     <string name="delete_user_title">Delete user</string>
     <string name="delete_user_message">Do you want to delete the selected user?</string>
+    <string name="last_name">Last name</string>
+    <string name="first_name">First name</string>
+    <string name="email">E-mail</string>
+    <string name="add_user">Add user</string>
+    <string name="edit_user">Edit user</string>
+    <string name="active">Active</string>
+    <string name="starter_sensor">Starter sensor</string>
 </resources>

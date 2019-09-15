@@ -6,6 +6,7 @@ import gr.artibet.lapper.models.LiveData;
 import gr.artibet.lapper.models.LoginUser;
 import gr.artibet.lapper.models.Sensor;
 import gr.artibet.lapper.models.User;
+import gr.artibet.lapper.models.Vehicle;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -79,4 +80,25 @@ public interface ApiInterface {
             @Field("username") String username,
             @Field("password") String password
     );
+
+    // --------------------------------------------------------------------------
+    // VEHICLES
+    // --------------------------------------------------------------------------
+
+    // Vehicle List
+    @GET("api/vehicles/")
+    Call<List<Vehicle>> getVehicles(@Header("Authorization") String token);
+
+    // Vehicle POST (create new)
+    @POST("api/vehicles/")
+    Call<Vehicle> createVehicle(@Header("Authorization") String token, @Body Vehicle vehicle);
+
+    // Vehicle PUT (update)
+    @PUT("api/vehicles/{id}/")
+    Call<Vehicle> updateVehicle(@Header("Authorization") String token, @Path("id") long id, @Body Vehicle vehicle);
+
+    // Sensor DELETE
+    @DELETE("api/vehicles/{id}/")
+    Call<Void> deleteVehicle(@Header("Authorization") String token, @Path("id") long id);
+
 }

@@ -65,4 +65,10 @@
     <string name="no_empty_password">Password can\'t be empty</string>
     <string name="password_reset_success">The password has been changed</string>
     <string name="driver">Driver</string>
+    <string name="delete_vehicle_title">Delete vehicle</string>
+    <string name="delete_vehicle_message">Do you want to delete the selected vehicle?</string>
+    <string name="tag">Tag</string>
+    <string name="owner">Owner</string>
+    <string name="add_vehicle">Add new vehicle</string>
+    <string name="edit_vehicle">Edit vehicle</string>
 </resources>

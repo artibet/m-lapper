@@ -135,7 +135,7 @@ public class VehiclesAdapter extends RecyclerView.Adapter<VehiclesAdapter.Vehicl
         return mVehicleList.size();
     }
 
-    public void setSensorList(List<Vehicle> vehicleList) {
+    public void setmVehicleList(List<Vehicle> vehicleList) {
         mVehicleList = vehicleList;
         notifyDataSetChanged();
     }

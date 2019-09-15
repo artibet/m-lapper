@@ -65,4 +65,10 @@
     <string name="no_empty_password">Ο κωδικός δεν μπορεί να είναι κενός</string>
     <string name="password_reset_success">Επιτυχής αλλαγή κωδικού!</string>
     <string name="driver">Οδηγός</string>
+    <string name="delete_vehicle_title">Διαγραφή οχήματος</string>
+    <string name="delete_vehicle_message">Να γίνει διαγραφή του επιλεγμένου οχήματος?</string>
+    <string name="tag">Ετικέτα</string>
+    <string name="owner">Ιδιοκτήτης</string>
+    <string name="add_vehicle">Προσθήκη οχήματος</string>
+    <string name="edit_vehicle">Επεξεργασία οχήματος</string>
 </resources>

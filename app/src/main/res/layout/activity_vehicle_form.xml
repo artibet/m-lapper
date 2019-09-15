@@ -24,28 +24,13 @@
             android:orientation="vertical">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/sensor_aa_layout"
+                android:id="@+id/vehicle_tag_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:errorEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/sensor_aa"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="A/A"
-                    android:inputType="number" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/sensor_tag_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:errorEnabled="true">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/sensor_tag"
+                    android:id="@+id/vehicle_tag"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/tag"
@@ -54,31 +39,33 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:errorEnabled="true">
+            android:id="@+id/vehicle_owner_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:errorEnabled="true">
 
-            <CheckBox
-                android:id="@+id/sensor_isstart"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/starter_sensor"
-                android:layout_marginBottom="16dp"/>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/vehicle_owner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/owner"
+                    android:inputType="text"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
+
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/sensor_threshold_layout"
+                android:id="@+id/vehicle_driver_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:errorEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/sensor_threshold"
+                    android:id="@+id/vehicle_driver"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/threshold"
-                    android:inputType="number" />
+                    android:hint="@string/driver"
+                    android:inputType="text"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -89,7 +76,7 @@
                 android:layout_marginTop="16dp">
 
                 <Switch
-                    android:id="@+id/sensor_isactive"
+                    android:id="@+id/vehicle_isactive"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="true" />

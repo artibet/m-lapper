@@ -7,7 +7,7 @@ public class Vehicle {
     // MEMBERS
 
     @SerializedName("id")
-    private long id;
+    private Long id;
 
     @SerializedName("tag")
     private String tag;
@@ -32,7 +32,7 @@ public class Vehicle {
 
     // GETTERS
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -62,5 +62,39 @@ public class Vehicle {
 
     public String getUpdatedAt() {
         return updatedAt;
+    }
+
+    // SETTERS
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
+
+    public void setDriver(String driver) {
+        this.driver = driver;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public void setUpdatedAt(String updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

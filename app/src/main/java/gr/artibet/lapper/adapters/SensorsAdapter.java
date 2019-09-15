@@ -53,13 +53,13 @@ public class SensorsAdapter extends RecyclerView.Adapter<SensorsAdapter.SensorVi
         public SensorViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
 
-            mSensorAa = itemView.findViewById(R.id.ivSensorAa);
-            mSensorTag = itemView.findViewById(R.id.tvUsername);
-            mSensorThreshold = itemView.findViewById(R.id.tvFullName);
-            mSensorUpdatedAt = itemView.findViewById(R.id.tvDateJoined);
-            mSensorStatus = itemView.findViewById(R.id.ivUserStatus);
-            mSensorStarter = itemView.findViewById(R.id.ivSensorStarter);
-            mDelete = itemView.findViewById(R.id.ivDelete);
+            mSensorAa = itemView.findViewById(R.id.sensor_item_aa);
+            mSensorTag = itemView.findViewById(R.id.sensor_item_tag);
+            mSensorThreshold = itemView.findViewById(R.id.sensor_item_threshold);
+            mSensorUpdatedAt = itemView.findViewById(R.id.sensor_item_updatedAt);
+            mSensorStatus = itemView.findViewById(R.id.sensor_item_status);
+            mSensorStarter = itemView.findViewById(R.id.sensor_item_isStart);
+            mDelete = itemView.findViewById(R.id.sensor_item_delete);
 
             // Item click listener
             itemView.setOnClickListener(new View.OnClickListener() {

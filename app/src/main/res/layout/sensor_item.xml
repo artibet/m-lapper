@@ -14,67 +14,71 @@
 
 
         <ImageView
-            android:id="@+id/ivUserStatus"
+            android:id="@+id/sensor_item_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:src="@drawable/ic_done_green"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:src="@drawable/ic_done_green" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tvUsername"
+            android:id="@+id/sensor_item_tag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:text="sensorTag"
             android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/ivUserStatus"
-            app:layout_constraintStart_toEndOf="@+id/ivSensorAa"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/sensor_item_aa"
+            app:layout_constraintStart_toEndOf="@+id/sensor_item_aa"
+            app:layout_constraintTop_toTopOf="@+id/sensor_item_aa" />
 
         <ImageView
-            android:id="@+id/ivSensorStarter"
+            android:id="@+id/sensor_item_isStart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             android:src="@drawable/ic_timer"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tvFullName" />
+            app:layout_constraintStart_toStartOf="@+id/sensor_item_status"
+            app:layout_constraintTop_toBottomOf="@+id/sensor_item_status" />
 
         <TextView
-            android:id="@+id/ivSensorAa"
+            android:id="@+id/sensor_item_aa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:text="aa"
             android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/ivUserStatus"
-            app:layout_constraintStart_toEndOf="@+id/ivUserStatus"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/sensor_item_status"
+            app:layout_constraintTop_toTopOf="@+id/sensor_item_status" />
 
         <TextView
-            android:id="@+id/tvFullName"
+            android:id="@+id/sensor_item_threshold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="TextView"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:text="threshold"
             android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="@+id/ivSensorAa"
-            app:layout_constraintTop_toBottomOf="@+id/tvUsername" />
+            app:layout_constraintBottom_toBottomOf="@+id/sensor_item_isStart"
+            app:layout_constraintStart_toEndOf="@+id/sensor_item_isStart"
+            app:layout_constraintTop_toTopOf="@+id/sensor_item_isStart" />
 
         <TextView
-            android:id="@+id/tvDateJoined"
+            android:id="@+id/sensor_item_updatedAt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="UpdatedAt"
             android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="@+id/tvFullName"
-            app:layout_constraintTop_toBottomOf="@+id/tvFullName" />
+            app:layout_constraintStart_toStartOf="@+id/sensor_item_threshold"
+            app:layout_constraintTop_toBottomOf="@+id/sensor_item_threshold" />
 
         <ImageView
-            android:id="@+id/ivDelete"
+            android:id="@+id/sensor_item_delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_delete"

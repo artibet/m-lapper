@@ -64,4 +64,5 @@
     <string name="new_password">New password</string>
     <string name="no_empty_password">Password can\'t be empty</string>
     <string name="password_reset_success">The password has been changed</string>
+    <string name="driver">Driver</string>
 </resources>

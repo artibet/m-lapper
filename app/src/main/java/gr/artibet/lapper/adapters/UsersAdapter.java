@@ -53,13 +53,13 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
         public UserViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
 
-            mUsername = itemView.findViewById(R.id.tvUsername);
-            mRole = itemView.findViewById(R.id.tvUserRole);
-            mFullName = itemView.findViewById(R.id.tvFullName);
-            mDateJoined = itemView.findViewById(R.id.tvDateJoined);
-            mUserStatus = itemView.findViewById(R.id.ivUserStatus);
-            mResetPassword = itemView.findViewById(R.id.ivResetPassword);
-            mDelete = itemView.findViewById(R.id.ivDelete);
+            mUsername = itemView.findViewById(R.id.user_item_username);
+            mRole = itemView.findViewById(R.id.user_item_role);
+            mFullName = itemView.findViewById(R.id.user_item_fullname);
+            mDateJoined = itemView.findViewById(R.id.user_item_dateJoined);
+            mUserStatus = itemView.findViewById(R.id.user_item_status);
+            mResetPassword = itemView.findViewById(R.id.user_item_resetPassword);
+            mDelete = itemView.findViewById(R.id.user_item_delete);
 
             // Item click listener
             itemView.setOnClickListener(new View.OnClickListener() {

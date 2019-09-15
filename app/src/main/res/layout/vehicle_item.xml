@@ -14,7 +14,7 @@
 
 
         <ImageView
-            android:id="@+id/user_item_status"
+            android:id="@+id/vehicle_item_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_done_green"
@@ -22,66 +22,55 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/user_item_delete"
+            android:id="@+id/vehicle_item_delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_delete"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/user_item_resetPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:src="@drawable/ic_key"
-            android:tint="@android:color/holo_orange_light"
-            app:layout_constraintEnd_toStartOf="@+id/user_item_delete"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <TextView
-            android:id="@+id/user_item_dateJoined"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="DateJoined"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="@+id/user_item_fullname"
-            app:layout_constraintTop_toBottomOf="@+id/user_item_fullname" />
-
-        <TextView
-            android:id="@+id/user_item_username"
+            android:id="@+id/vehicle_item_owner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:text="Username"
+            android:text="vehicleOwner"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/vehicle_item_tag"
+            app:layout_constraintStart_toEndOf="@+id/vehicle_item_tag"
+            app:layout_constraintTop_toTopOf="@+id/vehicle_item_tag" />
+
+        <TextView
+            android:id="@+id/vehicle_item_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:text="vehicleTag"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/user_item_status"
-            app:layout_constraintTop_toTopOf="@+id/user_item_status" />
+            app:layout_constraintBottom_toBottomOf="@+id/vehicle_item_status"
+            app:layout_constraintStart_toEndOf="@+id/vehicle_item_status"
+            app:layout_constraintTop_toTopOf="@+id/vehicle_item_status" />
 
         <TextView
-            android:id="@+id/user_item_fullname"
+            android:id="@+id/vehicle_item_updatedAt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="FullName"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="@+id/user_item_username"
-            app:layout_constraintTop_toBottomOf="@+id/user_item_username" />
+            android:text="updatedAt"
+            app:layout_constraintStart_toStartOf="@+id/vehicle_item_driver"
+            app:layout_constraintTop_toBottomOf="@+id/vehicle_item_driver" />
 
         <TextView
-            android:id="@+id/user_item_role"
+            android:id="@+id/vehicle_item_driver"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:text="Role"
-            app:layout_constraintBottom_toBottomOf="@+id/user_item_username"
-            app:layout_constraintStart_toEndOf="@+id/user_item_username"
-            app:layout_constraintTop_toTopOf="@+id/user_item_username" />
+            android:layout_marginTop="4dp"
+            android:text="vehicleDriver"
+            app:layout_constraintStart_toStartOf="@+id/vehicle_item_tag"
+            app:layout_constraintTop_toBottomOf="@+id/vehicle_item_tag" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

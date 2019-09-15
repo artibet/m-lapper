@@ -64,4 +64,5 @@
     <string name="new_password">Νέος κωδικός</string>
     <string name="no_empty_password">Ο κωδικός δεν μπορεί να είναι κενός</string>
     <string name="password_reset_success">Επιτυχής αλλαγή κωδικού!</string>
+    <string name="driver">Οδηγός</string>
 </resources>

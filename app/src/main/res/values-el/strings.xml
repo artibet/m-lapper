@@ -71,4 +71,5 @@
     <string name="owner">Ιδιοκτήτης</string>
     <string name="add_vehicle">Προσθήκη οχήματος</string>
     <string name="edit_vehicle">Επεξεργασία οχήματος</string>
+    <string name="description">Περιγραφή</string>
 </resources>

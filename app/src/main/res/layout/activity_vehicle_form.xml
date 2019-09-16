@@ -30,7 +30,7 @@
                 app:errorEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/vehicle_tag"
+                    android:id="@+id/vehicle_form_tag"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/tag"
@@ -38,30 +38,36 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/vehicle_owner_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:errorEnabled="true">
+            <LinearLayout
+                android:id="@+id/vehicle_owner_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="8dp">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/vehicle_owner"
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/owner"
-                    android:inputType="text"/>
+                    android:text="@string/owner" />
 
-            </com.google.android.material.textfield.TextInputLayout>
+                <Spinner
+                    android:id="@+id/vehicle_form_owner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp" />
+
+            </LinearLayout>
 
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/vehicle_driver_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:errorEnabled="true">
+                app:errorEnabled="true"
+                android:layout_marginTop="16dp" >
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/vehicle_driver"
+                    android:id="@+id/vehicle_form_driver"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/driver"
@@ -76,7 +82,7 @@
                 android:layout_marginTop="16dp">
 
                 <Switch
-                    android:id="@+id/vehicle_isactive"
+                    android:id="@+id/vehicle_form_isactive"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="true" />
@@ -88,6 +94,23 @@
                     android:text="@string/active" />
 
             </LinearLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/vehicle_form_description_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:errorEnabled="true"
+                android:layout_marginTop="16dp" >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/vehicle_form_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="4"
+                    android:hint="@string/description"
+                    android:inputType="textMultiLine" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
 
         </LinearLayout>

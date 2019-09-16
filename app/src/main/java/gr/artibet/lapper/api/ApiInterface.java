@@ -91,11 +91,28 @@ public interface ApiInterface {
 
     // Vehicle POST (create new)
     @POST("api/vehicles/")
-    Call<Vehicle> createVehicle(@Header("Authorization") String token, @Body Vehicle vehicle);
+    @FormUrlEncoded
+    Call<Vehicle> createVehicle(
+            @Header("Authorization") String token,
+            @Field("tag") String tag,
+            @Field("owner") Long owner_id,
+            @Field("driver") String driver,
+            @Field("isactive") Boolean isActive,
+            @Field("descr") String description
+    );
 
     // Vehicle PUT (update)
     @PUT("api/vehicles/{id}/")
-    Call<Vehicle> updateVehicle(@Header("Authorization") String token, @Path("id") long id, @Body Vehicle vehicle);
+    @FormUrlEncoded
+    Call<Vehicle> updateVehicle(
+            @Header("Authorization") String token,
+            @Path("id") long id,
+            @Field("tag") String tag,
+            @Field("owner") Long owner_id,
+            @Field("driver") String driver,
+            @Field("isactive") Boolean isActive,
+            @Field("descr") String description
+    );
 
     // Sensor DELETE
     @DELETE("api/vehicles/{id}/")

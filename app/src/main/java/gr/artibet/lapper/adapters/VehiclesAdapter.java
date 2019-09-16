@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 import gr.artibet.lapper.R;
@@ -118,7 +120,7 @@ public class VehiclesAdapter extends RecyclerView.Adapter<VehiclesAdapter.Vehicl
         holder.tvDriver.setText(mContext.getString(R.string.driver)+ ": " + vehicle.getDriver());
 
         // Updated At
-        holder.tvUpdatedAt.setText(mContext.getString(R.string.updated) + ": " + vehicle.getUpdatedAt());
+        holder.tvUpdatedAt.setText(mContext.getString(R.string.updated) + ": " + vehicle.getUpdatedAtFormated());
 
         // status
         if (vehicle.isActive()) {

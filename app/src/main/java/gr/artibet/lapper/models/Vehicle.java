@@ -30,6 +30,9 @@ public class Vehicle {
     @SerializedName("updated_at")
     private String updatedAt;
 
+    @SerializedName("updated_at_formated")
+    private String updatedAtFormated;
+
     // GETTERS
 
     public Long getId() {
@@ -64,6 +67,10 @@ public class Vehicle {
         return updatedAt;
     }
 
+    public String getUpdatedAtFormated() {
+        return updatedAtFormated;
+    }
+
     // SETTERS
 
     public void setId(Long id) {
@@ -96,5 +103,9 @@ public class Vehicle {
 
     public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public void setUpdatedAtFormated(String updatedAtFormated) {
+        this.updatedAtFormated = updatedAtFormated;
     }
 }

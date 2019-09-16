@@ -1,5 +1,7 @@
 package gr.artibet.lapper.models;
 
+import androidx.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
 
 import gr.artibet.lapper.R;
@@ -147,5 +149,11 @@ public class User {
         String fn = (firstName != null) ? firstName : "";
         String ln = (lastName != null) ? lastName : "";
         return (lastName + " " + firstName).trim();
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return this.username;
     }
 }

@@ -30,6 +30,7 @@ import gr.artibet.lapper.activities.SensorFormActivity;
 import gr.artibet.lapper.adapters.PendingRacesAdapter;
 import gr.artibet.lapper.adapters.SensorsAdapter;
 import gr.artibet.lapper.api.RetrofitClient;
+import gr.artibet.lapper.dialogs.ConfirmDialog;
 import gr.artibet.lapper.models.Race;
 import gr.artibet.lapper.models.RaceResponse;
 import gr.artibet.lapper.models.RaceState;
@@ -193,15 +194,12 @@ public class PendingRacesFragment extends Fragment implements BottomNavigationVi
     // Delete sensor
     private void deleteRace(final int position) {
 
-        // Get confirmation
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(getString(R.string.delete_race_title));
-        builder.setMessage(getString(R.string.delete_race_message));
-
-        // Ok button
-        builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+        ConfirmDialog confirmDialog = new ConfirmDialog(getString(R.string.delete_race_title), getString(R.string.delete_race_message));
+        confirmDialog.show(getActivity().getSupportFragmentManager(), "delete race");
+        confirmDialog.setConfirmListener(new ConfirmDialog.ConfirmListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onConfirm() {
+
                 Race race = mRaceList.get(position);
 
                 String token = SharedPrefManager.getInstance(getActivity()).getToken();
@@ -218,6 +216,10 @@ public class PendingRacesFragment extends Fragment implements BottomNavigationVi
                             //Util.successToast(getActivity(), "Delete successfully");
                             mRaceList.remove(position);
                             mAdapter.notifyItemRemoved(position);
+                            if (mRaceList.size() == 0) {
+                                mTvMessage.setText(getResources().getString(R.string.no_pending_races));
+                                mTvMessage.setVisibility(View.VISIBLE);
+                            }
                         }
                     }
 
@@ -227,26 +229,22 @@ public class PendingRacesFragment extends Fragment implements BottomNavigationVi
                     }
                 });
 
-
             }
         });
-
-        // Cancel button
-        builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // do nothing
-            }
-        });
-
-        // Show confirmation dialog
-        builder.show();
 
     }
 
     // Activate Race
     private void activateRace(int position) {
 
+        ConfirmDialog confirmDialog = new ConfirmDialog("Ενεργοποίηση αγώνα", "Να ενεργοποιηθεί ο επιλεγμένος αγώνας?");
+        confirmDialog.show(getActivity().getSupportFragmentManager(), "activate race");
+        confirmDialog.setConfirmListener(new ConfirmDialog.ConfirmListener() {
+            @Override
+            public void onConfirm() {
+                Util.successToast(getActivity(), "Race activated successfully");
+            }
+        });
     }
 
     // Race Vehicles

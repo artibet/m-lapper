@@ -68,7 +68,7 @@ public class App extends Application {
             // Send notification
             Gson gson = new Gson();
             Race race = gson.fromJson(args[0].toString(), Race.class);
-
+            // TODO: Create string resources
             // Check if connected user has permission to receive notification
             long connectedUserΙd = SharedPrefManager.getInstance(App.context).getLoggedInUser().getId();
             if (SharedPrefManager.getInstance(App.context).isAdmin() || race.isPublic() || race.userHasVehicleIntoRace(connectedUserΙd)) {
@@ -85,6 +85,7 @@ public class App extends Application {
         public void call(final Object... args) {
 
             // Send notification
+            // TODO: Create string resources and check permisions
             Gson gson = new Gson();
             Race race = gson.fromJson(args[0].toString(), Race.class);
             String title = "Απενεργοποίηση αγώνα";
@@ -99,6 +100,7 @@ public class App extends Application {
         public void call(final Object... args) {
 
             // Send notification
+            // TODO: Create string resources and check permisions
             Gson gson = new Gson();
             Race race = gson.fromJson(args[0].toString(), Race.class);
             String title = "Έναρξη αγώνα";

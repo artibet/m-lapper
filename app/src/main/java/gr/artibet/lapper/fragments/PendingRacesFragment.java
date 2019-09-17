@@ -30,6 +30,7 @@ import gr.artibet.lapper.activities.SensorFormActivity;
 import gr.artibet.lapper.adapters.PendingRacesAdapter;
 import gr.artibet.lapper.adapters.SensorsAdapter;
 import gr.artibet.lapper.api.RetrofitClient;
+import gr.artibet.lapper.api.SocketIO;
 import gr.artibet.lapper.dialogs.ConfirmDialog;
 import gr.artibet.lapper.models.Race;
 import gr.artibet.lapper.models.RaceResponse;
@@ -235,14 +236,40 @@ public class PendingRacesFragment extends Fragment implements BottomNavigationVi
     }
 
     // Activate Race
-    private void activateRace(int position) {
+    private void activateRace(final int position) {
 
         ConfirmDialog confirmDialog = new ConfirmDialog("Ενεργοποίηση αγώνα", "Να ενεργοποιηθεί ο επιλεγμένος αγώνας?");
         confirmDialog.show(getActivity().getSupportFragmentManager(), "activate race");
         confirmDialog.setConfirmListener(new ConfirmDialog.ConfirmListener() {
             @Override
             public void onConfirm() {
-                Util.successToast(getActivity(), "Race activated successfully");
+
+                Race race = mRaceList.get(position);
+
+                String token = SharedPrefManager.getInstance(getActivity()).getToken();
+                Call<Race> call = RetrofitClient.getInstance().getApi().activateRace(token, race.getId());
+                call.enqueue(new Callback<Race>() {
+                    @Override
+                    public void onResponse(Call<Race> call, Response<Race> response) {
+
+                        if (!response.isSuccessful()) {
+                            //Util.errorToast(SensorFormActivity.this, getString(R.string.sensor_create_failed));
+                            Util.errorToast(getActivity(), response.message());
+                        }
+                        else {
+                            Util.successToast(getActivity(), "Race activated successfully");
+                            Race activatedRace = response.body();
+                            String json = (new Gson()).toJson(activatedRace);
+                            SocketIO.getInstance().getSocket().emit("race_activated", json);
+                            // TODO: Send socket message
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Race> call, Throwable t) {
+                        Util.errorToast(getActivity(), t.getMessage());
+                    }
+                });
             }
         });
     }

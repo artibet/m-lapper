@@ -1,8 +1,5 @@
 package gr.artibet.lapper.api;
 
-import android.content.Context;
-
-import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.Socket;
 import com.github.nkzawa.socketio.client.IO;
 
@@ -11,8 +8,8 @@ import java.net.URISyntaxException;
 // Socket.io SINGLETON class
 public class SocketIO {
 
-    private static final String SOCKET_URL = "https://lapper-ws.herokuapp.com/";
-    //private static final String SOCKET_URL = "http://10.0.2.2:3000/";
+    //private static final String SOCKET_URL = "https://lapper-ws.herokuapp.com/";
+    private static final String SOCKET_URL = "http://10.0.2.2:3000/";
     private static SocketIO mInstance;
     private Socket mSocket;
 

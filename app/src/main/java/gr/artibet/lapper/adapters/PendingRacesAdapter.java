@@ -44,6 +44,7 @@ public class PendingRacesAdapter extends RecyclerView.Adapter<PendingRacesAdapte
     // VIEW HOLDER CLASS
     public static class PendingRacesViewHolder extends RecyclerView.ViewHolder {
 
+        public ImageView ivPublic;
         public ImageView ivVehicles;
         public ImageView ivActivate;
         public ImageView ivDelete;
@@ -60,6 +61,7 @@ public class PendingRacesAdapter extends RecyclerView.Adapter<PendingRacesAdapte
         public PendingRacesViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
 
+            ivPublic = itemView.findViewById(R.id.pending_races_item_ivPublic);
             ivVehicles = itemView.findViewById(R.id.pending_races_item_ivVehicles);
             ivActivate = itemView.findViewById(R.id.pending_races_item_ivActivate);
             ivDelete = itemView.findViewById(R.id.pending_races_item_ivDelete);
@@ -145,6 +147,14 @@ public class PendingRacesAdapter extends RecyclerView.Adapter<PendingRacesAdapte
     @Override
     public void onBindViewHolder(@NonNull PendingRacesViewHolder holder, int position) {
         Race race = mRaceList.get(position);
+
+        // Public
+        if (race.isPublic()) {
+            holder.ivPublic.setVisibility(View.VISIBLE);
+        }
+        else {
+            holder.ivPublic.setVisibility(View.INVISIBLE);
+        }
 
         // Tag
         holder.tvTag.setText(race.getTag());

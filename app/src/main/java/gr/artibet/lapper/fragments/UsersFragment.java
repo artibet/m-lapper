@@ -34,6 +34,7 @@ import gr.artibet.lapper.activities.UserFormActivity;
 import gr.artibet.lapper.adapters.SensorsAdapter;
 import gr.artibet.lapper.adapters.UsersAdapter;
 import gr.artibet.lapper.api.RetrofitClient;
+import gr.artibet.lapper.dialogs.ConfirmDialog;
 import gr.artibet.lapper.dialogs.ResetPasswordDialog;
 import gr.artibet.lapper.models.Sensor;
 import gr.artibet.lapper.models.User;
@@ -187,15 +188,11 @@ public class UsersFragment extends Fragment implements BottomNavigationView.OnNa
     // Delete sensor
     private void deleteUser(final int position) {
 
-        // Get confirmation
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(getString(R.string.delete_user_title));
-        builder.setMessage(getString(R.string.delete_user_message));
-
-        // Ok button
-        builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+        ConfirmDialog confirmDialog = new ConfirmDialog(getString(R.string.delete_user_title), getString(R.string.delete_user_message));
+        confirmDialog.show(getActivity().getSupportFragmentManager(), "delete user");
+        confirmDialog.setConfirmListener(new ConfirmDialog.ConfirmListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onConfirm() {
                 User user = mUserList.get(position);
 
                 String token = SharedPrefManager.getInstance(getActivity()).getToken();
@@ -224,17 +221,6 @@ public class UsersFragment extends Fragment implements BottomNavigationView.OnNa
 
             }
         });
-
-        // Cancel button
-        builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // do nothing
-            }
-        });
-
-        // Show confirmation dialog
-        builder.show();
 
     }
 

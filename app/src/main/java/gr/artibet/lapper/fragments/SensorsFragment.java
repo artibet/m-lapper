@@ -29,6 +29,7 @@ import gr.artibet.lapper.Util;
 import gr.artibet.lapper.activities.SensorFormActivity;
 import gr.artibet.lapper.adapters.SensorsAdapter;
 import gr.artibet.lapper.api.RetrofitClient;
+import gr.artibet.lapper.dialogs.ConfirmDialog;
 import gr.artibet.lapper.models.Sensor;
 import gr.artibet.lapper.storage.SharedPrefManager;
 import retrofit2.Call;
@@ -178,15 +179,11 @@ public class SensorsFragment extends Fragment implements BottomNavigationView.On
     // Delete sensor
     private void deleteSensor(final int position) {
 
-        // Get confirmation
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(getString(R.string.delete_sensor_title));
-        builder.setMessage(getString(R.string.delete_sensor_message));
-
-        // Ok button
-        builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+        ConfirmDialog confirmDialog = new ConfirmDialog(getString(R.string.delete_sensor_title), getString(R.string.delete_sensor_message));
+        confirmDialog.show(getActivity().getSupportFragmentManager(), "delete sensor");
+        confirmDialog.setConfirmListener(new ConfirmDialog.ConfirmListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onConfirm() {
                 Sensor sensor = mSensorList.get(position);
 
                 String token = SharedPrefManager.getInstance(getActivity()).getToken();
@@ -211,21 +208,8 @@ public class SensorsFragment extends Fragment implements BottomNavigationView.On
                         Util.errorToast(getActivity(), t.getMessage());
                     }
                 });
-
-
             }
         });
-
-        // Cancel button
-        builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // do nothing
-            }
-        });
-
-        // Show confirmation dialog
-        builder.show();
 
     }
 }

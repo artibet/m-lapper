@@ -31,6 +31,7 @@ import gr.artibet.lapper.activities.VehicleFormActivity;
 import gr.artibet.lapper.adapters.SensorsAdapter;
 import gr.artibet.lapper.adapters.VehiclesAdapter;
 import gr.artibet.lapper.api.RetrofitClient;
+import gr.artibet.lapper.dialogs.ConfirmDialog;
 import gr.artibet.lapper.models.Sensor;
 import gr.artibet.lapper.models.Vehicle;
 import gr.artibet.lapper.storage.SharedPrefManager;
@@ -179,15 +180,11 @@ public class VehiclesFragment extends Fragment implements BottomNavigationView.O
     // Delete vehicle
     private void deleteVehicle(final int position) {
 
-        // Get confirmation
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(getString(R.string.delete_vehicle_title));
-        builder.setMessage(getString(R.string.delete_vehicle_message));
-
-        // Ok button
-        builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+        ConfirmDialog confirmDialog = new ConfirmDialog(getString(R.string.delete_vehicle_title), getString(R.string.delete_vehicle_message));
+        confirmDialog.show(getActivity().getSupportFragmentManager(), "delete user");
+        confirmDialog.setConfirmListener(new ConfirmDialog.ConfirmListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onConfirm() {
                 Vehicle vehicle = mVehicleList.get(position);
 
                 String token = SharedPrefManager.getInstance(getActivity()).getToken();
@@ -212,21 +209,8 @@ public class VehiclesFragment extends Fragment implements BottomNavigationView.O
                         Util.errorToast(getActivity(), t.getMessage());
                     }
                 });
-
-
             }
         });
-
-        // Cancel button
-        builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // do nothing
-            }
-        });
-
-        // Show confirmation dialog
-        builder.show();
 
     }
 }

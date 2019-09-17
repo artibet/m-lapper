@@ -1,12 +1,17 @@
 package gr.artibet.lapper;
 
 import android.app.Activity;
+import android.app.Notification;
+import android.content.Context;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -68,5 +73,22 @@ public class Util {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy, HH:mm");
         sdf.setTimeZone(tz);
         return sdf.format(isoDate);
+    }
+
+    // ---------------------------------------------------------------------------------------
+    // Send Notification message
+    // ---------------------------------------------------------------------------------------
+    public static void sendNotification(Context context, String channelId, int id, String title, String message) {
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+        Notification notification = new NotificationCompat.Builder(context, channelId)
+                .setSmallIcon(R.drawable.ic_active_races)
+                .setContentTitle(title)
+                .setContentText(message)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .build();
+
+        notificationManager.notify(id, notification);
+
     }
 }

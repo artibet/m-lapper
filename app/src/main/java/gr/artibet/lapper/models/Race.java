@@ -9,7 +9,7 @@ public class Race {
     // MEMBERS
 
     @SerializedName("id")
-    private Long id;
+    private Integer id;
 
     @SerializedName("tag")
     private String tag;
@@ -73,7 +73,7 @@ public class Race {
 
     // GETTERS
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -157,7 +157,7 @@ public class Race {
 
     // SETTERS
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -248,9 +248,6 @@ public class Race {
         }
         return false;
     }
-
-
-
 
 
 }

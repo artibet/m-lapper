@@ -135,13 +135,13 @@ public interface ApiInterface {
 
     // Race DELETE
     @DELETE("api/races/{id}/")
-    Call<Void> deleteRace(@Header("Authorization") String token, @Path("id") long id);
+    Call<Void> deleteRace(@Header("Authorization") String token, @Path("id") int id);
 
     // Activate race
     @POST("cmd/activate-race/")
     @FormUrlEncoded
     Call<Race> activateRace(
             @Header("Authorization") String token,
-            @Field("race_id") long race_id
+            @Field("race_id") int race_id
     );
 }

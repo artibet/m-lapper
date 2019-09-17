@@ -1,21 +1,57 @@
 package gr.artibet.lapper.fragments;
 
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import gr.artibet.lapper.R;
+import gr.artibet.lapper.Util;
+import gr.artibet.lapper.activities.SensorFormActivity;
+import gr.artibet.lapper.adapters.PendingRacesAdapter;
+import gr.artibet.lapper.adapters.SensorsAdapter;
+import gr.artibet.lapper.api.RetrofitClient;
+import gr.artibet.lapper.models.Race;
+import gr.artibet.lapper.models.RaceResponse;
+import gr.artibet.lapper.models.RaceState;
+import gr.artibet.lapper.models.Sensor;
+import gr.artibet.lapper.storage.SharedPrefManager;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PendingRacesFragment extends Fragment {
+public class PendingRacesFragment extends Fragment implements BottomNavigationView.OnNavigationItemSelectedListener {
 
+    private List<Race> mRaceList = new ArrayList<Race>();
+    private ProgressBar mProgressBar;
+    private TextView mTvMessage;
+
+    // Recycler view members
+    private RecyclerView mRecyclerView;
+    private PendingRacesAdapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
 
     public PendingRacesFragment() {
         // Required empty public constructor
@@ -26,7 +62,196 @@ public class PendingRacesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_pending_races, container, false);
+        View v = inflater.inflate(R.layout.fragment_pending_races, container, false);
+
+        // Initialize views and layouts
+        mProgressBar = v.findViewById(R.id.progressBar);
+        mTvMessage = v.findViewById(R.id.tvMessage);
+        mRecyclerView = v.findViewById(R.id.recyclerView);
+        mLayoutManager = new LinearLayoutManager(getActivity());
+
+        mAdapter = new PendingRacesAdapter(getActivity(), mRaceList);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setAdapter(mAdapter);
+
+        // Set race item click listener
+        mAdapter.setOnItemClickListener(new PendingRacesAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                editRace(position);
+            }
+
+            @Override
+            public void onDeleteItem(int position) {
+                deleteRace(position);
+            }
+
+            @Override
+            public void onActivateItem(int position) {
+                activateRace(position);
+            }
+
+            @Override
+            public void onItemVehicles(int position) {
+                raceVehicles(position);
+            }
+        });
+
+
+        // Fetch data from API and return
+        fetchRaces();
+
+        // Set bottom navigation listener
+        BottomNavigationView bottomNav = v.findViewById(R.id.bottom_nav);
+        bottomNav.setOnNavigationItemSelectedListener(this);
+
+        // Return view
+        return v;
     }
 
+    private void fetchRaces() {
+
+        // Show progress bar and hide message text
+        mProgressBar.setVisibility(View.VISIBLE);
+        mTvMessage.setVisibility(View.INVISIBLE);
+
+        Call<RaceResponse> call = RetrofitClient
+                .getInstance()
+                .getApi()
+                .getRaces(SharedPrefManager.getInstance(getActivity()).getToken(), RaceState.STATE_PENDING);
+
+        call.enqueue(new Callback<RaceResponse>() {
+            @Override
+            public void onResponse(Call<RaceResponse> call, Response<RaceResponse> response) {
+
+                if (!response.isSuccessful()) {
+                    mTvMessage.setText(response.message());
+                    mTvMessage.setVisibility(View.VISIBLE);
+                    //Util.errorToast(getActivity(), response.message);
+                }
+                else {
+                    mRaceList = (response.body()).getResults();
+                    mAdapter.setRaceList(mRaceList);
+
+                    if (mRaceList.size() == 0) {
+                        mTvMessage.setText(getResources().getString(R.string.no_pending_races));
+                        mTvMessage.setVisibility(View.VISIBLE);
+                    }
+                    else {
+                        mTvMessage.setVisibility(View.INVISIBLE);
+                    }
+                }
+
+                // Hide progress bar
+                mProgressBar.setVisibility(View.INVISIBLE);
+
+            }
+
+            @Override
+            public void onFailure(Call<RaceResponse> call, Throwable t) {
+                mTvMessage.setText(t.getMessage());
+                //mTvMessage.setText(getString(R.string.unable_to_connect));
+                mTvMessage.setVisibility(View.VISIBLE);
+                mProgressBar.setVisibility(View.INVISIBLE);
+            }
+        });
+    }
+
+    // Bottom navigationview listener
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+        switch(menuItem.getItemId()) {
+            case R.id.action_add:
+                actionAddRace();
+                break;
+        }
+
+        return true;
+    }
+
+    // Add new sensor
+    private void actionAddRace() {
+        // TODO: Create race form activity
+        //Intent intent = new Intent(getActivity(), SensorFormActivity.class);
+        //startActivity(intent);
+    }
+
+    // Edit sensor
+    private void editRace(int position) {
+        Race race = mRaceList.get(position);
+
+        // Open sensor form
+        // TODO: Create race form activity
+//        String json = new Gson().toJson(race);
+//        Intent intent = new Intent(getActivity(), RaceFormActivity.class);
+//        intent.putExtra("race", json);
+//        startActivity(intent);
+    }
+
+    // Delete sensor
+    private void deleteRace(final int position) {
+
+        // Get confirmation
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(getString(R.string.delete_race_title));
+        builder.setMessage(getString(R.string.delete_race_message));
+
+        // Ok button
+        builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Race race = mRaceList.get(position);
+
+                String token = SharedPrefManager.getInstance(getActivity()).getToken();
+                Call<Void> call = RetrofitClient.getInstance().getApi().deleteRace(token, race.getId());
+                call.enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+
+                        if (!response.isSuccessful()) {
+                            //Util.errorToast(SensorFormActivity.this, getString(R.string.sensor_create_failed));
+                            Util.errorToast(getActivity(), response.message());
+                        }
+                        else {
+                            //Util.successToast(getActivity(), "Delete successfully");
+                            mRaceList.remove(position);
+                            mAdapter.notifyItemRemoved(position);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+                        Util.errorToast(getActivity(), t.getMessage());
+                    }
+                });
+
+
+            }
+        });
+
+        // Cancel button
+        builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // do nothing
+            }
+        });
+
+        // Show confirmation dialog
+        builder.show();
+
+    }
+
+    // Activate Race
+    private void activateRace(int position) {
+
+    }
+
+    // Race Vehicles
+    private void raceVehicles(int positioin) {
+
+    }
 }
+

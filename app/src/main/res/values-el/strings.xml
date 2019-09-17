@@ -72,4 +72,10 @@
     <string name="add_vehicle">Προσθήκη οχήματος</string>
     <string name="edit_vehicle">Επεξεργασία οχήματος</string>
     <string name="description">Περιγραφή</string>
+    <string name="no_pending_races">Δεν υπάρχουν εκκρεμείς αγώνες</string>
+    <string name="activator">Ενεργοποίηση</string>
+    <string name="start_method">Τρόπος εκκίνησης</string>
+    <string name="laps">Στροφές</string>
+    <string name="delete_race_title">Διαγραφή αγώνα</string>
+    <string name="delete_race_message">Να γίνει διαγραφή του επιλεγμένου αγώνα?</string>
 </resources>

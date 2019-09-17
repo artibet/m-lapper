@@ -4,6 +4,8 @@ import java.util.List;
 
 import gr.artibet.lapper.models.LiveData;
 import gr.artibet.lapper.models.LoginUser;
+import gr.artibet.lapper.models.Race;
+import gr.artibet.lapper.models.RaceResponse;
 import gr.artibet.lapper.models.Sensor;
 import gr.artibet.lapper.models.User;
 import gr.artibet.lapper.models.Vehicle;
@@ -17,6 +19,7 @@ import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ApiInterface {
 
@@ -118,4 +121,19 @@ public interface ApiInterface {
     @DELETE("api/vehicles/{id}/")
     Call<Void> deleteVehicle(@Header("Authorization") String token, @Path("id") long id);
 
+
+    // --------------------------------------------------------------------------
+    // RACES
+    // --------------------------------------------------------------------------
+
+    // Race GET
+    @GET("api/races/")
+    Call<RaceResponse> getRaces(
+            @Header("Authorization") String token,
+            @Query("state") int stateId
+    );
+
+    // Race DELETE
+    @DELETE("api/races/{id}/")
+    Call<Void> deleteRace(@Header("Authorization") String token, @Path("id") long id);
 }

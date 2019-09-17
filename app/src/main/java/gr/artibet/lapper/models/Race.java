@@ -9,7 +9,7 @@ public class Race {
     // MEMBERS
 
     @SerializedName("id")
-    private long id;
+    private Long id;
 
     @SerializedName("tag")
     private String tag;
@@ -68,9 +68,12 @@ public class Race {
     @SerializedName("ispublic")
     private boolean isPublic;
 
+    @SerializedName("updated_at_formated")
+    private String updatedAtFormated;
+
     // GETTERS
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -150,6 +153,94 @@ public class Race {
         return isPublic;
     }
 
+    public String getUpdatedAtFormated() {return updatedAtFormated; }
+
+    // SETTERS
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
+    public void setLaps(int laps) {
+        this.laps = laps;
+    }
+
+    public void setState(RaceState state) {
+        this.state = state;
+    }
+
+    public void setStartMethod(RaceStartMethod startMethod) {
+        this.startMethod = startMethod;
+    }
+
+    public void setMode(RaceMode mode) {
+        this.mode = mode;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setCreator(User creator) {
+        this.creator = creator;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public void setUpdatedAt(String updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public void setRvs(List<RaceVehicle> rvs) {
+        this.rvs = rvs;
+    }
+
+    public void setStartDt(String startDt) {
+        this.startDt = startDt;
+    }
+
+    public void setFinishDt(String finishDt) {
+        this.finishDt = finishDt;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
+
+    public void setTotalVehicles(int totalVehicles) {
+        this.totalVehicles = totalVehicles;
+    }
+
+    public void setRunningVehicles(int runningVehicles) {
+        this.runningVehicles = runningVehicles;
+    }
+
+    public void setFinishedVehicles(int finishedVehicles) {
+        this.finishedVehicles = finishedVehicles;
+    }
+
+    public void setCanceledVehicles(int canceledVehicles) {
+        this.canceledVehicles = canceledVehicles;
+    }
+
+    public void setLap(int lap) {
+        this.lap = lap;
+    }
+
+    public void setPublic(boolean aPublic) {
+        isPublic = aPublic;
+    }
+
+    public void setUpdatedAtFormated(String updatedAtFormated) {
+        this.updatedAtFormated = updatedAtFormated;
+    }
+
     // Check if given userId has vehicle into race
     public boolean userHasVehicleIntoRace(long userId) {
         for (RaceVehicle rv : rvs) {
@@ -157,4 +248,9 @@ public class Race {
         }
         return false;
     }
+
+
+
+
+
 }

@@ -72,4 +72,11 @@
     <string name="add_vehicle">Add new vehicle</string>
     <string name="edit_vehicle">Edit vehicle</string>
     <string name="description">Description</string>
+    <string name="no_pending_races">No pending races</string>
+    <string name="activator">Activator</string>
+    <string name="start_method">Start method</string>
+    <string name="laps">Laps</string>
+    <string name="delete_race_title">Delete race</string>
+    <string name="delete_race_message">Do you want to delete the selected race?</string>
+
 </resources>

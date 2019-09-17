@@ -21,6 +21,9 @@ import android.widget.TextView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -257,11 +260,20 @@ public class PendingRacesFragment extends Fragment implements BottomNavigationVi
                             Util.errorToast(getActivity(), response.message());
                         }
                         else {
-                            Util.successToast(getActivity(), "Race activated successfully");
+                            Util.successToast(getActivity(), getString(R.string.race_activated));
+
+                            // Send socket message
                             Race activatedRace = response.body();
-                            String json = (new Gson()).toJson(activatedRace);
-                            SocketIO.getInstance().getSocket().emit("race_activated", json);
-                            // TODO: Send socket message
+                            Gson gson = new Gson();
+                            try {
+                                JSONObject jsonObj = new JSONObject(gson.toJson(activatedRace));
+                                SocketIO.getInstance().getSocket().emit("race_activated", jsonObj);
+                                mRaceList.remove(position);
+                                mAdapter.notifyItemRemoved(position);
+                            }
+                            catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
 

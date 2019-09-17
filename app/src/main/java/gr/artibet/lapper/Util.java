@@ -25,7 +25,7 @@ public class Util {
         text.setText(message);
         Toast toast = new Toast(activity.getApplicationContext());
         toast.setGravity(Gravity.CENTER, 0, 0);
-        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setDuration(Toast.LENGTH_LONG);
         toast.setView(layout);
         toast.show();
     }
@@ -41,7 +41,7 @@ public class Util {
         text.setText(message);
         Toast toast = new Toast(activity.getApplicationContext());
         toast.setGravity(Gravity.CENTER, 0, 0);
-        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setDuration(Toast.LENGTH_LONG);
         toast.setView(layout);
         toast.show();
     }

@@ -78,5 +78,6 @@
     <string name="laps">Laps</string>
     <string name="delete_race_title">Delete race</string>
     <string name="delete_race_message">Do you want to delete the selected race?</string>
+    <string name="race_activated">Race activated successfully!</string>
 
 </resources>

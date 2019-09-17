@@ -78,4 +78,5 @@
     <string name="laps">Στροφές</string>
     <string name="delete_race_title">Διαγραφή αγώνα</string>
     <string name="delete_race_message">Να γίνει διαγραφή του επιλεγμένου αγώνα?</string>
+    <string name="race_activated">Ο αγώνας ενεργοποιήθηκε με επιτυχία!</string>
 </resources>

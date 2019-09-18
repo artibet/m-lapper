@@ -79,4 +79,10 @@
     <string name="delete_race_title">Διαγραφή αγώνα</string>
     <string name="delete_race_message">Να γίνει διαγραφή του επιλεγμένου αγώνα?</string>
     <string name="race_activated">Ο αγώνας ενεργοποιήθηκε με επιτυχία!</string>
+    <string name="activate_race_title">Ενεργοποίηση αγώνα</string>
+    <string name="activate_race_text">Ο αγώνας %1$s ενεργοποιήθηκε</string>
+    <string name="deactivate_race_title">Απενεργοποίηση αγώνα</string>
+    <string name="deactivate_race_text">Ο αγώνας %1$s απενεργοποιήθηκε</string>
+    <string name="start_race_title">Έναρξη αγώνα</string>
+    <string name="start_race_text">Ο αγώνας %1$s ξεκίνησε!</string>
 </resources>

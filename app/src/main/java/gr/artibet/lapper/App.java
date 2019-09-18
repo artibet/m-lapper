@@ -68,12 +68,12 @@ public class App extends Application {
             // Send notification
             Gson gson = new Gson();
             Race race = gson.fromJson(args[0].toString(), Race.class);
-            // TODO: Create string resources
+
             // Check if connected user has permission to receive notification
             long connectedUserΙd = SharedPrefManager.getInstance(App.context).getLoggedInUser().getId();
             if (SharedPrefManager.getInstance(App.context).isAdmin() || race.isPublic() || race.userHasVehicleIntoRace(connectedUserΙd)) {
-                String title = "Ενεργοποίηση αγώνα";
-                String message = "Ο αγώνας " + race.getTag() + " ενεργοποιήθηκε";
+                String title = getString(R.string.activate_race_title);
+                String message = getString(R.string.activate_race_text, race.getTag());
                 Util.sendNotification(App.context, App.CHANNEL_RACE_ID, race.getId(), title, message);
             }
          }
@@ -85,12 +85,16 @@ public class App extends Application {
         public void call(final Object... args) {
 
             // Send notification
-            // TODO: Create string resources and check permisions
             Gson gson = new Gson();
             Race race = gson.fromJson(args[0].toString(), Race.class);
-            String title = "Απενεργοποίηση αγώνα";
-            String message = "Ο αγώνας " + race.getTag() + " απενεργοποιήθηκε";
-            Util.sendNotification(App.context, App.CHANNEL_RACE_ID, race.getId(), title, message);
+
+            // Check if connected user has permission to receive notification
+            long connectedUserΙd = SharedPrefManager.getInstance(App.context).getLoggedInUser().getId();
+            if (SharedPrefManager.getInstance(App.context).isAdmin() || race.isPublic() || race.userHasVehicleIntoRace(connectedUserΙd)) {
+                String title = getString(R.string.deactivate_race_title);
+                String message = getString(R.string.deactivate_race_text, race.getTag());
+                Util.sendNotification(App.context, App.CHANNEL_RACE_ID, race.getId(), title, message);
+            }
         }
     };
 
@@ -100,12 +104,15 @@ public class App extends Application {
         public void call(final Object... args) {
 
             // Send notification
-            // TODO: Create string resources and check permisions
             Gson gson = new Gson();
             Race race = gson.fromJson(args[0].toString(), Race.class);
-            String title = "Έναρξη αγώνα";
-            String message = "Ο αγώνας " + race.getTag() + " ξεκίνησε";
-            Util.sendNotification(App.context, App.CHANNEL_RACE_ID, race.getId(), title, message);
+
+            long connectedUserΙd = SharedPrefManager.getInstance(App.context).getLoggedInUser().getId();
+            if (SharedPrefManager.getInstance(App.context).isAdmin() || race.isPublic() || race.userHasVehicleIntoRace(connectedUserΙd)) {
+                String title = getString(R.string.start_race_title);
+                String message = getString(R.string.start_race_text, race.getTag());
+                Util.sendNotification(App.context, App.CHANNEL_RACE_ID, race.getId(), title, message);
+            }
 
         }
     };

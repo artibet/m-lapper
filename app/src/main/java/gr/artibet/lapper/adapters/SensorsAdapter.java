@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import gr.artibet.lapper.R;
+import gr.artibet.lapper.Util;
 import gr.artibet.lapper.models.Sensor;
 
 public class SensorsAdapter extends RecyclerView.Adapter<SensorsAdapter.SensorViewHolder> {
@@ -117,7 +118,7 @@ public class SensorsAdapter extends RecyclerView.Adapter<SensorsAdapter.SensorVi
         holder.mSensorThreshold.setText(mContext.getString(R.string.threshold)+ ": " + String.valueOf(sensor.getThreshold()) + " sec");
 
         // UpdatedAt
-        holder.mSensorUpdatedAt.setText(mContext.getString(R.string.updated)+ ": " + sensor.getUpdatedAtFormated());
+        holder.mSensorUpdatedAt.setText(mContext.getString(R.string.updated)+ ": " + Util.TimestampToDatetime(sensor.getUpdatedAtTs()));
 
         // status
         if (sensor.isActive()) {

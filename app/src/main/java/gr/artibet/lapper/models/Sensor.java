@@ -30,8 +30,8 @@ public class Sensor {
     @SerializedName("updated_at")
     private String updatedAt;
 
-    @SerializedName("updated_at_formated")
-    private String updatedAtFormated;
+    @SerializedName("updated_at_ts")
+    private Double updatedAtTs;
 
     // GETTERS
 
@@ -67,7 +67,7 @@ public class Sensor {
         return updatedAt;
     }
 
-    public String getUpdatedAtFormated() {return updatedAtFormated; }
+    public Double getUpdatedAtTs() {return updatedAtTs; }
 
     // SETTERS
 
@@ -104,6 +104,6 @@ public class Sensor {
     }
 
     public void setUpdatedAtFormated(String updatedAtFormated) {
-        this.updatedAtFormated = updatedAtFormated;
+        this.updatedAtTs = updatedAtTs;
     }
 }

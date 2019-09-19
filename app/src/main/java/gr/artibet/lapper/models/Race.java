@@ -68,8 +68,8 @@ public class Race {
     @SerializedName("ispublic")
     private boolean isPublic;
 
-    @SerializedName("updated_at_formated")
-    private String updatedAtFormated;
+    @SerializedName("updated_at_ts")
+    private Double updatedAtTs;
 
     // GETTERS
 
@@ -153,7 +153,7 @@ public class Race {
         return isPublic;
     }
 
-    public String getUpdatedAtFormated() {return updatedAtFormated; }
+    public Double getUpdatedAtTs() {return updatedAtTs; }
 
     // SETTERS
 
@@ -237,8 +237,8 @@ public class Race {
         isPublic = aPublic;
     }
 
-    public void setUpdatedAtFormated(String updatedAtFormated) {
-        this.updatedAtFormated = updatedAtFormated;
+    public void setUpdatedAtTs(Double updatedAtTs) {
+        this.updatedAtTs = updatedAtTs;
     }
 
     // Check if given userId has vehicle into race

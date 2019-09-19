@@ -30,8 +30,8 @@ public class Vehicle {
     @SerializedName("updated_at")
     private String updatedAt;
 
-    @SerializedName("updated_at_formated")
-    private String updatedAtFormated;
+    @SerializedName("updated_at_ts")
+    private Double updatedAtTs;
 
     // GETTERS
 
@@ -67,8 +67,8 @@ public class Vehicle {
         return updatedAt;
     }
 
-    public String getUpdatedAtFormated() {
-        return updatedAtFormated;
+    public Double getUpdatedAtTs() {
+        return updatedAtTs;
     }
 
     // SETTERS
@@ -105,7 +105,7 @@ public class Vehicle {
         this.updatedAt = updatedAt;
     }
 
-    public void setUpdatedAtFormated(String updatedAtFormated) {
-        this.updatedAtFormated = updatedAtFormated;
+    public void setUpdatedAtFormated(Double updatedAtTs) {
+        this.updatedAtTs = updatedAtTs;
     }
 }

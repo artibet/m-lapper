@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import gr.artibet.lapper.R;
+import gr.artibet.lapper.Util;
 import gr.artibet.lapper.models.Race;
 import gr.artibet.lapper.models.Vehicle;
 
@@ -175,7 +176,7 @@ public class PendingRacesAdapter extends RecyclerView.Adapter<PendingRacesAdapte
         holder.tvLaps.setText(mContext.getString(R.string.laps) + ": " + String.valueOf(race.getLaps()));
 
         // Updated At
-        holder.tvUpdatedAt.setText(mContext.getString(R.string.updated) + ": " + race.getUpdatedAtFormated());
+        holder.tvUpdatedAt.setText(mContext.getString(R.string.updated) + ": " + Util.TimestampToDatetime(race.getUpdatedAtTs()));
 
      }
 

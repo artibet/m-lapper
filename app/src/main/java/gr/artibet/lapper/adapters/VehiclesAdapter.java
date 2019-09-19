@@ -15,6 +15,7 @@ import org.w3c.dom.Text;
 import java.util.List;
 
 import gr.artibet.lapper.R;
+import gr.artibet.lapper.Util;
 import gr.artibet.lapper.models.Sensor;
 import gr.artibet.lapper.models.Vehicle;
 
@@ -120,7 +121,7 @@ public class VehiclesAdapter extends RecyclerView.Adapter<VehiclesAdapter.Vehicl
         holder.tvDriver.setText(mContext.getString(R.string.driver)+ ": " + vehicle.getDriver());
 
         // Updated At
-        holder.tvUpdatedAt.setText(mContext.getString(R.string.updated) + ": " + vehicle.getUpdatedAtFormated());
+        holder.tvUpdatedAt.setText(mContext.getString(R.string.updated) + ": " + Util.TimestampToDatetime(vehicle.getUpdatedAtTs()));
 
         // status
         if (vehicle.isActive()) {

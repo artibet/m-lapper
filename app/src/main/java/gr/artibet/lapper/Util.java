@@ -54,12 +54,27 @@ public class Util {
     // ---------------------------------------------------------------------------------------
     // Convert timestamp to HH:mm:ss.mmm
     // ---------------------------------------------------------------------------------------
-    public static String TimestampToTime(double timestamp) {
+    public static String TimestampToTime(Double timestamp) {
+        if (timestamp == null) return "";
         long timeMills = (long)(timestamp * 1000);
         Calendar cal = Calendar.getInstance();
         cal.setTimeInMillis(timeMills);
         TimeZone tz = cal.getTimeZone();
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss.SSS");
+        sdf.setTimeZone(tz);
+        return sdf.format(timeMills);
+    }
+
+    // ---------------------------------------------------------------------------------------
+    // Convert timestamp to DD/MM/YYYY, HH:mm:ss.mmm
+    // ---------------------------------------------------------------------------------------
+    public static String TimestampToDatetime(Double timestamp) {
+        if (timestamp == null) return "";
+        long timeMills = (long)(timestamp * 1000);
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(timeMills);
+        TimeZone tz = cal.getTimeZone();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy, HH:mm");
         sdf.setTimeZone(tz);
         return sdf.format(timeMills);
     }

@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import gr.artibet.lapper.R;
+import gr.artibet.lapper.Util;
 import gr.artibet.lapper.models.User;
 
 public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHolder> {
@@ -147,7 +148,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
         holder.mFullName.setText(user.getFullName());
 
         // DateJoined
-        holder.mDateJoined.setText(mContext.getString(R.string.date_joined)+ ": " + user.getDateJoinedFormated());
+        holder.mDateJoined.setText(mContext.getString(R.string.date_joined)+ ": " + Util.TimestampToDatetime(user.getDateJoinedTs()));
 
      }
 

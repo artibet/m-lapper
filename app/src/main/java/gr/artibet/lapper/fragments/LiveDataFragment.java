@@ -23,14 +23,11 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
-import gr.artibet.lapper.App;
 import gr.artibet.lapper.R;
-import gr.artibet.lapper.Util;
 import gr.artibet.lapper.adapters.LiveDataAdapter;
 import gr.artibet.lapper.api.RetrofitClient;
 import gr.artibet.lapper.api.SocketIO;
 import gr.artibet.lapper.models.LiveData;
-import gr.artibet.lapper.models.Race;
 import gr.artibet.lapper.storage.SharedPrefManager;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -76,6 +73,7 @@ public class LiveDataFragment extends Fragment {
         mRecyclerView.setAdapter(mAdapter);
 
         // Fetch data from API and return
+        // TODO: Create an abstrace fragment and add fetch method. Remove fetch from here and call explicitly from parent activity
         fetchLiveData();
 
         // Subscribe on "checkpoint" socket message

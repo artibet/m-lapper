@@ -33,6 +33,7 @@ import gr.artibet.lapper.storage.SharedPrefManager;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout mDrawerLayout;
+    // TODO: Inherent new abstract fragment
     private Fragment mCurrentFragment;
     NavigationView mNavigationView;
 
@@ -83,9 +84,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, mCurrentFragment).commit();
         }
 
+        // If mCurrentFragment is not null fetch data
+
+
         // TEST WEBSOCKETS
         //SocketIO.getInstance();
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //TODO: Add fragment fetch calls here
     }
 
     // If back button pressed and drawer is open close it

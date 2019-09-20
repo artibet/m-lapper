@@ -144,4 +144,31 @@ public interface ApiInterface {
             @Header("Authorization") String token,
             @Field("race_id") int race_id
     );
+
+    // Race POST (create new)
+    @POST("api/races/")
+    @FormUrlEncoded
+    Call<Race> createRace(
+            @Header("Authorization") String token,
+            @Field("tag") String tag,
+            @Field("laps") int laps,
+            @Field("start") int start_method,
+            @Field("mode") int mode,
+            @Field("ispublic") Boolean isPublic,
+            @Field("descr") String description
+    );
+
+    // Race PUT (update)
+    @PUT("api/races/{id}/")
+    @FormUrlEncoded
+    Call<Race> updateRace(
+            @Header("Authorization") String token,
+            @Path("id") int id,
+            @Field("tag") String tag,
+            @Field("laps") int laps,
+            @Field("start") int start_method,
+            @Field("mode") int mode,
+            @Field("ispublic") Boolean isPublic,
+            @Field("descr") String description
+    );
 }

@@ -85,4 +85,11 @@
     <string name="deactivate_race_text">Ο αγώνας %1$s απενεργοποιήθηκε</string>
     <string name="start_race_title">Έναρξη αγώνα</string>
     <string name="start_race_text">Ο αγώνας %1$s ξεκίνησε!</string>
+    <string name="add_race">Προσθήκη αγώνα</string>
+    <string name="edit_race">Επεξεργασία αγώνα</string>
+    <string name="start_method_auto">Αυτόματα</string>
+    <string name="start_method_manual">Χειροκίνητα</string>
+    <string name="race_mode_both">Αισθητήρας και όχημα</string>
+    <string name="race_mode_sensor">Μόνο αισθητήρας</string>
+    <string name="race_mode_vehicle">Μόνο όχημα</string>
 </resources>

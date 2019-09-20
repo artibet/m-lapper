@@ -29,6 +29,7 @@ import java.util.List;
 
 import gr.artibet.lapper.R;
 import gr.artibet.lapper.Util;
+import gr.artibet.lapper.activities.RaceFormActivity;
 import gr.artibet.lapper.activities.SensorFormActivity;
 import gr.artibet.lapper.adapters.PendingRacesAdapter;
 import gr.artibet.lapper.adapters.SensorsAdapter;
@@ -178,9 +179,8 @@ public class PendingRacesFragment extends Fragment implements BottomNavigationVi
 
     // Add new sensor
     private void actionAddRace() {
-        // TODO: Create race form activity
-        //Intent intent = new Intent(getActivity(), SensorFormActivity.class);
-        //startActivity(intent);
+        Intent intent = new Intent(getActivity(), RaceFormActivity.class);
+        startActivity(intent);
     }
 
     // Edit sensor
@@ -188,11 +188,10 @@ public class PendingRacesFragment extends Fragment implements BottomNavigationVi
         Race race = mRaceList.get(position);
 
         // Open sensor form
-        // TODO: Create race form activity
-//        String json = new Gson().toJson(race);
-//        Intent intent = new Intent(getActivity(), RaceFormActivity.class);
-//        intent.putExtra("race", json);
-//        startActivity(intent);
+        String json = new Gson().toJson(race);
+        Intent intent = new Intent(getActivity(), RaceFormActivity.class);
+        intent.putExtra("race", json);
+        startActivity(intent);
     }
 
     // Delete sensor

@@ -85,5 +85,12 @@
     <string name="deactivate_race_text">Race %1$s has been deactivated</string>
     <string name="start_race_title">Start race</string>
     <string name="start_race_text">Race %1$s has been started!</string>
+    <string name="add_race">Add new race</string>
+    <string name="edit_race">Edit race</string>
+    <string name="start_method_auto">Auto</string>
+    <string name="start_method_manual">Manual</string>
+    <string name="race_mode_both">Sensor and vehicle</string>
+    <string name="race_mode_sensor">Sensor only</string>
+    <string name="race_mode_vehicle">Vehicle only</string>
 
 </resources>

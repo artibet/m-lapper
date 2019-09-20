@@ -101,9 +101,11 @@ public class UsersFragment extends Fragment implements BottomNavigationView.OnNa
         // Fetch data from API and return
         fetchUsers();
 
-        // Set bottom navigation listener
+        // Set bottom navigation listener and add text
         BottomNavigationView bottomNav = v.findViewById(R.id.bottom_nav);
         bottomNav.setOnNavigationItemSelectedListener(this);
+        MenuItem addItem = bottomNav.getMenu().findItem(R.id.action_add);
+        addItem.setTitle(getString(R.string.add_user));
 
         // Return view
         return v;

@@ -30,6 +30,7 @@ import java.util.List;
 import gr.artibet.lapper.R;
 import gr.artibet.lapper.Util;
 import gr.artibet.lapper.activities.RaceFormActivity;
+import gr.artibet.lapper.activities.RaceVehiclesActivity;
 import gr.artibet.lapper.activities.SensorFormActivity;
 import gr.artibet.lapper.adapters.PendingRacesAdapter;
 import gr.artibet.lapper.adapters.SensorsAdapter;
@@ -108,9 +109,11 @@ public class PendingRacesFragment extends Fragment implements BottomNavigationVi
         // Fetch data from API and return
         fetchRaces();
 
-        // Set bottom navigation listener
+        // Set bottom navigation listener and add action menu text
         BottomNavigationView bottomNav = v.findViewById(R.id.bottom_nav);
         bottomNav.setOnNavigationItemSelectedListener(this);
+        MenuItem addItem = bottomNav.getMenu().findItem(R.id.action_add);
+        addItem.setTitle(getString(R.string.add_race));
 
         // Return view
         return v;
@@ -286,8 +289,13 @@ public class PendingRacesFragment extends Fragment implements BottomNavigationVi
     }
 
     // Race Vehicles
-    private void raceVehicles(int positioin) {
-
+    private void raceVehicles(int position) {
+        // Get race ID and tag and open RaceVehiclesActivity
+        Race race = mRaceList.get(position);
+        Intent intent = new Intent(getActivity(), RaceVehiclesActivity.class);
+        intent.putExtra("raceId", race.getId());
+        intent.putExtra("raceTag", race.getTag());
+        startActivity(intent);
     }
 }
 

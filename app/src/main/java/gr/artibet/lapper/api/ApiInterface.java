@@ -6,6 +6,7 @@ import gr.artibet.lapper.models.LiveData;
 import gr.artibet.lapper.models.LoginUser;
 import gr.artibet.lapper.models.Race;
 import gr.artibet.lapper.models.RaceResponse;
+import gr.artibet.lapper.models.RaceVehicle;
 import gr.artibet.lapper.models.Sensor;
 import gr.artibet.lapper.models.User;
 import gr.artibet.lapper.models.Vehicle;
@@ -171,4 +172,24 @@ public interface ApiInterface {
             @Field("ispublic") Boolean isPublic,
             @Field("descr") String description
     );
+
+
+
+
+    // --------------------------------------------------------------------------
+    // RACES VEHICLES
+    // --------------------------------------------------------------------------
+
+    // Race vehicle GET (for specific race
+    @GET("api/race-vehicles/")
+    Call<List<RaceVehicle>> getRaceVehiclesForRace(
+            @Header("Authorization") String token,
+            @Query("race") int raceId
+    );
+
+    // Delete Race Vehicle
+    @DELETE("api/race-vehicles/{id}/")
+    Call<Void> deleteRaceVehicle(@Header("Authorization") String token, @Path("id") long rvId);
+
+
 }

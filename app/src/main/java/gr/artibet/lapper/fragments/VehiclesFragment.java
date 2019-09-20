@@ -92,9 +92,11 @@ public class VehiclesFragment extends Fragment implements BottomNavigationView.O
         // Fetch data from API and return
         fetchVehicles();
 
-        // Set bottom navigation listener
+        // Set bottom navigation listener and add action text
         BottomNavigationView bottomNav = v.findViewById(R.id.bottom_nav);
         bottomNav.setOnNavigationItemSelectedListener(this);
+        MenuItem addItem = bottomNav.getMenu().findItem(R.id.action_add);
+        addItem.setTitle(getString(R.string.add_vehicle));
 
         // Return view
         return v;
@@ -181,7 +183,7 @@ public class VehiclesFragment extends Fragment implements BottomNavigationView.O
     private void deleteVehicle(final int position) {
 
         ConfirmDialog confirmDialog = new ConfirmDialog(getString(R.string.delete_vehicle_title), getString(R.string.delete_vehicle_message));
-        confirmDialog.show(getActivity().getSupportFragmentManager(), "delete user");
+        confirmDialog.show(getActivity().getSupportFragmentManager(), "delete vehicle");
         confirmDialog.setConfirmListener(new ConfirmDialog.ConfirmListener() {
             @Override
             public void onConfirm() {

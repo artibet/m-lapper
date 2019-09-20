@@ -92,5 +92,7 @@
     <string name="race_mode_both">Sensor and vehicle</string>
     <string name="race_mode_sensor">Sensor only</string>
     <string name="race_mode_vehicle">Vehicle only</string>
+    <string name="race_vehicles">Race %1$s vehicles</string>
+    <string name="no_vehicles">No vehicles</string>
 
 </resources>

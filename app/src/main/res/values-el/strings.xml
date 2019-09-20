@@ -92,4 +92,6 @@
     <string name="race_mode_both">Αισθητήρας και όχημα</string>
     <string name="race_mode_sensor">Μόνο αισθητήρας</string>
     <string name="race_mode_vehicle">Μόνο όχημα</string>
+    <string name="race_vehicles">Οχήματα αγώνα %1$s</string>
+    <string name="no_vehicles">Δεν υπάρχουν οχήματα</string>
 </resources>

@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         // TEST WEBSOCKETS
-        SocketIO.getInstance();
+        //SocketIO.getInstance();
 
     }
 

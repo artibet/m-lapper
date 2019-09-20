@@ -11,14 +11,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity
-            android:name=".activities.RaceFormActivity"/>
-        <activity
-            android:name=".activities.SensorFormActivity"/>
-        <activity
-            android:name=".activities.VehicleFormActivity"/>
-        <activity
-            android:name=".activities.UserFormActivity"/>
+        <activity android:name=".activities.RaceVehiclesActivity"></activity>
+        <activity android:name=".activities.RaceFormActivity" />
+        <activity android:name=".activities.SensorFormActivity" />
+        <activity android:name=".activities.VehicleFormActivity" />
+        <activity android:name=".activities.UserFormActivity" />
         <activity
             android:name=".activities.StarterActivity"
             android:theme="@android:style/Theme.NoDisplay">

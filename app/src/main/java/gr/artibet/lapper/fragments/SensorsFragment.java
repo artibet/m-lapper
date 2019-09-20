@@ -88,9 +88,11 @@ public class SensorsFragment extends Fragment implements BottomNavigationView.On
         // Fetch data from API and return
         fetchSensors();
 
-        // Set bottom navigation listener
+        // Set bottom navigation listener and add action text
         BottomNavigationView bottomNav = v.findViewById(R.id.bottom_nav);
         bottomNav.setOnNavigationItemSelectedListener(this);
+        MenuItem addItem = bottomNav.getMenu().findItem(R.id.action_add);
+        addItem.setTitle(getString(R.string.add_sensor));
 
         // Return view
         return v;

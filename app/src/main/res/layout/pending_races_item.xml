@@ -21,34 +21,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/pending_races_item_ivVehicles"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_vehicle"
-            android:tint="#3f51b5"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/pending_races_item_ivActivate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:src="@drawable/ic_timer"
-            android:tint="#4caf50"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pending_races_item_ivVehicles" />
-
-        <ImageView
-            android:id="@+id/pending_races_item_ivDelete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:src="@drawable/ic_delete"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pending_races_item_ivActivate" />
-
         <TextView
             android:id="@+id/pending_races_item_creator"
             android:layout_width="wrap_content"
@@ -119,6 +91,14 @@
             android:text="laps"
             app:layout_constraintStart_toEndOf="@+id/pending_races_item_vehiclesNo"
             app:layout_constraintTop_toBottomOf="@+id/pending_races_item_mode" />
+
+        <ImageView
+            android:id="@+id/ivMenu"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/ic_more" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

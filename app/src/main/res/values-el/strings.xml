@@ -60,7 +60,7 @@
     <string name="active">Ενεργός</string>
     <string name="starter_sensor">Αισθητήρας εκκίνησης</string>
     <string name="date_joined">Δημιουργήθηκε</string>
-    <string name="reset_password_title">Επαναφορά κωδικού πρόσβασης</string>
+    <string name="reset_password_title">Επαναφορά κωδικού</string>
     <string name="new_password">Νέος κωδικός</string>
     <string name="no_empty_password">Ο κωδικός δεν μπορεί να είναι κενός</string>
     <string name="password_reset_success">Επιτυχής αλλαγή κωδικού!</string>
@@ -94,4 +94,7 @@
     <string name="race_mode_vehicle">Μόνο όχημα</string>
     <string name="race_vehicles">Οχήματα αγώνα %1$s</string>
     <string name="no_vehicles">Δεν υπάρχουν οχήματα</string>
+    <string name="delete">Διαγραφή</string>
+    <string name="activate">Ενεργοποίηση</string>
+    <string name="edit">Επεξεργασία</string>
 </resources>

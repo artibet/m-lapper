@@ -2,16 +2,21 @@ package gr.artibet.lapper.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.view.menu.MenuBuilder;
+import androidx.appcompat.view.menu.MenuPopupHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import gr.artibet.lapper.App;
 import gr.artibet.lapper.R;
 import gr.artibet.lapper.Util;
 import gr.artibet.lapper.models.Race;
@@ -20,7 +25,7 @@ import gr.artibet.lapper.models.Vehicle;
 public class PendingRacesAdapter extends RecyclerView.Adapter<PendingRacesAdapter.PendingRacesViewHolder> {
 
     // Context
-    private Context mContext;
+    private static Context mContext;
 
     // Vehicle List
     private List<Race> mRaceList;
@@ -46,9 +51,7 @@ public class PendingRacesAdapter extends RecyclerView.Adapter<PendingRacesAdapte
     public static class PendingRacesViewHolder extends RecyclerView.ViewHolder {
 
         public ImageView ivPublic;
-        public ImageView ivVehicles;
-        public ImageView ivActivate;
-        public ImageView ivDelete;
+        public ImageView ivMenu;
 
         public TextView tvTag;
         public TextView tvCreator;
@@ -63,9 +66,7 @@ public class PendingRacesAdapter extends RecyclerView.Adapter<PendingRacesAdapte
             super(itemView);
 
             ivPublic = itemView.findViewById(R.id.pending_races_item_ivPublic);
-            ivVehicles = itemView.findViewById(R.id.pending_races_item_ivVehicles);
-            ivActivate = itemView.findViewById(R.id.pending_races_item_ivActivate);
-            ivDelete = itemView.findViewById(R.id.pending_races_item_ivDelete);
+            ivMenu = itemView.findViewById(R.id.ivMenu);
 
             tvTag = itemView.findViewById(R.id.pending_races_item_tag);
             tvCreator = itemView.findViewById(R.id.pending_races_item_creator);
@@ -88,42 +89,63 @@ public class PendingRacesAdapter extends RecyclerView.Adapter<PendingRacesAdapte
                 }
             });
 
-            // Delete click listener
-            ivDelete.setOnClickListener(new View.OnClickListener() {
+            // Crete popup menu
+            ivMenu.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (listener != null) {
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION) {
-                            listener.onDeleteItem(position);
-                        }
-                    }
-                }
-            });
+                    PopupMenu popup = new PopupMenu(mContext, ivMenu);
+                    popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem item) {
 
-            // Activate click listener
-            ivActivate.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (listener != null) {
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION) {
-                            listener.onActivateItem(position);
-                        }
-                    }
-                }
-            });
+                            switch (item.getItemId()) {
 
-            // Vehicles click listener
-            ivVehicles.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (listener != null) {
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION) {
-                            listener.onItemVehicles(position);
+                                // Edit
+                                case R.id.item_edit:
+                                    if (listener != null) {
+                                        int position = getAdapterPosition();
+                                        if (position != RecyclerView.NO_POSITION) {
+                                            listener.onItemClick(position);
+                                        }
+                                    }
+                                    return true;
+
+                                // Delete
+                                case R.id.item_delete:
+                                    if (listener != null) {
+                                        int position = getAdapterPosition();
+                                        if (position != RecyclerView.NO_POSITION) {
+                                            listener.onDeleteItem(position);
+                                        }
+                                    }
+                                    return true;
+
+                                case R.id.item_vehicles:
+                                    if (listener != null) {
+                                        int position = getAdapterPosition();
+                                        if (position != RecyclerView.NO_POSITION) {
+                                            listener.onItemVehicles(position);
+                                        }
+                                    }
+                                    return true;
+
+                                case R.id.item_activate:
+                                    if (listener != null) {
+                                        int position = getAdapterPosition();
+                                        if (position != RecyclerView.NO_POSITION) {
+                                            listener.onActivateItem(position);
+                                        }
+                                    }
+                                    return true;
+                            }
+
+                            return false;
                         }
-                    }
+                    });
+                    popup.inflate(R.menu.pending_races_menu);
+                    Util.enablePopupIcons(popup);
+                    popup.show();
+
                 }
             });
 

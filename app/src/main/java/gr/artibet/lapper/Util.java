@@ -7,12 +7,14 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.TimeZone;
@@ -105,5 +107,23 @@ public class Util {
 
         notificationManager.notify(id, notification);
 
+    }
+
+    // ---------------------------------------------------------------------------------------
+    // Enable popup menu icons via reflection
+    // ---------------------------------------------------------------------------------------
+    public static void enablePopupIcons(PopupMenu popup) {
+        Object menuHelper;
+        Class[] argTypes;
+        try {
+            Field fMenuHelper = PopupMenu.class.getDeclaredField("mPopup");
+            fMenuHelper.setAccessible(true);
+            menuHelper = fMenuHelper.get(popup);
+            argTypes = new Class[]{boolean.class};
+            menuHelper.getClass().getDeclaredMethod("setForceShowIcon", argTypes).invoke(menuHelper, true);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

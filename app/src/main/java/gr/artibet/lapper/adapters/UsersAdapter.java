@@ -2,9 +2,11 @@ package gr.artibet.lapper.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,7 +21,7 @@ import gr.artibet.lapper.models.User;
 public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHolder> {
 
     // Context
-    private Context mContext;
+    private static Context mContext;
 
     // User List
     private List<User> mUserList;
@@ -48,8 +50,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
         public TextView mFullName;
         public TextView mDateJoined;
         public ImageView mUserStatus;
-        public ImageView mResetPassword;
-        public ImageView mDelete;
+        public ImageView ivMenu;
 
         public UserViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
@@ -59,8 +60,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
             mFullName = itemView.findViewById(R.id.user_item_fullname);
             mDateJoined = itemView.findViewById(R.id.user_item_dateJoined);
             mUserStatus = itemView.findViewById(R.id.user_item_status);
-            mResetPassword = itemView.findViewById(R.id.user_item_resetPassword);
-            mDelete = itemView.findViewById(R.id.user_item_delete);
+            ivMenu = itemView.findViewById(R.id.ivMenu);
 
             // Item click listener
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -75,31 +75,59 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
                 }
             });
 
-            // Delete click listener
-            mDelete.setOnClickListener(new View.OnClickListener() {
+            // Crete popup menu
+            ivMenu.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (listener != null) {
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION) {
-                            listener.onDeleteClick(position);
+                    PopupMenu popup = new PopupMenu(mContext, ivMenu);
+                    popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem item) {
+
+                            switch (item.getItemId()) {
+
+                                // Edit
+                                case R.id.item_edit:
+                                    if (listener != null) {
+                                        int position = getAdapterPosition();
+                                        if (position != RecyclerView.NO_POSITION) {
+                                            listener.onItemClick(position);
+                                        }
+                                    }
+                                    return true;
+
+                                // Reset passwored
+                                case R.id.item_resetPassword:
+                                    if (listener != null) {
+                                        int position = getAdapterPosition();
+                                        if (position != RecyclerView.NO_POSITION) {
+                                            listener.onResetPassword(position);
+                                        }
+                                    }
+                                    return true;
+
+                                // Delete
+                                case R.id.item_delete:
+                                    if (listener != null) {
+                                        int position = getAdapterPosition();
+                                        if (position != RecyclerView.NO_POSITION) {
+                                            listener.onDeleteClick(position);
+                                        }
+                                    }
+                                    return true;
+
+                            }
+
+                            return false;
                         }
-                    }
+                    });
+                    popup.inflate(R.menu.users_menu);
+                    Util.enablePopupIcons(popup);
+                    popup.show();
+
                 }
             });
 
-            // Set Password click listener
-            mResetPassword.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (listener != null) {
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION) {
-                            listener.onResetPassword(position);
-                        }
-                    }
-                }
-            });
 
 
         }

@@ -1,24 +1,19 @@
 package gr.artibet.lapper.fragments;
 
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
@@ -29,19 +24,15 @@ import java.util.List;
 
 import gr.artibet.lapper.R;
 import gr.artibet.lapper.Util;
-import gr.artibet.lapper.activities.RaceFormActivity;
-import gr.artibet.lapper.activities.RaceVehiclesActivity;
-import gr.artibet.lapper.activities.SensorFormActivity;
+import gr.artibet.lapper.activities.ActiveRacesVehiclesActivity;
+import gr.artibet.lapper.activities.PendingRacesVehiclesActivity;
 import gr.artibet.lapper.adapters.ActiveRacesAdapter;
-import gr.artibet.lapper.adapters.PendingRacesAdapter;
-import gr.artibet.lapper.adapters.SensorsAdapter;
 import gr.artibet.lapper.api.RetrofitClient;
 import gr.artibet.lapper.api.SocketIO;
 import gr.artibet.lapper.dialogs.ConfirmDialog;
 import gr.artibet.lapper.models.Race;
 import gr.artibet.lapper.models.RaceResponse;
 import gr.artibet.lapper.models.RaceState;
-import gr.artibet.lapper.models.Sensor;
 import gr.artibet.lapper.storage.SharedPrefManager;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -209,7 +200,12 @@ public class ActiveRacesFragment extends Fragment {
 
     // View Race vehicles
     private void viewVehicles(int position) {
-        // TODO: implement viewVehicles
+        // Get race ID and tag and open ActiveRacesVehiclesActivity
+        Race race = mRaceList.get(position);
+        Intent intent = new Intent(getActivity(), ActiveRacesVehiclesActivity.class);
+        intent.putExtra("raceId", race.getId());
+        intent.putExtra("raceTag", race.getTag());
+        startActivity(intent);
     }
 
     // Start race

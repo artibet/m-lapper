@@ -15,30 +15,22 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.gson.Gson;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import gr.artibet.lapper.R;
 import gr.artibet.lapper.Util;
-import gr.artibet.lapper.adapters.RaceVehiclesAdapter;
-import gr.artibet.lapper.adapters.VehiclesAdapter;
+import gr.artibet.lapper.adapters.PendingRacesVehiclesAdapter;
 import gr.artibet.lapper.api.RetrofitClient;
-import gr.artibet.lapper.api.SocketIO;
 import gr.artibet.lapper.dialogs.ConfirmDialog;
-import gr.artibet.lapper.models.Race;
 import gr.artibet.lapper.models.RaceVehicle;
-import gr.artibet.lapper.models.Vehicle;
 import gr.artibet.lapper.storage.SharedPrefManager;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RaceVehiclesActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+public class PendingRacesVehiclesActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
     private List<RaceVehicle> mRaceVehicleList = new ArrayList<>();
     private ProgressBar mProgressBar;
@@ -49,13 +41,13 @@ public class RaceVehiclesActivity extends AppCompatActivity implements BottomNav
 
     // Recycler view members
     private RecyclerView mRecyclerView;
-    private RaceVehiclesAdapter mAdapter;
+    private PendingRacesVehiclesAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_race_vehicles);
+        setContentView(R.layout.activity_pending_races_vehicles);
 
         // Get race id and tag from indent
         Intent intent = getIntent();
@@ -68,7 +60,7 @@ public class RaceVehiclesActivity extends AppCompatActivity implements BottomNav
         mRecyclerView = findViewById(R.id.recyclerView);
         mLayoutManager = new LinearLayoutManager(this);
 
-        mAdapter = new RaceVehiclesAdapter(this, mRaceVehicleList);
+        mAdapter = new PendingRacesVehiclesAdapter(this, mRaceVehicleList);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setAdapter(mAdapter);
@@ -87,7 +79,7 @@ public class RaceVehiclesActivity extends AppCompatActivity implements BottomNav
         });
 
         // Set vehicle item click listener
-        mAdapter.setOnItemClickListener(new RaceVehiclesAdapter.OnItemClickListener() {
+        mAdapter.setOnItemClickListener(new PendingRacesVehiclesAdapter.OnItemClickListener() {
             @Override
             public void onDelete(int position) {
                 deleteVehicle(position);
@@ -121,7 +113,7 @@ public class RaceVehiclesActivity extends AppCompatActivity implements BottomNav
 
                 if (!response.isSuccessful()) {
                     //Util.errorToast(SensorFormActivity.this, getString(R.string.sensor_create_failed));
-                    Util.errorToast(RaceVehiclesActivity.this, response.message());
+                    Util.errorToast(PendingRacesVehiclesActivity.this, response.message());
                 }
                 else {
 
@@ -157,7 +149,7 @@ public class RaceVehiclesActivity extends AppCompatActivity implements BottomNav
     @Override
     public void onBackPressed() {
         if (mListModified) {
-            Intent intent = new Intent(RaceVehiclesActivity.this, MainActivity.class);
+            Intent intent = new Intent(PendingRacesVehiclesActivity.this, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             intent.putExtra("fragment", MainActivity.PENDING_RACES);
             startActivity(intent);
@@ -197,7 +189,7 @@ public class RaceVehiclesActivity extends AppCompatActivity implements BottomNav
             public void onConfirm() {
                 RaceVehicle rv = mRaceVehicleList.get(position);
 
-                String token = SharedPrefManager.getInstance(RaceVehiclesActivity.this).getToken();
+                String token = SharedPrefManager.getInstance(PendingRacesVehiclesActivity.this).getToken();
                 Call<Void> call = RetrofitClient.getInstance().getApi().deleteRaceVehicle(token, rv.getId());
                 call.enqueue(new Callback<Void>() {
                     @Override
@@ -205,7 +197,7 @@ public class RaceVehiclesActivity extends AppCompatActivity implements BottomNav
 
                         if (!response.isSuccessful()) {
                             //Util.errorToast(SensorFormActivity.this, getString(R.string.sensor_create_failed));
-                            Util.errorToast(RaceVehiclesActivity.this, response.message());
+                            Util.errorToast(PendingRacesVehiclesActivity.this, response.message());
                         }
                         else {
                             //Util.successToast(getActivity(), "Delete successfully");
@@ -217,7 +209,7 @@ public class RaceVehiclesActivity extends AppCompatActivity implements BottomNav
 
                     @Override
                     public void onFailure(Call<Void> call, Throwable t) {
-                        Util.errorToast(RaceVehiclesActivity.this, t.getMessage());
+                        Util.errorToast(PendingRacesVehiclesActivity.this, t.getMessage());
                     }
                 });
             }

@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.RaceVehiclesActivity"></activity>
+        <activity android:name=".activities.PendingRacesVehiclesActivity"></activity>
+        <activity android:name=".activities.ActiveRacesVehiclesActivity"></activity>
         <activity android:name=".activities.RaceFormActivity" />
         <activity android:name=".activities.SensorFormActivity" />
         <activity android:name=".activities.VehicleFormActivity" />

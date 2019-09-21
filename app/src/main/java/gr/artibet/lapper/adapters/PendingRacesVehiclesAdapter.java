@@ -13,11 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import gr.artibet.lapper.R;
-import gr.artibet.lapper.Util;
 import gr.artibet.lapper.models.RaceVehicle;
-import gr.artibet.lapper.models.Vehicle;
 
-public class RaceVehiclesAdapter extends RecyclerView.Adapter<RaceVehiclesAdapter.RaceVehicleViewHolder> {
+public class PendingRacesVehiclesAdapter extends RecyclerView.Adapter<PendingRacesVehiclesAdapter.RaceVehicleViewHolder> {
 
     // Context
     private Context mContext;
@@ -76,7 +74,7 @@ public class RaceVehiclesAdapter extends RecyclerView.Adapter<RaceVehiclesAdapte
     }
 
     // CONSTRUCTOR WITH AN ARRAY LIST OF Vehicle
-    public RaceVehiclesAdapter(Context context, List<RaceVehicle> raceVehicleList) {
+    public PendingRacesVehiclesAdapter(Context context, List<RaceVehicle> raceVehicleList) {
         mContext = context;
         mRaceVehicleList = raceVehicleList;
     }
@@ -84,7 +82,7 @@ public class RaceVehiclesAdapter extends RecyclerView.Adapter<RaceVehiclesAdapte
     @NonNull
     @Override
     public RaceVehicleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.race_vehicle_item, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.pending_races_vehicle_item, parent, false);
         RaceVehicleViewHolder viewHolder = new RaceVehicleViewHolder(v, mItemListener);
         return viewHolder;
     }

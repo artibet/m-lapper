@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onResume() {
         super.onResume();
-        //TODO: Add fragment fetch calls here
+        //actionRefresh();
     }
 
     // If back button pressed and drawer is open close it

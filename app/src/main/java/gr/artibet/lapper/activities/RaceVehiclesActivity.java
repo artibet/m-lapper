@@ -45,6 +45,7 @@ public class RaceVehiclesActivity extends AppCompatActivity implements BottomNav
     private TextView mTvMessage;
     private int mRaceId;
     private String mRaceTag;
+    private Boolean mListModified = false;
 
     // Recycler view members
     private RecyclerView mRecyclerView;
@@ -150,6 +151,22 @@ public class RaceVehiclesActivity extends AppCompatActivity implements BottomNav
         });
     }
 
+    // Override onBackPressed to force MainActivity to refresh
+
+
+    @Override
+    public void onBackPressed() {
+        if (mListModified) {
+            Intent intent = new Intent(RaceVehiclesActivity.this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            intent.putExtra("fragment", MainActivity.PENDING_RACES);
+            startActivity(intent);
+        }
+        else {
+            super.onBackPressed();
+        }
+
+    }
 
     // Bottom navigation listener
     @Override
@@ -194,6 +211,7 @@ public class RaceVehiclesActivity extends AppCompatActivity implements BottomNav
                             //Util.successToast(getActivity(), "Delete successfully");
                             mRaceVehicleList.remove(position);
                             mAdapter.notifyItemRemoved(position);
+                            mListModified = true;
                         }
                     }
 

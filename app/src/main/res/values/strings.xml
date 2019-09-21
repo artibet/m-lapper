@@ -97,5 +97,11 @@
     <string name="delete">Delete</string>
     <string name="activate">Activate</string>
     <string name="edit">Edit</string>
+    <string name="start_race">Start race</string>
+    <string name="deactivate">Deactivate</string>
+    <string name="no_active_races">No active races</string>
+    <string name="activate_race_confirm_message">Do you want to activate race %1$s?</string>
+    <string name="deactivate_race_confirm_message">Do you want to deactivate race %1$s?</string>
+    <string name="race_deactivated">Race activated successfully!</string>
 
 </resources>

@@ -97,4 +97,11 @@
     <string name="delete">Διαγραφή</string>
     <string name="activate">Ενεργοποίηση</string>
     <string name="edit">Επεξεργασία</string>
+    <string name="start_race">Εκκίνηση αγώνα</string>
+    <string name="deactivate">Απενεργοποίηση</string>
+    <string name="no_active_races">Δεν υπάρχουν ενεργοί αγώνες</string>
+    <string name="activate_race_confirm_message">Να ενεργοποιηθεί ο αγώνας %1$s?</string>
+    <string name="deactivate_race_confirm_message">Να απενεργοποιηθεί ο αγώνας %1$s?</string>
+    <string name="race_deactivated">Ο αγώνας απενεργοποιήθηκε με επιτυχία!</string>
+
 </resources>

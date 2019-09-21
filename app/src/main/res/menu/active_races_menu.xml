@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:id="@+id/item_deactivateRace"
+        android:title="@string/deactivate"
+        android:icon="@drawable/ic_pending_races"
+        android:iconTint="#f44336"/>
+
+    <item
+        android:id="@+id/item_vehicles"
+        android:title="@string/vehicles"
+        android:icon="@drawable/ic_vehicle"
+        android:iconTint="#3f51b5"/>
+
+    <item
+        android:id="@+id/item_startRace"
+        android:title="@string/start_race"
+        android:icon="@drawable/ic_inprogress_races"
+        android:iconTint="#4caf50"/>
+
+</menu>

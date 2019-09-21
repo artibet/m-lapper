@@ -146,6 +146,14 @@ public interface ApiInterface {
             @Field("race_id") int race_id
     );
 
+    // Deactivate race
+    @POST("cmd/deactivate-race/")
+    @FormUrlEncoded
+    Call<Race> deactivateRace(
+            @Header("Authorization") String token,
+            @Field("race_id") int race_id
+    );
+
     // Race POST (create new)
     @POST("api/races/")
     @FormUrlEncoded

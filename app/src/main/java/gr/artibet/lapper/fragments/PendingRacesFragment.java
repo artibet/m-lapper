@@ -197,7 +197,7 @@ public class PendingRacesFragment extends Fragment implements BottomNavigationVi
         startActivity(intent);
     }
 
-    // Delete sensor
+    // Delete race
     private void deleteRace(final int position) {
 
         ConfirmDialog confirmDialog = new ConfirmDialog(getString(R.string.delete_race_title), getString(R.string.delete_race_message));
@@ -243,13 +243,13 @@ public class PendingRacesFragment extends Fragment implements BottomNavigationVi
     // Activate Race
     private void activateRace(final int position) {
 
-        ConfirmDialog confirmDialog = new ConfirmDialog("Ενεργοποίηση αγώνα", "Να ενεργοποιηθεί ο επιλεγμένος αγώνας?");
+        final Race race = mRaceList.get(position);
+
+        ConfirmDialog confirmDialog = new ConfirmDialog(getString(R.string.activate_race_title), getString(R.string.activate_race_confirm_message, race.getTag()));
         confirmDialog.show(getActivity().getSupportFragmentManager(), "activate race");
         confirmDialog.setConfirmListener(new ConfirmDialog.ConfirmListener() {
             @Override
             public void onConfirm() {
-
-                Race race = mRaceList.get(position);
 
                 String token = SharedPrefManager.getInstance(getActivity()).getToken();
                 Call<Race> call = RetrofitClient.getInstance().getApi().activateRace(token, race.getId());

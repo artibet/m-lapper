@@ -14,7 +14,7 @@
 
 
         <ImageView
-            android:id="@+id/pending_races_item_ivPublic"
+            android:id="@+id/active_races_item_ivPublic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_people"
@@ -22,19 +22,19 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/pending_races_item_creator"
+            android:id="@+id/active_races_item_creator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:text="raceCreator"
             android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@+id/pending_races_item_tag"
-            app:layout_constraintStart_toEndOf="@+id/pending_races_item_tag"
-            app:layout_constraintTop_toTopOf="@+id/pending_races_item_tag" />
+            app:layout_constraintBottom_toBottomOf="@+id/active_races_item_tag"
+            app:layout_constraintStart_toEndOf="@+id/active_races_item_tag"
+            app:layout_constraintTop_toTopOf="@+id/active_races_item_tag" />
 
         <TextView
-            android:id="@+id/pending_races_item_tag"
+            android:id="@+id/active_races_item_tag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -42,55 +42,55 @@
             android:text="raceTag"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/pending_races_item_ivPublic"
+            app:layout_constraintStart_toEndOf="@+id/active_races_item_ivPublic"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/pending_race_item_updatedAt"
+            android:id="@+id/active_race_item_updatedAt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="updatedAt"
-            app:layout_constraintStart_toStartOf="@+id/pending_races_item_startMethod"
-            app:layout_constraintTop_toBottomOf="@+id/pending_races_item_vehiclesNo" />
+            app:layout_constraintStart_toStartOf="@+id/active_races_item_startMethod"
+            app:layout_constraintTop_toBottomOf="@+id/active_races_item_vehiclesNo" />
 
         <TextView
-            android:id="@+id/pending_races_item_startMethod"
+            android:id="@+id/active_races_item_startMethod"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="startMethod"
-            app:layout_constraintStart_toStartOf="@+id/pending_races_item_tag"
-            app:layout_constraintTop_toBottomOf="@+id/pending_races_item_tag" />
+            app:layout_constraintStart_toStartOf="@+id/active_races_item_tag"
+            app:layout_constraintTop_toBottomOf="@+id/active_races_item_tag" />
 
         <TextView
-            android:id="@+id/pending_races_item_mode"
+            android:id="@+id/active_races_item_mode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="mode"
-            app:layout_constraintStart_toStartOf="@+id/pending_races_item_startMethod"
-            app:layout_constraintTop_toBottomOf="@+id/pending_races_item_startMethod" />
+            app:layout_constraintStart_toStartOf="@+id/active_races_item_startMethod"
+            app:layout_constraintTop_toBottomOf="@+id/active_races_item_startMethod" />
 
         <TextView
-            android:id="@+id/pending_races_item_vehiclesNo"
+            android:id="@+id/active_races_item_vehiclesNo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="vehiclesNo"
-            app:layout_constraintStart_toStartOf="@+id/pending_races_item_mode"
-            app:layout_constraintTop_toBottomOf="@+id/pending_races_item_mode" />
+            app:layout_constraintStart_toStartOf="@+id/active_races_item_mode"
+            app:layout_constraintTop_toBottomOf="@+id/active_races_item_mode" />
 
         <TextView
-            android:id="@+id/pending_races_item_laps"
+            android:id="@+id/active_races_item_laps"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="4dp"
             android:text="laps"
-            app:layout_constraintStart_toEndOf="@+id/pending_races_item_vehiclesNo"
-            app:layout_constraintTop_toBottomOf="@+id/pending_races_item_mode" />
+            app:layout_constraintStart_toEndOf="@+id/active_races_item_vehiclesNo"
+            app:layout_constraintTop_toBottomOf="@+id/active_races_item_mode" />
 
         <ImageView
             android:id="@+id/ivMenu"

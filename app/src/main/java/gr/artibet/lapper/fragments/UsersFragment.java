@@ -99,7 +99,6 @@ public class UsersFragment extends Fragment implements BottomNavigationView.OnNa
         });
 
         // Fetch data from API and return
-        // TODO: Create an abstrace fragment and add fetch method. Remove fetch from here and call explicitly from parent activity
         fetchUsers();
 
         // Set bottom navigation listener and add text

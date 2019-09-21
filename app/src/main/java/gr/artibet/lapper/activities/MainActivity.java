@@ -33,7 +33,6 @@ import gr.artibet.lapper.storage.SharedPrefManager;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout mDrawerLayout;
-    // TODO: Inherent new abstract fragment
     private Fragment mCurrentFragment;
     NavigationView mNavigationView;
 

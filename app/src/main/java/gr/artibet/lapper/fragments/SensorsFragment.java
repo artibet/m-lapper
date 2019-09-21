@@ -86,7 +86,6 @@ public class SensorsFragment extends Fragment implements BottomNavigationView.On
         });
 
         // Fetch data from API and return
-        // TODO: Create an abstrace fragment and add fetch method. Remove fetch from here and call explicitly from parent activity
         fetchSensors();
 
         // Set bottom navigation listener and add action text

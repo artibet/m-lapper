@@ -90,7 +90,6 @@ public class VehiclesFragment extends Fragment implements BottomNavigationView.O
         });
 
         // Fetch data from API and return
-        // TODO: Create an abstrace fragment and add fetch method. Remove fetch from here and call explicitly from parent activity
         fetchVehicles();
 
         // Set bottom navigation listener and add action text

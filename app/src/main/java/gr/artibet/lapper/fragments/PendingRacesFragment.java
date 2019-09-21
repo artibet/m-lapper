@@ -107,7 +107,6 @@ public class PendingRacesFragment extends Fragment implements BottomNavigationVi
 
 
         // Fetch data from API and return
-        // TODO: Create an abstrace fragment and add fetch method. Remove fetch from here and call explicitly from parent activity
         fetchRaces();
 
         // Set bottom navigation listener and add action menu text

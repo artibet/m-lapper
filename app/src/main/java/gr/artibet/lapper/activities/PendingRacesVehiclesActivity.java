@@ -24,7 +24,9 @@ import gr.artibet.lapper.Util;
 import gr.artibet.lapper.adapters.PendingRacesVehiclesAdapter;
 import gr.artibet.lapper.api.RetrofitClient;
 import gr.artibet.lapper.dialogs.ConfirmDialog;
+import gr.artibet.lapper.dialogs.SelectVehicleDialog;
 import gr.artibet.lapper.models.RaceVehicle;
+import gr.artibet.lapper.models.Vehicle;
 import gr.artibet.lapper.storage.SharedPrefManager;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -175,8 +177,14 @@ public class PendingRacesVehiclesActivity extends AppCompatActivity implements B
     // Add new vehicle to the race
     private void actionAddVehicle() {
         // TODO: Create add vehicle to race form
-        //Intent intent = new Intent(getActivity(), VehicleFormActivity.class);
-        //startActivity(intent);
+        SelectVehicleDialog dialog = new SelectVehicleDialog(mRaceId);
+        dialog.show(getSupportFragmentManager(), "select vehicle");
+        dialog.setSelectVehicleListener(new SelectVehicleDialog.SelectVehicleListener() {
+            @Override
+            public void onSelectVehicle(Vehicle vehicle) {
+                // TODO: pick-up sellected vehicle and add to race
+            }
+        });
     }
 
     // Delete vehicle from the race

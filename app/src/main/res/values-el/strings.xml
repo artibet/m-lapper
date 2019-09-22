@@ -104,5 +104,6 @@
     <string name="deactivate_race_confirm_message">Να απενεργοποιηθεί ο αγώνας %1$s?</string>
     <string name="race_deactivated">Ο αγώνας απενεργοποιήθηκε με επιτυχία!</string>
     <string name="race_started">Ο αγώνας %1$s ξεκίνησε!</string>
+    <string name="select_vehicle">Επιλογή οχήματος</string>
 
 </resources>

@@ -209,8 +209,43 @@ public class ActiveRacesFragment extends Fragment {
     }
 
     // Start race
-    private void startRace(int position) {
-        // TODO: implement start race
+    private void startRace(final int position) {
+
+        final Race race = mRaceList.get(position);
+
+        String token = SharedPrefManager.getInstance(getActivity()).getToken();
+        Call<Race> call = RetrofitClient.getInstance().getApi().startRace(token, race.getId());
+        call.enqueue(new Callback<Race>() {
+            @Override
+            public void onResponse(Call<Race> call, Response<Race> response) {
+
+                if (!response.isSuccessful()) {
+                    //Util.errorToast(SensorFormActivity.this, getString(R.string.sensor_create_failed));
+                    Util.errorToast(getActivity(), response.message());
+                }
+                else {
+                    Util.successToast(getActivity(), getString(R.string.race_started, race.getTag()));
+
+                    // Send socket message
+                    Race startedRace = response.body();
+                    Gson gson = new Gson();
+                    try {
+                        JSONObject jsonObj = new JSONObject(gson.toJson(startedRace));
+                        SocketIO.getInstance().getSocket().emit("race_started", jsonObj);
+                        mRaceList.remove(position);
+                        mAdapter.notifyItemRemoved(position);
+                    }
+                    catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Race> call, Throwable t) {
+                Util.errorToast(getActivity(), t.getMessage());
+            }
+        });
     }
 }
 

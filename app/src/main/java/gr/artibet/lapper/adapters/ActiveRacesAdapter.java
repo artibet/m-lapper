@@ -103,7 +103,7 @@ public class ActiveRacesAdapter extends RecyclerView.Adapter<ActiveRacesAdapter.
                                     return true;
 
                                 // Start race
-                                case R.id.item_activate:
+                                case R.id.item_startRace:
                                     if (listener != null) {
                                         int position = getAdapterPosition();
                                         if (position != RecyclerView.NO_POSITION) {

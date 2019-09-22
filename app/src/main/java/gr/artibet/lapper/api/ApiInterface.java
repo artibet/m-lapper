@@ -154,6 +154,14 @@ public interface ApiInterface {
             @Field("race_id") int race_id
     );
 
+    // Start race (manual)
+    @POST("cmd/start-race/")
+    @FormUrlEncoded
+    Call<Race> startRace(
+            @Header("Authorization") String token,
+            @Field("race_id") int race_id
+    );
+
     // Race POST (create new)
     @POST("api/races/")
     @FormUrlEncoded

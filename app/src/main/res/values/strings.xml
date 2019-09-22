@@ -103,5 +103,6 @@
     <string name="activate_race_confirm_message">Do you want to activate race %1$s?</string>
     <string name="deactivate_race_confirm_message">Do you want to deactivate race %1$s?</string>
     <string name="race_deactivated">Race activated successfully!</string>
+    <string name="race_started">Race %1$s has been started!</string>
 
 </resources>

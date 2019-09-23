@@ -176,13 +176,37 @@ public class PendingRacesVehiclesActivity extends AppCompatActivity implements B
 
     // Add new vehicle to the race
     private void actionAddVehicle() {
-        // TODO: Create add vehicle to race form
         SelectVehicleDialog dialog = new SelectVehicleDialog(mRaceId);
         dialog.show(getSupportFragmentManager(), "select vehicle");
         dialog.setSelectVehicleListener(new SelectVehicleDialog.SelectVehicleListener() {
             @Override
-            public void onSelectVehicle(Vehicle vehicle) {
-                // TODO: pick-up sellected vehicle and add to race
+            public void onSelectVehicle(Vehicle vehicle, String driver) {
+
+                // Send API request to store selected vehicle into race
+                String token = SharedPrefManager.getInstance(PendingRacesVehiclesActivity.this).getToken();
+                Call<RaceVehicle> call = RetrofitClient.getInstance().getApi().addVehicleToRace(token, mRaceId, vehicle.getId(), driver);
+                call.enqueue(new Callback<RaceVehicle>() {
+                    @Override
+                    public void onResponse(Call<RaceVehicle> call, Response<RaceVehicle> response) {
+
+                        if (!response.isSuccessful()) {
+                            //Util.errorToast(SensorFormActivity.this, getString(R.string.sensor_create_failed));
+                            Util.errorToast(PendingRacesVehiclesActivity.this, response.message());
+                        }
+                        else {
+                            //Util.successToast(getActivity(), "Delete successfully");
+                            RaceVehicle raceVehicle = response.body();
+                            mRaceVehicleList.add(raceVehicle);
+                            mAdapter.notifyItemInserted(mRaceVehicleList.size()-1);
+                            mListModified = true;
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<RaceVehicle> call, Throwable t) {
+                        Util.errorToast(PendingRacesVehiclesActivity.this, t.getMessage());
+                    }
+                });
             }
         });
     }

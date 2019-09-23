@@ -1,5 +1,7 @@
 package gr.artibet.lapper.models;
 
+import androidx.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
 
 public class Vehicle {
@@ -107,5 +109,11 @@ public class Vehicle {
 
     public void setUpdatedAtFormated(Double updatedAtTs) {
         this.updatedAtTs = updatedAtTs;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return owner.getUsername() + " - " + tag;
     }
 }

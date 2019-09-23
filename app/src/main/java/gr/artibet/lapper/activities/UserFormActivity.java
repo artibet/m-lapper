@@ -170,7 +170,7 @@ public class UserFormActivity extends AppCompatActivity {
                 else {
                     //Util.successToast(SensorFormActivity.this, getString(R.string.sensor_create_success));
 
-                    // Open MainActivity and set fragment to sensors
+                    // Open MainActivity and set fragment to users
                     Intent intent = new Intent(UserFormActivity.this, MainActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     intent.putExtra("fragment", MainActivity.USERS);
@@ -202,7 +202,7 @@ public class UserFormActivity extends AppCompatActivity {
                 else {
                     //Util.successToast(SensorFormActivity.this, getString(R.string.sensor_create_success));
 
-                    // Open MainActivity and set fragment to sensors
+                    // Open MainActivity and set fragment to users
                     Intent intent = new Intent(UserFormActivity.this, MainActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     intent.putExtra("fragment", MainActivity.USERS);

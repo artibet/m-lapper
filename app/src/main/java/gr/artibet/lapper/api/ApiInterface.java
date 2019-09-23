@@ -189,7 +189,22 @@ public interface ApiInterface {
             @Field("descr") String description
     );
 
+    // Available vehicles to be selected in race
+    @GET("api/race-available-vehicles/{race_id}/")
+    Call<List<Vehicle>> getAvailableVehicles(
+            @Header("Authorization") String token,
+            @Path("race_id") int raceId
+    );
 
+    // Add vehicle to race
+    @POST("api/race-vehicles/")
+    @FormUrlEncoded
+    Call<RaceVehicle> addVehicleToRace(
+            @Header("Authorization") String token,
+            @Field("race") int raceId,
+            @Field("vehicle") long vehicleId,
+            @Field("driver") String driver
+    );
 
 
     // --------------------------------------------------------------------------

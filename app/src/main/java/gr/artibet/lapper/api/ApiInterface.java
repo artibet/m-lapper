@@ -134,6 +134,15 @@ public interface ApiInterface {
             @Query("state") int stateId
     );
 
+    // Race GET (Paged)
+    @GET("api/races/")
+    Call<RaceResponse> getPagedRaces(
+            @Header("Authorization") String token,
+            @Query("state") int stateId,
+            @Query("page") int page,
+            @Query("page_size") int pageSize
+    );
+
     // Race DELETE
     @DELETE("api/races/{id}/")
     Call<Void> deleteRace(@Header("Authorization") String token, @Path("id") int id);

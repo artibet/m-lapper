@@ -105,5 +105,6 @@
     <string name="race_deactivated">Race activated successfully!</string>
     <string name="race_started">Race %1$s has been started!</string>
     <string name="select_vehicle">Select vehicle</string>
+    <string name="no_completed_races">No completed races</string>
 
 </resources>

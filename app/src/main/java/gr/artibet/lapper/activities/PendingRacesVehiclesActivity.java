@@ -199,6 +199,7 @@ public class PendingRacesVehiclesActivity extends AppCompatActivity implements B
                             mRaceVehicleList.add(raceVehicle);
                             mAdapter.notifyItemInserted(mRaceVehicleList.size()-1);
                             mListModified = true;
+                            mTvMessage.setVisibility(View.INVISIBLE);
                         }
                     }
 

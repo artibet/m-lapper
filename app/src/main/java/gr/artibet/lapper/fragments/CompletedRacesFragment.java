@@ -64,7 +64,7 @@ public class CompletedRacesFragment extends Fragment {
     private int mVisibleItemsCount = 0;
     private int mTotalItemsCount = 0;
     private int mPrevTotalItemsCount = 0;
-    private int mViewThreshold = 10;
+    private int mViewThreshold = 0;
 
 
     public CompletedRacesFragment() {

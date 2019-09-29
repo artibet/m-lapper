@@ -46,7 +46,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/completed_race_item_updatedAt"
+            android:id="@+id/completed_race_item_startAt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
@@ -99,6 +99,15 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:src="@drawable/ic_more" />
+
+        <TextView
+            android:id="@+id/completed_races_item_duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="TextView"
+            app:layout_constraintStart_toStartOf="@+id/completed_race_item_startAt"
+            app:layout_constraintTop_toBottomOf="@+id/completed_race_item_startAt" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -53,7 +53,8 @@ public class CompletedRacesAdapter extends RecyclerView.Adapter<CompletedRacesAd
         public TextView tvMode;
         public TextView tvVehiclesNo;
         public TextView tvLaps;
-        public TextView tvUpdatedAt;
+        public TextView tvStartAt;
+        public TextView tvDuration;
 
 
         public CompletedRacesViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
@@ -68,8 +69,8 @@ public class CompletedRacesAdapter extends RecyclerView.Adapter<CompletedRacesAd
             tvMode = itemView.findViewById(R.id.completed_races_item_mode);
             tvVehiclesNo = itemView.findViewById(R.id.completed_races_item_vehiclesNo);
             tvLaps = itemView.findViewById(R.id.completed_races_item_laps);
-            tvUpdatedAt = itemView.findViewById(R.id.completed_race_item_updatedAt);
-
+            tvStartAt = itemView.findViewById(R.id.completed_race_item_startAt);
+            tvDuration = itemView.findViewById(R.id.completed_races_item_duration);
 
             // Crete popup menu
             ivMenu.setOnClickListener(new View.OnClickListener() {
@@ -161,8 +162,11 @@ public class CompletedRacesAdapter extends RecyclerView.Adapter<CompletedRacesAd
         // Laps
         holder.tvLaps.setText(mContext.getString(R.string.laps) + ": " + String.valueOf(race.getLaps()));
 
-        // Updated At
-        holder.tvUpdatedAt.setText(mContext.getString(R.string.updated) + ": " + Util.TimestampToDatetime(race.getUpdatedAtTs()));
+        // Start At
+        holder.tvStartAt.setText(mContext.getString(R.string.start_race_title) + ": " + Util.TimestampToDatetime(race.getStartTs()));
+
+        // Duration
+        holder.tvDuration.setText(mContext.getString(R.string.duration) + ": " + race.getDuration() );
 
      }
 

@@ -106,5 +106,6 @@
     <string name="race_started">Ο αγώνας %1$s ξεκίνησε!</string>
     <string name="select_vehicle">Επιλογή οχήματος</string>
     <string name="no_completed_races">Δεν υπάρχουν ολοκληρωμένοι αγώνες</string>
+    <string name="duration">Διάρκεια</string>
 
 </resources>

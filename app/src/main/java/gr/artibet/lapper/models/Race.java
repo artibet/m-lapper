@@ -71,6 +71,9 @@ public class Race {
     @SerializedName("updated_at_ts")
     private Double updatedAtTs;
 
+    @SerializedName("start_ts")
+    private Double startTs;
+
     // GETTERS
 
     public Integer getId() {
@@ -153,7 +156,9 @@ public class Race {
         return isPublic;
     }
 
-    public Double getUpdatedAtTs() {return updatedAtTs; }
+    public Double getUpdatedAtTs() { return updatedAtTs; }
+
+    public Double getStartTs() { return startTs; }
 
     // SETTERS
 
@@ -240,6 +245,8 @@ public class Race {
     public void setUpdatedAtTs(Double updatedAtTs) {
         this.updatedAtTs = updatedAtTs;
     }
+
+    public void setStartTs(Double startTs) { this.startTs = startTs; }
 
     // Check if given userId has vehicle into race
     public boolean userHasVehicleIntoRace(long userId) {

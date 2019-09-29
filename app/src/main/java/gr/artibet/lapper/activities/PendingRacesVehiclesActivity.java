@@ -237,6 +237,10 @@ public class PendingRacesVehiclesActivity extends AppCompatActivity implements B
                             mRaceVehicleList.remove(position);
                             mAdapter.notifyItemRemoved(position);
                             mListModified = true;
+                            if (mRaceVehicleList.size() == 0) {
+                                mTvMessage.setText(getResources().getString(R.string.no_vehicles));
+                                mTvMessage.setVisibility(View.VISIBLE);
+                            }
                         }
                     }
 

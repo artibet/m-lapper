@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="4dp"
+    android:layout_marginBottom="4dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="4dp">
+
+
+        <ImageView
+            android:id="@+id/inprogress_races_item_ivPublic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_people"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/inprogress_races_item_creator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:text="raceCreator"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/inprogress_races_item_tag"
+            app:layout_constraintStart_toEndOf="@+id/inprogress_races_item_tag"
+            app:layout_constraintTop_toTopOf="@+id/inprogress_races_item_tag" />
+
+        <TextView
+            android:id="@+id/inprogress_races_item_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:text="raceTag"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/inprogress_races_item_ivPublic"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/inprogress_races_item_startMethod"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="startMethod"
+            app:layout_constraintStart_toStartOf="@+id/inprogress_races_item_tag"
+            app:layout_constraintTop_toBottomOf="@+id/inprogress_races_item_tag" />
+
+        <TextView
+            android:id="@+id/inprogress_races_item_mode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="mode"
+            app:layout_constraintStart_toStartOf="@+id/inprogress_races_item_startMethod"
+            app:layout_constraintTop_toBottomOf="@+id/inprogress_races_item_startMethod" />
+
+        <TextView
+            android:id="@+id/inprogress_races_item_vehiclesNo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="vehiclesNo"
+            app:layout_constraintStart_toStartOf="@+id/inprogress_races_item_mode"
+            app:layout_constraintTop_toBottomOf="@+id/inprogress_races_item_mode" />
+
+        <TextView
+            android:id="@+id/inprogress_races_item_laps"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="4dp"
+            android:text="laps"
+            app:layout_constraintStart_toEndOf="@+id/inprogress_races_item_vehiclesNo"
+            app:layout_constraintTop_toBottomOf="@+id/inprogress_races_item_mode" />
+
+        <ImageView
+            android:id="@+id/ivMenu"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/ic_more" />
+
+        <TextView
+            android:id="@+id/inprogress_races_item_duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:text="duration"
+            app:layout_constraintBottom_toBottomOf="@+id/inprogress_races_item_creator"
+            app:layout_constraintStart_toEndOf="@+id/inprogress_races_item_creator"
+            app:layout_constraintTop_toTopOf="@+id/inprogress_races_item_creator" />
+
+        <ImageView
+            android:id="@+id/iv_inprogress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"
+            android:src="@drawable/ic_inprogress_races"
+            android:tint="#4caf50"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_inprogress"
+            app:layout_constraintStart_toEndOf="@+id/tv_inprogress"
+            app:layout_constraintTop_toTopOf="@+id/tv_inprogress" />
+
+        <ImageView
+            android:id="@+id/iv_finished"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"
+            android:src="@drawable/ic_flag_blue"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_finished"
+            app:layout_constraintStart_toEndOf="@+id/tv_finished"
+            app:layout_constraintTop_toTopOf="@+id/tv_finished" />
+
+        <ImageView
+            android:id="@+id/iv_canceled"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"
+            android:src="@drawable/ic_block_red"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_canceled"
+            app:layout_constraintStart_toEndOf="@+id/tv_canceled"
+            app:layout_constraintTop_toTopOf="@+id/tv_canceled" />
+
+        <TextView
+            android:id="@+id/tv_inprogress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textSize="18sp"
+            android:text="3"
+            app:layout_constraintStart_toStartOf="@+id/inprogress_races_item_vehiclesNo"
+            app:layout_constraintTop_toBottomOf="@+id/inprogress_races_item_vehiclesNo" />
+
+        <TextView
+            android:id="@+id/tv_canceled"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:text="0"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_inprogress"
+            app:layout_constraintStart_toEndOf="@+id/iv_inprogress"
+            app:layout_constraintTop_toTopOf="@+id/tv_inprogress" />
+
+        <TextView
+            android:id="@+id/tv_finished"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:textSize="18sp"
+            android:text="1"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_canceled"
+            app:layout_constraintStart_toEndOf="@+id/iv_canceled"
+            app:layout_constraintTop_toTopOf="@+id/tv_canceled" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

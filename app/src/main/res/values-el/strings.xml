@@ -108,5 +108,6 @@
     <string name="no_completed_races">Δεν υπάρχουν ολοκληρωμένοι αγώνες</string>
     <string name="duration">Διάρκεια</string>
     <string name="no_canceled_races">Δεν υπάρχουν ακυρωμένοι αγώνες</string>
+    <string name="cancel_race">Ακύρωση αγώνα</string>
 
 </resources>

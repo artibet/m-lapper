@@ -108,5 +108,6 @@
     <string name="no_completed_races">No completed races</string>
     <string name="duration">Duration</string>
     <string name="no_canceled_races">No canceled races</string>
+    <string name="cancel_race">Cancel race</string>
 
 </resources>

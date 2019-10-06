@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:id="@+id/item_cancel_race"
+        android:title="@string/cancel_race"
+        android:icon="@drawable/ic_block_red"
+        android:iconTint="#f44336"/>
+
+    <item
+        android:id="@+id/item_vehicles"
+        android:title="@string/vehicles"
+        android:icon="@drawable/ic_vehicle"
+        android:iconTint="#3f51b5"/>
+
+</menu>

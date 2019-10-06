@@ -13,12 +13,20 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import gr.artibet.lapper.R;
+import gr.artibet.lapper.Util;
 import gr.artibet.lapper.adapters.InProgressRacesAdapter;
 import gr.artibet.lapper.api.RetrofitClient;
+import gr.artibet.lapper.api.SocketIO;
+import gr.artibet.lapper.dialogs.ConfirmDialog;
 import gr.artibet.lapper.models.Race;
 import gr.artibet.lapper.models.RaceResponse;
 import gr.artibet.lapper.models.RaceState;
@@ -138,6 +146,48 @@ public class InProgressRacesFragment extends Fragment {
     private void cancelRace(final int position) {
 
         final Race race = mRaceList.get(position);
+
+        ConfirmDialog confirmDialog = new ConfirmDialog(getString(R.string.cancel_race_title), getString(R.string.cancel_race_confirm_message, race.getTag()));
+        confirmDialog.show(getActivity().getSupportFragmentManager(), "cancel race");
+        confirmDialog.setConfirmListener(new ConfirmDialog.ConfirmListener() {
+            @Override
+            public void onConfirm() {
+
+                String token = SharedPrefManager.getInstance(getActivity()).getToken();
+                Call<Race> call = RetrofitClient.getInstance().getApi().cancelRace(token, race.getId());
+                call.enqueue(new Callback<Race>() {
+                    @Override
+                    public void onResponse(Call<Race> call, Response<Race> response) {
+
+                        if (!response.isSuccessful()) {
+                            //Util.errorToast(SensorFormActivity.this, getString(R.string.sensor_create_failed));
+                            Util.errorToast(getActivity(), response.message());
+                        }
+                        else {
+                            Util.successToast(getActivity(), getString(R.string.race_canceled));
+
+                            // Send socket message
+                            Race canceledRace = response.body();
+                            Gson gson = new Gson();
+                            try {
+                                JSONObject jsonObj = new JSONObject(gson.toJson(canceledRace));
+                                SocketIO.getInstance().getSocket().emit("race_canceled", jsonObj);
+                                mRaceList.remove(position);
+                                mAdapter.notifyItemRemoved(position);
+                            }
+                            catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Race> call, Throwable t) {
+                        Util.errorToast(getActivity(), t.getMessage());
+                    }
+                });
+            }
+        });
 
     }
 

@@ -109,5 +109,8 @@
     <string name="duration">Duration</string>
     <string name="no_canceled_races">No canceled races</string>
     <string name="cancel_race">Cancel race</string>
+    <string name="cancel_race_title">Cancel race</string>
+    <string name="cancel_race_confirm_message">Do you want to cancel race %1$s?</string>
+    <string name="race_canceled">Race canceled successfully!</string>
 
 </resources>

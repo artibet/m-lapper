@@ -171,6 +171,14 @@ public interface ApiInterface {
             @Field("race_id") int race_id
     );
 
+    // Cancel race
+    @POST("cmd/cancel-race/")
+    @FormUrlEncoded
+    Call<Race> cancelRace(
+            @Header("Authorization") String token,
+            @Field("race_id") int race_id
+    );
+
     // Race POST (create new)
     @POST("api/races/")
     @FormUrlEncoded

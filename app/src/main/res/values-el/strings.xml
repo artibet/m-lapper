@@ -109,5 +109,8 @@
     <string name="duration">Διάρκεια</string>
     <string name="no_canceled_races">Δεν υπάρχουν ακυρωμένοι αγώνες</string>
     <string name="cancel_race">Ακύρωση αγώνα</string>
+    <string name="cancel_race_title">Ακύρωση αγώνα</string>
+    <string name="cancel_race_confirm_message">Να ακυρωθεί ο αγώνας %1$s?</string>
+    <string name="race_canceled">Ο αγώνας ακυρώθηκε με επιτυχία!</string>
 
 </resources>

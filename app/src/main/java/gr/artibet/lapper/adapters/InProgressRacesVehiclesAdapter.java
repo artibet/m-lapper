@@ -2,6 +2,7 @@ package gr.artibet.lapper.adapters;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +12,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import gr.artibet.lapper.R;
 import gr.artibet.lapper.models.RaceVehicle;
+import gr.artibet.lapper.models.RaceVehicleState;
 
 public class InProgressRacesVehiclesAdapter extends RecyclerView.Adapter<InProgressRacesVehiclesAdapter.RaceVehicleViewHolder> {
 
@@ -58,6 +62,8 @@ public class InProgressRacesVehiclesAdapter extends RecyclerView.Adapter<InProgr
         public TextView tvLap;
         public TextView tvLapIntervalLabel;
         public TextView tvLapInterval;
+        public TextView tvBestLapIntervalLabel;
+        public TextView tvBestLapInterval;
 
 
         public RaceVehicleViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
@@ -77,6 +83,8 @@ public class InProgressRacesVehiclesAdapter extends RecyclerView.Adapter<InProgr
             tvLap = itemView.findViewById(R.id.tvLap);
             tvLapIntervalLabel = itemView.findViewById(R.id.tvLapIntervalLabel);
             tvLapInterval = itemView.findViewById(R.id.tvLapInterval);
+            tvBestLapIntervalLabel = itemView.findViewById(R.id.tvBestLapIntervalLabel);
+            tvBestLapInterval = itemView.findViewById(R.id.tvBestLapInterval);
 
             // Cancel vehicle click listener
             ivCancel.setOnClickListener(new View.OnClickListener() {
@@ -100,6 +108,7 @@ public class InProgressRacesVehiclesAdapter extends RecyclerView.Adapter<InProgr
         mContext = context;
         mRaceVehicleList = raceVehicleList;
         mRaceLaps = laps;
+        sortVehicleList();
     }
 
     @NonNull
@@ -158,14 +167,30 @@ public class InProgressRacesVehiclesAdapter extends RecyclerView.Adapter<InProgr
         holder.tvLap.setText(String.valueOf(rv.getLap()) + "/" + mRaceLaps);
 
         // Lap interval - when passing start sensor
-        if (rv.getLastSensor().isStart() && rv.getLap() > 1) {
-            holder.tvLapIntervalLabel.setText(mContext.getString(R.string.lap_interval) + ":");
-            holder.tvLapInterval.setText(rv.getLapIntervalString());
+        holder.tvLapIntervalLabel.setText(mContext.getString(R.string.lap_interval) + ":");
+        holder.tvLapInterval.setText(rv.getLapIntervalString());
+        holder.tvBestLapIntervalLabel.setText(mContext.getString(R.string.best_lap_interval) + ":");
+        holder.tvBestLapInterval.setText(rv.getBestLapIntervalString());
+
+        // Set status icon and remove delete button if finished or canceled
+        String uri = null;
+        switch (rv.getState().getId()) {
+            case RaceVehicleState.STATE_RUNNING:
+                uri = "@drawable/ic_flash_green";
+            break;
+            case RaceVehicleState.STATE_CANCELED:
+                uri = "@drawable/ic_block_red";
+                holder.ivCancel.setVisibility(View.INVISIBLE);
+                break;
+            case RaceVehicleState.STATE_FINISHED:
+                uri = "@drawable/ic_flag_blue";
+                holder.ivCancel.setVisibility(View.INVISIBLE);
+                break;
         }
-        else {
-            holder.tvLapIntervalLabel.setVisibility(View.INVISIBLE);
-            holder.tvLapInterval.setVisibility(View.INVISIBLE);
-        }
+        int imageResource = mContext.getResources().getIdentifier(uri, null, mContext.getPackageName());
+        Drawable res = mContext.getResources().getDrawable(imageResource);
+        holder.ivStatus.setImageDrawable(res);
+
 
      }
 
@@ -176,6 +201,28 @@ public class InProgressRacesVehiclesAdapter extends RecyclerView.Adapter<InProgr
 
     public void setRaceVehicleList(List<RaceVehicle> raceVehicleList) {
         mRaceVehicleList = raceVehicleList;
+        sortVehicleList();
         notifyDataSetChanged();
+    }
+
+
+    // Sort Vehicle List
+    private void sortVehicleList() {
+        Collections.sort(mRaceVehicleList, new Comparator<RaceVehicle>() {
+            @Override
+            public int compare(RaceVehicle lhs, RaceVehicle rhs) {
+                int lhsState = lhs.getState().getId();
+                int rhsState = rhs.getState().getId();
+                if (lhsState == RaceVehicleState.STATE_FINISHED && rhsState != RaceVehicleState.STATE_FINISHED) return -1;
+                if (lhsState != RaceVehicleState.STATE_FINISHED && rhsState == RaceVehicleState.STATE_FINISHED) return 1;
+                if (lhsState == RaceVehicleState.STATE_CANCELED && rhsState != RaceVehicleState.STATE_CANCELED) return 1;
+                if (lhsState != RaceVehicleState.STATE_CANCELED && rhsState == RaceVehicleState.STATE_CANCELED) return -1;
+                if (lhs.getLap() > rhs.getLap()) return -1;
+                if (lhs.getLap() < rhs.getLap()) return 1;
+                if (lhs.getLastSensor().getAa() > rhs.getLastSensor().getAa()) return -1;
+                if (lhs.getLastSensor().getAa() < rhs.getLastSensor().getAa()) return 1;
+                return (int)(lhs.getLastTs() - rhs.getLastTs());
+            }
+        });
     }
 }

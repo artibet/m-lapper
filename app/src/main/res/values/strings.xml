@@ -114,5 +114,6 @@
     <string name="race_canceled">Race canceled successfully!</string>
     <string name="start">Start at</string>
     <string name="best_time">Best time</string>
+    <string name="best_lap_interval">Best lap</string>
 
 </resources>

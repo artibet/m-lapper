@@ -29,7 +29,6 @@
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:src="@drawable/ic_delete"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -167,6 +166,29 @@
             android:textSize="16sp"
             app:layout_constraintStart_toEndOf="@+id/tvBestSectorIntervalLabel"
             app:layout_constraintTop_toTopOf="@+id/tvBestSectorIntervalLabel" />
+
+        <TextView
+            android:id="@+id/tvBestLapInterval"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"
+            android:text="Best lap interval"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvBestLapIntervalLabel"
+            app:layout_constraintStart_toEndOf="@+id/tvBestLapIntervalLabel"
+            app:layout_constraintTop_toTopOf="@+id/tvBestLapIntervalLabel" />
+
+        <TextView
+            android:id="@+id/tvBestLapIntervalLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Best Lap:"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/race_vehicle_item_tag"
+            app:layout_constraintTop_toBottomOf="@+id/tvLapLabel" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

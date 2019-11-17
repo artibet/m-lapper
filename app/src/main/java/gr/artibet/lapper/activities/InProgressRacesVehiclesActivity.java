@@ -1,6 +1,9 @@
 package gr.artibet.lapper.activities;
 
 import android.content.Intent;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,7 +17,9 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.github.nkzawa.emitter.Emitter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,8 +29,10 @@ import gr.artibet.lapper.Util;
 import gr.artibet.lapper.adapters.InProgressRacesVehiclesAdapter;
 import gr.artibet.lapper.adapters.PendingRacesVehiclesAdapter;
 import gr.artibet.lapper.api.RetrofitClient;
+import gr.artibet.lapper.api.SocketIO;
 import gr.artibet.lapper.dialogs.ConfirmDialog;
 import gr.artibet.lapper.dialogs.SelectVehicleDialog;
+import gr.artibet.lapper.models.LiveData;
 import gr.artibet.lapper.models.RaceVehicle;
 import gr.artibet.lapper.models.Vehicle;
 import gr.artibet.lapper.storage.SharedPrefManager;
@@ -93,6 +100,16 @@ public class InProgressRacesVehiclesActivity extends AppCompatActivity {
         // Fetch data from API and return
         fetchRaceVehicles();
 
+        // Subscribe on "checkpoint" socket message
+        SocketIO.getInstance().getSocket().on("checkpoint", onCheckPoint);
+
+    }
+
+    // Unsubscribe from socket events on destroy
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        SocketIO.getInstance().getSocket().off("checkpoint", onCheckPoint);
     }
 
     // Fetch race vehicles
@@ -144,6 +161,7 @@ public class InProgressRacesVehiclesActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+
         super.onBackPressed();
     }
 
@@ -153,4 +171,56 @@ public class InProgressRacesVehiclesActivity extends AppCompatActivity {
 
         // TODO: Implement vehicle cancelation
     }
+
+    // On checkpoint socket message
+    private Emitter.Listener onCheckPoint = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+           runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Gson gson = new Gson();
+                    LiveData ld = gson.fromJson(args[0].toString(), LiveData.class);
+
+                    // find rv for ld
+                    int pos = -1;
+                    for (int i=0; i<mRaceVehicleList.size(); i++) {
+                        if (mRaceVehicleList.get(i).getId() == ld.getRvId()) {
+                            pos = i;
+                            break;
+                        }
+                    }
+
+                    // If rv exists into list
+                    if (pos > -1) {
+                        RaceVehicle rv = mRaceVehicleList.get(pos);
+
+                        rv.setState(ld.getRvState());
+                        rv.setPrevSensor(ld.getPrevSensor());
+                        rv.setLastSensor(ld.getLastSensor());
+                        rv.setPrevTs(ld.getPrevTs());
+                        rv.setLastTs(ld.getLastTs());
+                        rv.setIntervalString(ld.getIntervalString());
+                        rv.setBestIntervalString(ld.getBestIntervalString());
+                        rv.setLap(ld.getLap());
+                        rv.setLapIntervalString(ld.getLapIntervalString());
+                        rv.setBestLapIntervalString(ld.getBestLapIntervalString());
+
+                        // Set list again for sorting
+                        mAdapter.setRaceVehicleList(mRaceVehicleList);
+
+                        // Find rv into sorted list for animation
+                        // TODO: animate changed item
+                        for (int i=0; i < mRaceVehicleList.size(); i++) {
+                            rv = mRaceVehicleList.get(i);
+                            if (rv.getId() == ld.getRvId()) {
+                                mAdapter.notifyItemChanged(i);
+                                break;
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    };
 }

@@ -155,4 +155,90 @@ public class RaceVehicle {
     public String getDriver() {
         return driver;
     }
+
+    // SETTERS
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setRaceId(long raceId) {
+        this.raceId = raceId;
+    }
+
+    public void setRaceCreatorId(long raceCreatorId) {
+        this.raceCreatorId = raceCreatorId;
+    }
+
+    public void setRaceIsPublic(boolean raceIsPublic) {
+        this.raceIsPublic = raceIsPublic;
+    }
+
+    public void setRaceTag(String raceTag) {
+        this.raceTag = raceTag;
+    }
+
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
+    }
+
+    public void setState(RaceVehicleState state) {
+        this.state = state;
+    }
+
+    public void setPrevSensor(Sensor prevSensor) {
+        this.prevSensor = prevSensor;
+    }
+
+    public void setLastSensor(Sensor lastSensor) {
+        this.lastSensor = lastSensor;
+    }
+
+    public void setStartTs(Double startTs) {
+        this.startTs = startTs;
+    }
+
+    public void setFinishTs(Double finishTs) {
+        this.finishTs = finishTs;
+    }
+
+    public void setPrevTs(Double prevTs) {
+        this.prevTs = prevTs;
+    }
+
+    public void setLastTs(Double lastTs) {
+        this.lastTs = lastTs;
+    }
+
+    public void setIntervalString(String intervalString) {
+        IntervalString = intervalString;
+    }
+
+    public void setBestIntervalString(String bestIntervalString) {
+        this.bestIntervalString = bestIntervalString;
+    }
+
+    public void setLap(int lap) {
+        this.lap = lap;
+    }
+
+    public void setLapIntervalString(String lapIntervalString) {
+        this.lapIntervalString = lapIntervalString;
+    }
+
+    public void setBestLapIntervalString(String bestLapIntervalString) {
+        this.bestLapIntervalString = bestLapIntervalString;
+    }
+
+    public void setUflag(boolean uflag) {
+        this.uflag = uflag;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
+
+    public void setDriver(String driver) {
+        this.driver = driver;
+    }
 }

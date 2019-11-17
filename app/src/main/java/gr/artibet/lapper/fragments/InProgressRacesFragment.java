@@ -88,7 +88,6 @@ public class InProgressRacesFragment extends Fragment {
 
         });
 
-
         // Fetch data from API and return
         fetchRaces();
 

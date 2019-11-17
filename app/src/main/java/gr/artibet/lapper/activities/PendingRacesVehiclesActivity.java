@@ -146,8 +146,6 @@ public class PendingRacesVehiclesActivity extends AppCompatActivity implements B
     }
 
     // Override onBackPressed to force MainActivity to refresh
-
-
     @Override
     public void onBackPressed() {
         if (mListModified) {

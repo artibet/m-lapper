@@ -207,7 +207,7 @@ public class InProgressRacesVehiclesAdapter extends RecyclerView.Adapter<InProgr
 
 
     // Sort Vehicle List
-    private void sortVehicleList() {
+    public void sortVehicleList() {
         Collections.sort(mRaceVehicleList, new Comparator<RaceVehicle>() {
             @Override
             public int compare(RaceVehicle lhs, RaceVehicle rhs) {

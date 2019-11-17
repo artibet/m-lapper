@@ -136,7 +136,7 @@ public class CanceledRacesFragment extends Fragment {
         Call<RaceResponse> call = RetrofitClient
                 .getInstance()
                 .getApi()
-                .getPagedRaces(SharedPrefManager.getInstance(getActivity()).getToken(), RaceState.STATE_CANCELED, mPage, mPageSize);
+                .getPagedRaces(SharedPrefManager.getInstance(getActivity()).getToken(), RaceState.STATE_CANCELED, mPage, mPageSize, "-start_dt");
 
         call.enqueue(new Callback<RaceResponse>() {
             @Override
@@ -244,7 +244,7 @@ public class CanceledRacesFragment extends Fragment {
         Call<RaceResponse> call = RetrofitClient
                 .getInstance()
                 .getApi()
-                .getPagedRaces(SharedPrefManager.getInstance(getActivity()).getToken(), RaceState.STATE_CANCELED, mPage, mPageSize);
+                .getPagedRaces(SharedPrefManager.getInstance(getActivity()).getToken(), RaceState.STATE_CANCELED, mPage, mPageSize, "-start_dt");
 
         call.enqueue(new Callback<RaceResponse>() {
             @Override

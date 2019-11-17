@@ -12,11 +12,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import gr.artibet.lapper.R;
 import gr.artibet.lapper.Util;
 import gr.artibet.lapper.models.Race;
+import gr.artibet.lapper.models.RaceVehicle;
+import gr.artibet.lapper.models.RaceVehicleState;
 
 public class CompletedRacesAdapter extends RecyclerView.Adapter<CompletedRacesAdapter.CompletedRacesViewHolder> {
 
@@ -179,5 +183,6 @@ public class CompletedRacesAdapter extends RecyclerView.Adapter<CompletedRacesAd
         mRaceList = raceList;
         notifyDataSetChanged();
     }
+
 
 }

@@ -149,7 +149,7 @@ public class CompletedRacesFragment extends Fragment {
         Call<RaceResponse> call = RetrofitClient
                 .getInstance()
                 .getApi()
-                .getPagedRaces(SharedPrefManager.getInstance(getActivity()).getToken(), RaceState.STATE_COMPLETED, mPage, mPageSize);
+                .getPagedRaces(SharedPrefManager.getInstance(getActivity()).getToken(), RaceState.STATE_COMPLETED, mPage, mPageSize, "-start_dt");
 
         call.enqueue(new Callback<RaceResponse>() {
             @Override
@@ -257,7 +257,7 @@ public class CompletedRacesFragment extends Fragment {
         Call<RaceResponse> call = RetrofitClient
                 .getInstance()
                 .getApi()
-                .getPagedRaces(SharedPrefManager.getInstance(getActivity()).getToken(), RaceState.STATE_COMPLETED, mPage, mPageSize);
+                .getPagedRaces(SharedPrefManager.getInstance(getActivity()).getToken(), RaceState.STATE_COMPLETED, mPage, mPageSize, "-start_dt");
 
         call.enqueue(new Callback<RaceResponse>() {
             @Override

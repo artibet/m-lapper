@@ -140,7 +140,8 @@ public interface ApiInterface {
             @Header("Authorization") String token,
             @Query("state") int stateId,
             @Query("page") int page,
-            @Query("page_size") int pageSize
+            @Query("page_size") int pageSize,
+            @Query("ordering") String ordering
     );
 
     // Race DELETE

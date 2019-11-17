@@ -98,7 +98,7 @@ public class CompletedRacesFragment extends Fragment {
 
             @Override
             public void onViewVehicles(int position) {
-                raceVehicles(position);
+                viewVehicles(position);
             }
         });
 
@@ -232,7 +232,7 @@ public class CompletedRacesFragment extends Fragment {
     }
 
     // Race Vehicles
-    private void raceVehicles(int position) {
+    private void viewVehicles(int position) {
 
         // TODO: Show completed race vehicles
         /*

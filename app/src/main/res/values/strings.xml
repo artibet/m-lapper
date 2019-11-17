@@ -113,5 +113,6 @@
     <string name="cancel_race_confirm_message">Do you want to cancel race %1$s?</string>
     <string name="race_canceled">Race canceled successfully!</string>
     <string name="start">Start at</string>
+    <string name="best_time">Best time</string>
 
 </resources>

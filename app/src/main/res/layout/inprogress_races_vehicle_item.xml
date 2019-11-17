@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="4dp"
+    android:layout_marginBottom="4dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="4dp">
+
+
+        <ImageView
+            android:id="@+id/race_vehicle_item_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:src="@drawable/ic_done_green"
+            app:layout_constraintBottom_toBottomOf="@+id/race_vehicle_item_owner"
+            app:layout_constraintStart_toEndOf="@+id/race_vehicle_item_owner"
+            app:layout_constraintTop_toTopOf="@+id/race_vehicle_item_owner" />
+
+        <ImageView
+            android:id="@+id/race_vehicle_item_delete"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_delete"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/race_vehicle_item_owner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:text="vehicleOwner"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/race_vehicle_item_tag"
+            app:layout_constraintStart_toEndOf="@+id/race_vehicle_item_tag"
+            app:layout_constraintTop_toTopOf="@+id/race_vehicle_item_tag" />
+
+        <TextView
+            android:id="@+id/race_vehicle_item_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:text="vehicleTag"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/tvAa"
+            app:layout_constraintTop_toTopOf="@+id/tvAa" />
+
+        <TextView
+            android:id="@+id/race_vehicle_item_driver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="vehicleDriver"
+            app:layout_constraintStart_toStartOf="@+id/race_vehicle_item_tag"
+            app:layout_constraintTop_toBottomOf="@+id/race_vehicle_item_tag" />
+
+        <TextView
+            android:id="@+id/tvSector"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Sector"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/race_vehicle_item_tag"
+            app:layout_constraintTop_toBottomOf="@+id/race_vehicle_item_driver" />
+
+        <TextView
+            android:id="@+id/tvSectorInterval"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:text="Sector interval"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvSector"
+            app:layout_constraintStart_toEndOf="@+id/tvSector"
+            app:layout_constraintTop_toTopOf="@+id/tvSector" />
+
+        <TextView
+            android:id="@+id/tvLapLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/lap"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/race_vehicle_item_tag"
+            app:layout_constraintTop_toBottomOf="@+id/tvBestSectorInterval" />
+
+        <TextView
+            android:id="@+id/tvLap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:text="lap/laps"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@+id/tvLapLabel"
+            app:layout_constraintTop_toTopOf="@+id/tvLapLabel" />
+
+        <TextView
+            android:id="@+id/tvLapIntervalLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:text="@string/lap_interval"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/tvLap"
+            app:layout_constraintTop_toTopOf="@+id/tvLap" />
+
+        <TextView
+            android:id="@+id/tvLapInterval"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:text="Lap interval"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@+id/tvLapIntervalLabel"
+            app:layout_constraintTop_toTopOf="@+id/tvLapIntervalLabel" />
+
+        <TextView
+            android:id="@+id/tvAa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"
+            android:text="aa"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvBestSectorIntervalLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:text="Best time"
+            app:layout_constraintStart_toStartOf="@+id/race_vehicle_item_tag"
+            app:layout_constraintTop_toBottomOf="@+id/tvSectorInterval" />
+
+        <TextView
+            android:id="@+id/tvBestSectorInterval"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:text="best sector interval"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@+id/tvBestSectorIntervalLabel"
+            app:layout_constraintTop_toTopOf="@+id/tvBestSectorIntervalLabel" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

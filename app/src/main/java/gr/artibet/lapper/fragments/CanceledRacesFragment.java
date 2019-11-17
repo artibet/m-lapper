@@ -85,7 +85,7 @@ public class CanceledRacesFragment extends Fragment {
 
             @Override
             public void onViewVehicles(int position) {
-                raceVehicles(position);
+                viewVehicles(position);
             }
         });
 
@@ -219,7 +219,7 @@ public class CanceledRacesFragment extends Fragment {
     }
 
     // Race Vehicles
-    private void raceVehicles(int position) {
+    private void viewVehicles(int position) {
 
         // TODO: Show canceled race vehicles
         /*

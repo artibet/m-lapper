@@ -1,6 +1,7 @@
 package gr.artibet.lapper.fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -23,7 +24,9 @@ import java.util.List;
 
 import gr.artibet.lapper.R;
 import gr.artibet.lapper.Util;
+import gr.artibet.lapper.activities.InProgressRacesVehiclesActivity;
 import gr.artibet.lapper.adapters.InProgressRacesAdapter;
+import gr.artibet.lapper.adapters.InProgressRacesVehiclesAdapter;
 import gr.artibet.lapper.api.RetrofitClient;
 import gr.artibet.lapper.api.SocketIO;
 import gr.artibet.lapper.dialogs.ConfirmDialog;
@@ -194,6 +197,15 @@ public class InProgressRacesFragment extends Fragment {
 
     // View Race vehicles
     private void viewVehicles(int position) {
+        // TODO: Show inprogress race vehicles
+
+        // Get race ID and tag and open InprogressRacesVehiclesActivity
+        Race race = mRaceList.get(position);
+        Intent intent = new Intent(getActivity(), InProgressRacesVehiclesActivity.class);
+        intent.putExtra("raceId", race.getId());
+        intent.putExtra("raceTag", race.getTag());
+        intent.putExtra("laps", race.getLaps());
+        startActivity(intent);
 
     }
 

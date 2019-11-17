@@ -197,9 +197,8 @@ public class InProgressRacesFragment extends Fragment {
 
     // View Race vehicles
     private void viewVehicles(int position) {
-        // TODO: Show inprogress race vehicles
 
-        // Get race ID and tag and open InprogressRacesVehiclesActivity
+        // Get race ID tag and laps from race and open InprogressRacesVehiclesActivity
         Race race = mRaceList.get(position);
         Intent intent = new Intent(getActivity(), InProgressRacesVehiclesActivity.class);
         intent.putExtra("raceId", race.getId());

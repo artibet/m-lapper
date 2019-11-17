@@ -176,7 +176,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
         holder.mFullName.setText(user.getFullName());
 
         // DateJoined
-        holder.mDateJoined.setText(mContext.getString(R.string.date_joined)+ ": " + Util.TimestampToDatetime(user.getDateJoinedTs()));
+        holder.mDateJoined.setText(mContext.getString(R.string.date_joined)+ ": " + Util.TimestampToDatetime(user.getDateJoinedTs(), false));
 
      }
 

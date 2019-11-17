@@ -1,10 +1,12 @@
 package gr.artibet.lapper.adapters;
 
 import android.content.Context;
+import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -49,6 +51,7 @@ public class InProgressRacesAdapter extends RecyclerView.Adapter<InProgressRaces
 
         public TextView tvTag;
         public TextView tvCreator;
+        public TextView tvStart;
         public TextView tvStartMethod;
         public TextView tvMode;
         public TextView tvVehiclesNo;
@@ -56,6 +59,7 @@ public class InProgressRacesAdapter extends RecyclerView.Adapter<InProgressRaces
         public TextView tvInProgress;
         public TextView tvCanceled;
         public TextView tvFinished;
+        public Chronometer crDuration;
 
 
         public InProgressRacesViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
@@ -66,6 +70,7 @@ public class InProgressRacesAdapter extends RecyclerView.Adapter<InProgressRaces
 
             tvTag = itemView.findViewById(R.id.inprogress_races_item_tag);
             tvCreator = itemView.findViewById(R.id.inprogress_races_item_creator);
+            tvStart = itemView.findViewById(R.id.inprogress_races_item_start);
             tvStartMethod = itemView.findViewById(R.id.inprogress_races_item_startMethod);
             tvMode = itemView.findViewById(R.id.inprogress_races_item_mode);
             tvVehiclesNo = itemView.findViewById(R.id.inprogress_races_item_vehiclesNo);
@@ -73,6 +78,7 @@ public class InProgressRacesAdapter extends RecyclerView.Adapter<InProgressRaces
             tvInProgress = itemView.findViewById(R.id.tv_inprogress);
             tvCanceled = itemView.findViewById(R.id.tv_canceled);
             tvFinished = itemView.findViewById(R.id.tv_finished);
+            crDuration = itemView.findViewById(R.id.inprogress_races_item_duration);
 
             // Crete popup menu
             ivMenu.setOnClickListener(new View.OnClickListener() {
@@ -152,7 +158,8 @@ public class InProgressRacesAdapter extends RecyclerView.Adapter<InProgressRaces
         // creator
         holder.tvCreator.setText("(" + race.getCreator().getUsername() + ")");
 
-        // Start Method
+        // Start datetime and method
+        holder.tvStart.setText(mContext.getString(R.string.start) + ": " + Util.TimestampToDatetime(race.getStartTs(), true));
         holder.tvStartMethod.setText(mContext.getString(R.string.start_method) + ": " + race.getStartMethod().getDescription());
 
         // Mode
@@ -172,6 +179,14 @@ public class InProgressRacesAdapter extends RecyclerView.Adapter<InProgressRaces
 
         // Finished vehicles
         holder.tvFinished.setText(String.valueOf(race.getFinishedVehicles()));
+
+        // Start duration cronometer
+        long start_ts_mills = (long)(race.getStartTs() * 1000);
+        long elapsedRealtimeOffset = System.currentTimeMillis() - SystemClock.elapsedRealtime();
+        holder.crDuration.setBase(start_ts_mills - elapsedRealtimeOffset);
+        holder.crDuration.setFormat("%s");
+        holder.crDuration.start();
+
 
      }
 

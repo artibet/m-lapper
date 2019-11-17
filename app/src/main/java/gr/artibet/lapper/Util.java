@@ -69,14 +69,21 @@ public class Util {
 
     // ---------------------------------------------------------------------------------------
     // Convert timestamp to DD/MM/YYYY, HH:mm:ss.mmm
+    // IF seconds is true show HH:mm:ss else HH:mm (defalute is false)
     // ---------------------------------------------------------------------------------------
-    public static String TimestampToDatetime(Double timestamp) {
+    public static String TimestampToDatetime(Double timestamp, boolean seconds) {
         if (timestamp == null) return "";
         long timeMills = (long)(timestamp * 1000);
         Calendar cal = Calendar.getInstance();
         cal.setTimeInMillis(timeMills);
         TimeZone tz = cal.getTimeZone();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy, HH:mm");
+        SimpleDateFormat sdf = null;
+        if (seconds) {
+            sdf = new SimpleDateFormat("dd/MM/yyyy, HH:mm:ss");
+        }
+        else {
+            sdf = new SimpleDateFormat("dd/MM/yyyy, HH:mm");
+        }
         sdf.setTimeZone(tz);
         return sdf.format(timeMills);
     }

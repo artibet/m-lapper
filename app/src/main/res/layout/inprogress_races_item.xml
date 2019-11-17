@@ -21,6 +21,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <Chronometer
+            android:id="@+id/inprogress_races_item_duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@+id/inprogress_races_item_creator"
+            app:layout_constraintTop_toTopOf="@+id/inprogress_races_item_creator" />
+
         <TextView
             android:id="@+id/inprogress_races_item_creator"
             android:layout_width="wrap_content"
@@ -46,13 +56,23 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/inprogress_races_item_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="start"
+            app:layout_constraintStart_toStartOf="@+id/inprogress_races_item_tag"
+            app:layout_constraintTop_toBottomOf="@+id/inprogress_races_item_tag" />
+
+
+        <TextView
             android:id="@+id/inprogress_races_item_startMethod"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="startMethod"
+            android:text="start method"
             app:layout_constraintStart_toStartOf="@+id/inprogress_races_item_tag"
-            app:layout_constraintTop_toBottomOf="@+id/inprogress_races_item_tag" />
+            app:layout_constraintTop_toBottomOf="@+id/inprogress_races_item_start" />
 
         <TextView
             android:id="@+id/inprogress_races_item_mode"
@@ -60,7 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="mode"
-            app:layout_constraintStart_toStartOf="@+id/inprogress_races_item_startMethod"
+            app:layout_constraintStart_toStartOf="@+id/inprogress_races_item_tag"
             app:layout_constraintTop_toBottomOf="@+id/inprogress_races_item_startMethod" />
 
         <TextView
@@ -69,7 +89,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="vehiclesNo"
-            app:layout_constraintStart_toStartOf="@+id/inprogress_races_item_mode"
+            app:layout_constraintStart_toStartOf="@+id/inprogress_races_item_tag"
             app:layout_constraintTop_toBottomOf="@+id/inprogress_races_item_mode" />
 
         <TextView
@@ -90,17 +110,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:src="@drawable/ic_more" />
-
-        <TextView
-            android:id="@+id/inprogress_races_item_duration"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:text="duration"
-            app:layout_constraintBottom_toBottomOf="@+id/inprogress_races_item_creator"
-            app:layout_constraintStart_toEndOf="@+id/inprogress_races_item_creator"
-            app:layout_constraintTop_toTopOf="@+id/inprogress_races_item_creator" />
 
         <ImageView
             android:id="@+id/iv_inprogress"

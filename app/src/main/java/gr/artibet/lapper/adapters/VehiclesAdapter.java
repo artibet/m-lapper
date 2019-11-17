@@ -121,7 +121,7 @@ public class VehiclesAdapter extends RecyclerView.Adapter<VehiclesAdapter.Vehicl
         holder.tvDriver.setText(mContext.getString(R.string.driver)+ ": " + vehicle.getDriver());
 
         // Updated At
-        holder.tvUpdatedAt.setText(mContext.getString(R.string.updated) + ": " + Util.TimestampToDatetime(vehicle.getUpdatedAtTs()));
+        holder.tvUpdatedAt.setText(mContext.getString(R.string.updated) + ": " + Util.TimestampToDatetime(vehicle.getUpdatedAtTs(), false));
 
         // status
         if (vehicle.isActive()) {

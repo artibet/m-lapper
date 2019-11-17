@@ -198,7 +198,7 @@ public class PendingRacesAdapter extends RecyclerView.Adapter<PendingRacesAdapte
         holder.tvLaps.setText(mContext.getString(R.string.laps) + ": " + String.valueOf(race.getLaps()));
 
         // Updated At
-        holder.tvUpdatedAt.setText(mContext.getString(R.string.updated) + ": " + Util.TimestampToDatetime(race.getUpdatedAtTs()));
+        holder.tvUpdatedAt.setText(mContext.getString(R.string.updated) + ": " + Util.TimestampToDatetime(race.getUpdatedAtTs(), false));
 
      }
 

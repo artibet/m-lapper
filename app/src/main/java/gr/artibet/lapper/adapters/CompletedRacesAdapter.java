@@ -163,7 +163,7 @@ public class CompletedRacesAdapter extends RecyclerView.Adapter<CompletedRacesAd
         holder.tvLaps.setText(mContext.getString(R.string.laps) + ": " + String.valueOf(race.getLaps()));
 
         // Start At
-        holder.tvStartAt.setText(mContext.getString(R.string.start_race_title) + ": " + Util.TimestampToDatetime(race.getStartTs()));
+        holder.tvStartAt.setText(mContext.getString(R.string.start_race_title) + ": " + Util.TimestampToDatetime(race.getStartTs(), false));
 
         // Duration
         holder.tvDuration.setText(mContext.getString(R.string.duration) + ": " + race.getDuration() );

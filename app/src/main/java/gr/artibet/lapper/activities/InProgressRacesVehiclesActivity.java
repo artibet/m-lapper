@@ -162,7 +162,13 @@ public class InProgressRacesVehiclesActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-        super.onBackPressed();
+        // Refresh InProgress Races into MainActivity
+        Intent intent = new Intent(InProgressRacesVehiclesActivity.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.putExtra("fragment", MainActivity.INPROGRESS_RACES);
+        startActivity(intent);
+
+        //super.onBackPressed();
     }
 
 

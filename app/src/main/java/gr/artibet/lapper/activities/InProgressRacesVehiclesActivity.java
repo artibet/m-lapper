@@ -184,7 +184,7 @@ public class InProgressRacesVehiclesActivity extends AppCompatActivity {
 
                     // find rv for ld
                     int pos = -1;
-                    for (int i=0; i<mRaceVehicleList.size(); i++) {
+                    for (int i=0; i < mRaceVehicleList.size(); i++) {
                         if (mRaceVehicleList.get(i).getId() == ld.getRvId()) {
                             pos = i;
                             break;
@@ -206,11 +206,30 @@ public class InProgressRacesVehiclesActivity extends AppCompatActivity {
                         rv.setLapIntervalString(ld.getLapIntervalString());
                         rv.setBestLapIntervalString(ld.getBestLapIntervalString());
 
+                        // Notify item changed and resort list
+                        mAdapter.notifyItemChanged(pos);
+                        mAdapter.sortVehicleList();
+
+                        // If item has changed position, notify
+                        for (int i=0; i < mRaceVehicleList.size(); i++) {
+                            RaceVehicle rv2 = mRaceVehicleList.get(i);
+                            if (rv2.getId() == rv.getId()) {
+                                if (pos != i) {
+                                    mAdapter.notifyItemMoved(pos, i);
+                                    mAdapter.notifyItemChanged(i);
+                                    mAdapter.notifyItemChanged(pos);
+                                    break;
+                                }
+                            }
+                        }
+
+
                         // Set list again for sorting
-                        mAdapter.setRaceVehicleList(mRaceVehicleList);
+                        //mAdapter.setRaceVehicleList(mRaceVehicleList);
 
                         // Find rv into sorted list for animation
                         // TODO: animate changed item
+                        /*
                         for (int i=0; i < mRaceVehicleList.size(); i++) {
                             rv = mRaceVehicleList.get(i);
                             if (rv.getId() == ld.getRvId()) {
@@ -218,6 +237,7 @@ public class InProgressRacesVehiclesActivity extends AppCompatActivity {
                                 break;
                             }
                         }
+                        */
                     }
                 }
             });

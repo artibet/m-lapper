@@ -152,6 +152,7 @@ public class InProgressRacesVehiclesAdapter extends RecyclerView.Adapter<InProgr
         }
         else {
             sector = rv.getPrevSensor().getTag() + " - " + rv.getLastSensor().getTag() + ":";
+            holder.tvSectorInterval.setVisibility(View.VISIBLE);
         }
         holder.tvSector.setText(sector);
 

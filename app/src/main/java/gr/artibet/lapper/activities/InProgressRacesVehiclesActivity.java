@@ -21,6 +21,9 @@ import com.github.nkzawa.emitter.Emitter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +36,7 @@ import gr.artibet.lapper.api.SocketIO;
 import gr.artibet.lapper.dialogs.ConfirmDialog;
 import gr.artibet.lapper.dialogs.SelectVehicleDialog;
 import gr.artibet.lapper.models.LiveData;
+import gr.artibet.lapper.models.Race;
 import gr.artibet.lapper.models.RaceVehicle;
 import gr.artibet.lapper.models.Vehicle;
 import gr.artibet.lapper.storage.SharedPrefManager;
@@ -93,15 +97,16 @@ public class InProgressRacesVehiclesActivity extends AppCompatActivity {
         mAdapter.setOnItemClickListener(new InProgressRacesVehiclesAdapter.OnItemClickListener() {
             @Override
             public void onCancel(int position) {
-
+                cancelVehicle(position);
             }
         });
 
         // Fetch data from API and return
         fetchRaceVehicles();
 
-        // Subscribe on "checkpoint" socket message
+        // Subscribe on "checkpoint" and "cancel_vehicle" socket message
         SocketIO.getInstance().getSocket().on("checkpoint", onCheckPoint);
+        SocketIO.getInstance().getSocket().on("cancel_vehicle", onCancelVehicle);
 
     }
 
@@ -175,7 +180,51 @@ public class InProgressRacesVehiclesActivity extends AppCompatActivity {
     // Delete vehicle from the race
     private void cancelVehicle(final int position) {
 
-        // TODO: Implement vehicle cancelation
+        final RaceVehicle rv = mRaceVehicleList.get(position);
+
+        ConfirmDialog confirmDialog = new ConfirmDialog(getString(R.string.cancel_vehicle_title), getString(R.string.cancel_vehicle_confirm_message, rv.getVehicle().getTag(), rv.getRaceTag()));
+        confirmDialog.show(getSupportFragmentManager(), "cancel vehicle");
+        confirmDialog.setConfirmListener(new ConfirmDialog.ConfirmListener() {
+            @Override
+            public void onConfirm() {
+
+                String token = SharedPrefManager.getInstance(InProgressRacesVehiclesActivity.this).getToken();
+                Call<RaceVehicle> call = RetrofitClient.getInstance().getApi().cancelVehicle(token, rv.getId());
+                call.enqueue(new Callback<RaceVehicle>() {
+                    @Override
+                    public void onResponse(Call<RaceVehicle> call, Response<RaceVehicle> response) {
+
+                        if (!response.isSuccessful()) {
+                            //Util.errorToast(SensorFormActivity.this, getString(R.string.sensor_create_failed));
+                            Util.errorToast(InProgressRacesVehiclesActivity.this, response.message());
+                        }
+                        else {
+                            Util.successToast(InProgressRacesVehiclesActivity.this, getString(R.string.vehicle_canceled, rv.getVehicle().getTag()));
+
+                            // Send socket message
+                            RaceVehicle canceledRv = response.body();
+                            Gson gson = new Gson();
+                            try {
+                                JSONObject jsonObj = new JSONObject(gson.toJson(canceledRv));
+                                SocketIO.getInstance().getSocket().emit("cancel_vehicle", jsonObj);
+                                mRaceVehicleList.set(position, canceledRv);
+                                mAdapter.notifyItemChanged(position);
+                            }
+                            catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<RaceVehicle> call, Throwable t) {
+                        Util.errorToast(InProgressRacesVehiclesActivity.this, t.getMessage());
+                    }
+                });
+            }
+        });
+
+
     }
 
     // On checkpoint socket message
@@ -229,21 +278,50 @@ public class InProgressRacesVehiclesActivity extends AppCompatActivity {
                             }
                         }
 
+                    }
+                }
+            });
+        }
+    };
 
-                        // Set list again for sorting
-                        //mAdapter.setRaceVehicleList(mRaceVehicleList);
+    // On cancel vehicle socket message
+    private Emitter.Listener onCancelVehicle = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Gson gson = new Gson();
+                    RaceVehicle rv = gson.fromJson(args[0].toString(), RaceVehicle.class);
 
-                        // Find rv into sorted list for animation
-                        // TODO: animate changed item
-                        /*
+                    // find rv into the list
+                    int pos = -1;
+                    for (int i=0; i < mRaceVehicleList.size(); i++) {
+                        if (mRaceVehicleList.get(i).getId() == rv.getId()) {
+                            pos = i;
+                            break;
+                        }
+                    }
+
+                    // If rv exists into list change with canceled one
+                    if (pos > -1) {
+                        mRaceVehicleList.set(pos, rv);
+                        mAdapter.notifyItemChanged(pos);
+                        mAdapter.sortVehicleList();
+
+                        // If item has changed position, notify
                         for (int i=0; i < mRaceVehicleList.size(); i++) {
-                            rv = mRaceVehicleList.get(i);
-                            if (rv.getId() == ld.getRvId()) {
-                                mAdapter.notifyItemChanged(i);
-                                break;
+                            RaceVehicle rv2 = mRaceVehicleList.get(i);
+                            if (rv2.getId() == rv.getId()) {
+                                if (pos != i) {
+                                    mAdapter.notifyItemMoved(pos, i);
+                                    mAdapter.notifyItemChanged(i);
+                                    mAdapter.notifyItemChanged(pos);
+                                    break;
+                                }
                             }
                         }
-                        */
+
                     }
                 }
             });

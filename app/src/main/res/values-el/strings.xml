@@ -115,5 +115,8 @@
     <string name="start">Εκκίνηση</string>
     <string name="best_time">Καλύτερος χρόνος</string>
     <string name="best_lap_interval">Καλύτερος γύρος</string>
+    <string name="cancel_vehicle_title">Εγκατάλειψη οχήματος</string>
+    <string name="cancel_vehicle_confirm_message">Να ακυρωθεί το όχημα %1$s από τον αγώνα %2$s?</string>
+    <string name="vehicle_canceled">Το όχημα %1$s εγκατέλειψε τον αγώνα!</string>
 
 </resources>

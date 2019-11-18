@@ -240,5 +240,13 @@ public interface ApiInterface {
     @DELETE("api/race-vehicles/{id}/")
     Call<Void> deleteRaceVehicle(@Header("Authorization") String token, @Path("id") long rvId);
 
+    // Cancel vehicle
+    @POST("cmd/cancel-vehicle/")
+    @FormUrlEncoded
+    Call<RaceVehicle> cancelVehicle(
+            @Header("Authorization") String token,
+            @Field("rv_id") long rvId
+    );
+
 
 }

@@ -1,5 +1,6 @@
 package gr.artibet.lapper.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,6 +19,7 @@ import java.util.List;
 
 import gr.artibet.lapper.R;
 import gr.artibet.lapper.Util;
+import gr.artibet.lapper.activities.CompletedRacesVehiclesActivity;
 import gr.artibet.lapper.adapters.CompletedRacesAdapter;
 import gr.artibet.lapper.api.RetrofitClient;
 import gr.artibet.lapper.dialogs.ConfirmDialog;
@@ -221,15 +223,12 @@ public class CanceledRacesFragment extends Fragment {
     // Race Vehicles
     private void viewVehicles(int position) {
 
-        // TODO: Show canceled race vehicles
-        /*
-        // Get race ID and tag and open PendingRacesVehiclesActivity
+        // Get race ID tag and laps from race and open InprogressRacesVehiclesActivity
         Race race = mRaceList.get(position);
-        Intent intent = new Intent(getActivity(), PendingRacesVehiclesActivity.class);
+        Intent intent = new Intent(getActivity(), CompletedRacesVehiclesActivity.class);
         intent.putExtra("raceId", race.getId());
         intent.putExtra("raceTag", race.getTag());
         startActivity(intent);
-        */
 
     }
 

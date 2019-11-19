@@ -118,5 +118,6 @@
     <string name="cancel_vehicle_title">Εγκατάλειψη οχήματος</string>
     <string name="cancel_vehicle_confirm_message">Να ακυρωθεί το όχημα %1$s από τον αγώνα %2$s?</string>
     <string name="vehicle_canceled">Το όχημα %1$s εγκατέλειψε τον αγώνα!</string>
+    <string name="checkpoints">Σημεία ελέγχου</string>
 
 </resources>

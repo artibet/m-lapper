@@ -4,9 +4,8 @@
 
 
     <item
-        android:id="@+id/item_cancel_vehicle"
-        android:title="@string/cancel_vehicle_title"
-        android:icon="@drawable/ic_block_red"
-        android:iconTint="#f44336"/>
+        android:id="@+id/item_checkpoints"
+        android:title="@string/checkpoints"
+        android:icon="@drawable/ic_checkpoint" />
 
 </menu>

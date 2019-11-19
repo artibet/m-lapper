@@ -263,7 +263,7 @@ public class InProgressRacesVehiclesActivity extends AppCompatActivity {
 
                         // Notify item changed and resort list
                         mAdapter.notifyItemChanged(pos);
-                        mAdapter.sortVehicleList();
+                        Util.sortVehicleList(mRaceVehicleList);
 
                         // If item has changed position, notify
                         for (int i=0; i < mRaceVehicleList.size(); i++) {
@@ -307,7 +307,7 @@ public class InProgressRacesVehiclesActivity extends AppCompatActivity {
                     if (pos > -1) {
                         mRaceVehicleList.set(pos, rv);
                         mAdapter.notifyItemChanged(pos);
-                        mAdapter.sortVehicleList();
+                        Util.sortVehicleList(mRaceVehicleList);
                         Util.successToast(InProgressRacesVehiclesActivity.this, getString(R.string.vehicle_canceled, rv.getVehicle().getTag()));
 
                         // If item has changed position, notify

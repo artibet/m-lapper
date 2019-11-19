@@ -1,7 +1,6 @@
 package gr.artibet.lapper.adapters;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -23,7 +22,7 @@ import gr.artibet.lapper.Util;
 import gr.artibet.lapper.models.RaceVehicle;
 import gr.artibet.lapper.models.RaceVehicleState;
 
-public class InProgressRacesVehiclesAdapter extends RecyclerView.Adapter<InProgressRacesVehiclesAdapter.RaceVehicleViewHolder> {
+public class CompletedRacesVehiclesAdapter extends RecyclerView.Adapter<CompletedRacesVehiclesAdapter.RaceVehicleViewHolder> {
 
     // Context
     private static Context mContext;
@@ -31,16 +30,13 @@ public class InProgressRacesVehiclesAdapter extends RecyclerView.Adapter<InProgr
     // Vehicle List
     private List<RaceVehicle> mRaceVehicleList;
 
-    // Race laps
-    private int mRaceLaps;
-
     // item click listener member
     private OnItemClickListener mItemListener;
 
 
     // Item click interface
     public interface OnItemClickListener {
-        void onCancel(int position);
+        void onViewCheckpoints(int position);
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
@@ -56,19 +52,12 @@ public class InProgressRacesVehiclesAdapter extends RecyclerView.Adapter<InProgr
         public TextView tvAa;
         public TextView tvTag;
         public TextView tvOwner;
+        public TextView tvDriverLabel;
         public TextView tvDriver;
-        public TextView tvSector;
-        public TextView tvSectorInterval;
-        public TextView tvBestSectorIntervalLabel;
-        public TextView tvBestSectorInterval;
-        public TextView tvLapLabel;
-        public TextView tvLap;
-        public TextView tvLapIntervalLabel;
-        public TextView tvLapInterval;
-        public TextView tvBestLapIntervalLabel;
-        public TextView tvBestLapInterval;
+        public TextView tvDurationLabel;
+        public TextView tvDuration;
 
-        public RaceVehicleViewHolder(@NonNull View itemView, final OnItemClickListener listener, final List<RaceVehicle> rvList) {
+        public RaceVehicleViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
 
             ivStatus = itemView.findViewById(R.id.race_vehicle_item_status);
@@ -76,17 +65,10 @@ public class InProgressRacesVehiclesAdapter extends RecyclerView.Adapter<InProgr
             tvAa = itemView.findViewById(R.id.tvAa);
             tvTag = itemView.findViewById(R.id.race_vehicle_item_tag);
             tvOwner = itemView.findViewById(R.id.race_vehicle_item_owner);
-            tvDriver = itemView.findViewById(R.id.race_vehicle_item_driver);
-            tvSector = itemView.findViewById(R.id.tvSector);
-            tvSectorInterval = itemView.findViewById(R.id.tvSectorInterval);
-            tvBestSectorIntervalLabel = itemView.findViewById(R.id.tvBestSectorIntervalLabel);
-            tvBestSectorInterval = itemView.findViewById(R.id.tvBestSectorInterval);
-            tvLapLabel = itemView.findViewById(R.id.tvLapLabel);
-            tvLap = itemView.findViewById(R.id.tvLap);
-            tvLapIntervalLabel = itemView.findViewById(R.id.tvLapIntervalLabel);
-            tvLapInterval = itemView.findViewById(R.id.tvLapInterval);
-            tvBestLapIntervalLabel = itemView.findViewById(R.id.tvBestLapIntervalLabel);
-            tvBestLapInterval = itemView.findViewById(R.id.tvBestLapInterval);
+            tvDriverLabel = itemView.findViewById(R.id.tvDriverLabel);
+            tvDriver = itemView.findViewById(R.id.tvDriver);
+            tvDurationLabel = itemView.findViewById(R.id.tvDurationLabel);
+            tvDuration = itemView.findViewById(R.id.tvDuration);
 
             // Crete popup menu
             ivMenu.setOnClickListener(new View.OnClickListener() {
@@ -100,11 +82,11 @@ public class InProgressRacesVehiclesAdapter extends RecyclerView.Adapter<InProgr
                             switch (item.getItemId()) {
 
                                 // Cancel vehicle
-                                case R.id.item_cancel_vehicle:
+                                case R.id.item_checkpoints:
                                     if (listener != null) {
                                         int position = getAdapterPosition();
                                         if (position != RecyclerView.NO_POSITION) {
-                                            listener.onCancel(position);
+                                            listener.onViewCheckpoints(position);
                                         }
                                     }
                                     return true;
@@ -114,16 +96,10 @@ public class InProgressRacesVehiclesAdapter extends RecyclerView.Adapter<InProgr
                         }
                     });
 
-                    // Show popup and disable cancelation item if state not is running
-                    popupMenu.inflate(R.menu.inprogress_races_vehicles_menu);
+                    // Show popup
+                    popupMenu.inflate(R.menu.completed_races_vehicles_menu);
                     Util.enablePopupIcons(popupMenu);
                     popupMenu.show();
-                    MenuItem menuItemCancel = popupMenu.getMenu().findItem(R.id.item_cancel_vehicle);
-                    int position = getAdapterPosition();
-                    RaceVehicle rv = rvList.get(position);
-                    if (rv.getState().getId() != RaceVehicleState.STATE_RUNNING) {
-                        menuItemCancel.setEnabled(false);
-                    }
                 }
             });
 
@@ -133,18 +109,17 @@ public class InProgressRacesVehiclesAdapter extends RecyclerView.Adapter<InProgr
     }
 
     // CONSTRUCTOR WITH AN ARRAY LIST OF Vehicle and race laps
-    public InProgressRacesVehiclesAdapter(Context context, List<RaceVehicle> raceVehicleList, int laps) {
+    public CompletedRacesVehiclesAdapter(Context context, List<RaceVehicle> raceVehicleList) {
         mContext = context;
         mRaceVehicleList = raceVehicleList;
-        mRaceLaps = laps;
         Util.sortVehicleList(mRaceVehicleList);
     }
 
     @NonNull
     @Override
     public RaceVehicleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.inprogress_races_vehicle_item, parent, false);
-        RaceVehicleViewHolder viewHolder = new RaceVehicleViewHolder(v, mItemListener, mRaceVehicleList);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.completed_races_vehicle_item, parent, false);
+        RaceVehicleViewHolder viewHolder = new RaceVehicleViewHolder(v, mItemListener);
         return viewHolder;
     }
 
@@ -163,36 +138,12 @@ public class InProgressRacesVehiclesAdapter extends RecyclerView.Adapter<InProgr
         holder.tvOwner.setText("(" + rv.getVehicle().getOwner().getUsername() + ")");
 
         // Driver
-        holder.tvDriver.setText(mContext.getString(R.string.driver)+ ": " + rv.getDriver());
+        holder.tvDriverLabel.setText(mContext.getString(R.string.driver)+ ":");
+        holder.tvDriver.setText(rv.getDriver());
 
-        // Sector
-        String sector;
-        if (rv.getPrevSensor() == null) {
-            sector = mContext.getResources().getString(R.string.race_start);
-            holder.tvSectorInterval.setVisibility(View.INVISIBLE);
-        }
-        else {
-            sector = rv.getPrevSensor().getTag() + " - " + rv.getLastSensor().getTag() + ":";
-            holder.tvSectorInterval.setVisibility(View.VISIBLE);
-        }
-        holder.tvSector.setText(sector);
-
-        // Sector interval
-        holder.tvSectorInterval.setText(rv.getIntervalString());
-
-        // Best sector interval
-        holder.tvBestSectorIntervalLabel.setText(mContext.getResources().getString(R.string.best_time) + ":");
-        holder.tvBestSectorInterval.setText(rv.getBestIntervalString());
-
-        // Lap
-        holder.tvLapLabel.setText(mContext.getString(R.string.lap) + ":");
-        holder.tvLap.setText(String.valueOf(rv.getLap()) + "/" + mRaceLaps);
-
-        // Lap interval - when passing start sensor
-        holder.tvLapIntervalLabel.setText(mContext.getString(R.string.lap_interval) + ":");
-        holder.tvLapInterval.setText(rv.getLapIntervalString());
-        holder.tvBestLapIntervalLabel.setText(mContext.getString(R.string.best_lap_interval) + ":");
-        holder.tvBestLapInterval.setText(rv.getBestLapIntervalString());
+        // Duration
+        holder.tvDurationLabel.setText(mContext.getString(R.string.duration)+ ":");
+        holder.tvDuration.setText(rv.getDuration());
 
         // Set status icon and disable cancelation menu item
         String uri = null;
@@ -224,4 +175,5 @@ public class InProgressRacesVehiclesAdapter extends RecyclerView.Adapter<InProgr
         Util.sortVehicleList(mRaceVehicleList);
         notifyDataSetChanged();
     }
+
 }

@@ -17,7 +17,13 @@ import androidx.core.app.NotificationManagerCompat;
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.TimeZone;
+
+import gr.artibet.lapper.models.RaceVehicle;
+import gr.artibet.lapper.models.RaceVehicleState;
 
 public class Util {
 
@@ -132,5 +138,28 @@ public class Util {
         catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+
+    // ---------------------------------------------------------------------------------------
+    // Sort a list of RaceVehicles
+    // ---------------------------------------------------------------------------------------
+    public static void sortVehicleList(List<RaceVehicle> rvList) {
+        Collections.sort(rvList, new Comparator<RaceVehicle>() {
+            @Override
+            public int compare(RaceVehicle lhs, RaceVehicle rhs) {
+                int lhsState = lhs.getState().getId();
+                int rhsState = rhs.getState().getId();
+                if (lhsState == RaceVehicleState.STATE_FINISHED && rhsState != RaceVehicleState.STATE_FINISHED) return -1;
+                if (lhsState != RaceVehicleState.STATE_FINISHED && rhsState == RaceVehicleState.STATE_FINISHED) return 1;
+                if (lhsState == RaceVehicleState.STATE_CANCELED && rhsState != RaceVehicleState.STATE_CANCELED) return 1;
+                if (lhsState != RaceVehicleState.STATE_CANCELED && rhsState == RaceVehicleState.STATE_CANCELED) return -1;
+                if (lhs.getLap() > rhs.getLap()) return -1;
+                if (lhs.getLap() < rhs.getLap()) return 1;
+                if (lhs.getLastSensor().getAa() > rhs.getLastSensor().getAa()) return -1;
+                if (lhs.getLastSensor().getAa() < rhs.getLastSensor().getAa()) return 1;
+                return (int)(lhs.getLastTs() - rhs.getLastTs());
+            }
+        });
     }
 }

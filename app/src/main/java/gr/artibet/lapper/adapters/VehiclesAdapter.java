@@ -2,9 +2,11 @@ package gr.artibet.lapper.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,13 +18,15 @@ import java.util.List;
 
 import gr.artibet.lapper.R;
 import gr.artibet.lapper.Util;
+import gr.artibet.lapper.models.RaceVehicle;
+import gr.artibet.lapper.models.RaceVehicleState;
 import gr.artibet.lapper.models.Sensor;
 import gr.artibet.lapper.models.Vehicle;
 
 public class VehiclesAdapter extends RecyclerView.Adapter<VehiclesAdapter.VehicleViewHolder> {
 
     // Context
-    private Context mContext;
+    private static Context mContext;
 
     // Vehicle List
     private List<Vehicle> mVehicleList;
@@ -33,8 +37,8 @@ public class VehiclesAdapter extends RecyclerView.Adapter<VehiclesAdapter.Vehicl
 
     // Item click interface
     public interface OnItemClickListener {
-        void onItemClick(int position);
-        void onDeleteClick(int position);
+        void onEdit(int position);
+        void onDelete(int position);
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
@@ -45,8 +49,8 @@ public class VehiclesAdapter extends RecyclerView.Adapter<VehiclesAdapter.Vehicl
     // VIEW HOLDER CLASS
     public static class VehicleViewHolder extends RecyclerView.ViewHolder {
 
+        public ImageView ivMenu;
         public ImageView ivStatus;
-        public ImageView ivDelete;
         public TextView tvTag;
         public TextView tvOwner;
         public TextView tvDriver;
@@ -57,37 +61,57 @@ public class VehiclesAdapter extends RecyclerView.Adapter<VehiclesAdapter.Vehicl
             super(itemView);
 
             ivStatus = itemView.findViewById(R.id.vehicle_item_status);
-            ivDelete = itemView.findViewById(R.id.vehicle_item_delete);
+            ivMenu = itemView.findViewById(R.id.ivMenu);
             tvTag = itemView.findViewById(R.id.vehicle_item_tag);
             tvOwner = itemView.findViewById(R.id.vehicle_item_owner);
             tvDriver = itemView.findViewById(R.id.vehicle_item_driver);
             tvUpdatedAt = itemView.findViewById(R.id.vehicle_item_updatedAt);
 
-            // Item click listener
-            itemView.setOnClickListener(new View.OnClickListener() {
+            // Crete popup menu
+            ivMenu.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (listener != null) {
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION) {
-                            listener.onItemClick(position);
+                    PopupMenu popupMenu = new PopupMenu(mContext, ivMenu);
+                    popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem item) {
+
+                            switch (item.getItemId()) {
+
+                                // Edit
+                                case R.id.item_edit:
+                                    if (listener != null) {
+                                        int position = getAdapterPosition();
+                                        if (position != RecyclerView.NO_POSITION) {
+                                            listener.onEdit(position);
+                                        }
+                                    }
+                                    return true;
+
+                                // Delete
+                                case R.id.item_delete:
+                                    if (listener != null) {
+                                        int position = getAdapterPosition();
+                                        if (position != RecyclerView.NO_POSITION) {
+                                            listener.onDelete(position);
+                                        }
+                                    }
+                                    return true;
+                            }
+
+                            return false;
                         }
-                    }
+                    });
+
+                    // Show popup
+                    popupMenu.inflate(R.menu.vehicles_menu);
+                    Util.enablePopupIcons(popupMenu);
+                    popupMenu.show();
+
                 }
             });
 
-            // Delete click listener
-            ivDelete.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (listener != null) {
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION) {
-                            listener.onDeleteClick(position);
-                        }
-                    }
-                }
-            });
+
 
 
         }

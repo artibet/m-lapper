@@ -79,12 +79,12 @@ public class VehiclesFragment extends Fragment implements BottomNavigationView.O
         mAdapter.setOnItemClickListener(new VehiclesAdapter.OnItemClickListener() {
 
             @Override
-            public void onItemClick(int position) {
+            public void onEdit(int position) {
                 editVehicle(position);
             }
 
             @Override
-            public void onDeleteClick(int position) {
+            public void onDelete(int position) {
                 deleteVehicle(position);
             }
         });

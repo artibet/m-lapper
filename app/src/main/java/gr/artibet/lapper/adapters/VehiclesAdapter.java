@@ -112,8 +112,6 @@ public class VehiclesAdapter extends RecyclerView.Adapter<VehiclesAdapter.Vehicl
             });
 
 
-
-
         }
     }
 

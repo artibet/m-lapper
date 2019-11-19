@@ -75,12 +75,12 @@ public class SensorsFragment extends Fragment implements BottomNavigationView.On
         mAdapter.setOnItemClickListener(new SensorsAdapter.OnItemClickListener() {
 
             @Override
-            public void onItemClick(int position) {
+            public void onEdit(int position) {
                 editSensor(position);
             }
 
             @Override
-            public void onDeleteClick(int position) {
+            public void onDelete(int position) {
                 deleteSensor(position);
             }
         });

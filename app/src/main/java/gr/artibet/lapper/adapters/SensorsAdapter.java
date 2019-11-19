@@ -2,9 +2,11 @@ package gr.artibet.lapper.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,7 +21,7 @@ import gr.artibet.lapper.models.Sensor;
 public class SensorsAdapter extends RecyclerView.Adapter<SensorsAdapter.SensorViewHolder> {
 
     // Context
-    private Context mContext;
+    private static Context mContext;
 
     // Sensor List
     private List<Sensor> mSensorList;
@@ -30,8 +32,8 @@ public class SensorsAdapter extends RecyclerView.Adapter<SensorsAdapter.SensorVi
 
     // Item click interface
     public interface OnItemClickListener {
-        void onItemClick(int position);
-        void onDeleteClick(int position);
+        void onEdit(int position);
+        void onDelete(int position);
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
@@ -42,52 +44,69 @@ public class SensorsAdapter extends RecyclerView.Adapter<SensorsAdapter.SensorVi
     // VIEW HOLDER CLASS
     public static class SensorViewHolder extends RecyclerView.ViewHolder {
 
+        public ImageView ivMenu;
         public TextView mSensorAa;
         public TextView mSensorTag;
         public TextView mSensorThreshold;
         public TextView mSensorUpdatedAt;
         public ImageView mSensorStatus;
         public ImageView mSensorStarter;
-        public ImageView mDelete;
 
 
         public SensorViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
 
+            ivMenu = itemView.findViewById(R.id.ivMenu);
             mSensorAa = itemView.findViewById(R.id.sensor_item_aa);
             mSensorTag = itemView.findViewById(R.id.sensor_item_tag);
             mSensorThreshold = itemView.findViewById(R.id.sensor_item_threshold);
             mSensorUpdatedAt = itemView.findViewById(R.id.sensor_item_updatedAt);
             mSensorStatus = itemView.findViewById(R.id.sensor_item_status);
             mSensorStarter = itemView.findViewById(R.id.sensor_item_isStart);
-            mDelete = itemView.findViewById(R.id.sensor_item_delete);
 
-            // Item click listener
-            itemView.setOnClickListener(new View.OnClickListener() {
+            // Crete popup menu
+            ivMenu.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (listener != null) {
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION) {
-                            listener.onItemClick(position);
+                    PopupMenu popupMenu = new PopupMenu(mContext, ivMenu);
+                    popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem item) {
+
+                            switch (item.getItemId()) {
+
+                                // Edit
+                                case R.id.item_edit:
+                                    if (listener != null) {
+                                        int position = getAdapterPosition();
+                                        if (position != RecyclerView.NO_POSITION) {
+                                            listener.onEdit(position);
+                                        }
+                                    }
+                                    return true;
+
+                                // Delete
+                                case R.id.item_delete:
+                                    if (listener != null) {
+                                        int position = getAdapterPosition();
+                                        if (position != RecyclerView.NO_POSITION) {
+                                            listener.onDelete(position);
+                                        }
+                                    }
+                                    return true;
+                            }
+
+                            return false;
                         }
-                    }
+                    });
+
+                    // Show popup
+                    popupMenu.inflate(R.menu.sensors_menu);
+                    Util.enablePopupIcons(popupMenu);
+                    popupMenu.show();
+
                 }
             });
-
-            // Delete click listener
-            mDelete.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (listener != null) {
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION) {
-                            listener.onDeleteClick(position);
-                        }
-                    }
-                }
-            });
-
 
         }
     }

@@ -4,9 +4,11 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,13 +19,14 @@ import java.util.Comparator;
 import java.util.List;
 
 import gr.artibet.lapper.R;
+import gr.artibet.lapper.Util;
 import gr.artibet.lapper.models.RaceVehicle;
 import gr.artibet.lapper.models.RaceVehicleState;
 
 public class InProgressRacesVehiclesAdapter extends RecyclerView.Adapter<InProgressRacesVehiclesAdapter.RaceVehicleViewHolder> {
 
     // Context
-    private Context mContext;
+    private static Context mContext;
 
     // Vehicle List
     private List<RaceVehicle> mRaceVehicleList;
@@ -49,7 +52,7 @@ public class InProgressRacesVehiclesAdapter extends RecyclerView.Adapter<InProgr
     public static class RaceVehicleViewHolder extends RecyclerView.ViewHolder {
 
         public ImageView ivStatus;
-        public ImageView ivCancel;
+        public ImageView ivMenu;
         public TextView tvAa;
         public TextView tvTag;
         public TextView tvOwner;
@@ -65,12 +68,11 @@ public class InProgressRacesVehiclesAdapter extends RecyclerView.Adapter<InProgr
         public TextView tvBestLapIntervalLabel;
         public TextView tvBestLapInterval;
 
-
-        public RaceVehicleViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
+        public RaceVehicleViewHolder(@NonNull View itemView, final OnItemClickListener listener, final List<RaceVehicle> rvList) {
             super(itemView);
 
             ivStatus = itemView.findViewById(R.id.race_vehicle_item_status);
-            ivCancel = itemView.findViewById(R.id.race_vehicle_item_delete);
+            ivMenu = itemView.findViewById(R.id.ivMenu);
             tvAa = itemView.findViewById(R.id.tvAa);
             tvTag = itemView.findViewById(R.id.race_vehicle_item_tag);
             tvOwner = itemView.findViewById(R.id.race_vehicle_item_owner);
@@ -86,18 +88,45 @@ public class InProgressRacesVehiclesAdapter extends RecyclerView.Adapter<InProgr
             tvBestLapIntervalLabel = itemView.findViewById(R.id.tvBestLapIntervalLabel);
             tvBestLapInterval = itemView.findViewById(R.id.tvBestLapInterval);
 
-            // Cancel vehicle click listener
-            ivCancel.setOnClickListener(new View.OnClickListener() {
+            // Crete popup menu
+            ivMenu.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (listener != null) {
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION) {
-                            listener.onCancel(position);
+                    PopupMenu popupMenu = new PopupMenu(mContext, ivMenu);
+                    popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem item) {
+
+                            switch (item.getItemId()) {
+
+                                // Cancel vehicle
+                                case R.id.item_cancel_vehicle:
+                                    if (listener != null) {
+                                        int position = getAdapterPosition();
+                                        if (position != RecyclerView.NO_POSITION) {
+                                            listener.onCancel(position);
+                                        }
+                                    }
+                                    return true;
+                            }
+
+                            return false;
                         }
+                    });
+
+                    // Show popup and disable cancelation item if state not is running
+                    popupMenu.inflate(R.menu.inprogress_races_vehicles_menu);
+                    Util.enablePopupIcons(popupMenu);
+                    popupMenu.show();
+                    MenuItem menuItemCancel = popupMenu.getMenu().findItem(R.id.item_cancel_vehicle);
+                    int position = getAdapterPosition();
+                    RaceVehicle rv = rvList.get(position);
+                    if (rv.getState().getId() != RaceVehicleState.STATE_RUNNING) {
+                        menuItemCancel.setEnabled(false);
                     }
                 }
             });
+
 
 
         }
@@ -115,7 +144,7 @@ public class InProgressRacesVehiclesAdapter extends RecyclerView.Adapter<InProgr
     @Override
     public RaceVehicleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.inprogress_races_vehicle_item, parent, false);
-        RaceVehicleViewHolder viewHolder = new RaceVehicleViewHolder(v, mItemListener);
+        RaceVehicleViewHolder viewHolder = new RaceVehicleViewHolder(v, mItemListener, mRaceVehicleList);
         return viewHolder;
     }
 
@@ -173,7 +202,7 @@ public class InProgressRacesVehiclesAdapter extends RecyclerView.Adapter<InProgr
         holder.tvBestLapIntervalLabel.setText(mContext.getString(R.string.best_lap_interval) + ":");
         holder.tvBestLapInterval.setText(rv.getBestLapIntervalString());
 
-        // Set status icon and remove delete button if finished or canceled
+        // Set status icon and disable cancelation menu item
         String uri = null;
         switch (rv.getState().getId()) {
             case RaceVehicleState.STATE_RUNNING:
@@ -181,11 +210,9 @@ public class InProgressRacesVehiclesAdapter extends RecyclerView.Adapter<InProgr
             break;
             case RaceVehicleState.STATE_CANCELED:
                 uri = "@drawable/ic_block_red";
-                holder.ivCancel.setVisibility(View.INVISIBLE);
                 break;
             case RaceVehicleState.STATE_FINISHED:
                 uri = "@drawable/ic_flag_blue";
-                holder.ivCancel.setVisibility(View.INVISIBLE);
                 break;
         }
         int imageResource = mContext.getResources().getIdentifier(uri, null, mContext.getPackageName());

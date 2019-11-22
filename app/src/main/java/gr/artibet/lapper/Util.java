@@ -142,7 +142,7 @@ public class Util {
 
 
     // ---------------------------------------------------------------------------------------
-    // Sort a list of RaceVehicles
+    // Sort a list of RaceVehicles that are in progress
     // ---------------------------------------------------------------------------------------
     public static void sortVehicleList(List<RaceVehicle> rvList) {
         Collections.sort(rvList, new Comparator<RaceVehicle>() {
@@ -159,6 +159,31 @@ public class Util {
                 if (lhs.getLastSensor().getAa() > rhs.getLastSensor().getAa()) return -1;
                 if (lhs.getLastSensor().getAa() < rhs.getLastSensor().getAa()) return 1;
                 return (int)(lhs.getLastTs() - rhs.getLastTs());
+            }
+        });
+    }
+
+    // ---------------------------------------------------------------------------------------
+    // Sort a list of completed or canceled RaceVehicles
+    // ---------------------------------------------------------------------------------------
+    public static void sortCompletedVehicleList(List<RaceVehicle> rvList) {
+        Collections.sort(rvList, new Comparator<RaceVehicle>() {
+            @Override
+            public int compare(RaceVehicle lhs, RaceVehicle rhs) {
+                int lhsState = lhs.getState().getId();
+                int rhsState = rhs.getState().getId();
+
+                // If both finished, first is the vehicle with less duration
+                if (lhsState == RaceVehicleState.STATE_FINISHED && rhsState == RaceVehicleState.STATE_FINISHED) return (int)(lhs.getFinishTs() - rhs.getFinishTs());
+
+                // If both canceled, first is the vehicle with greater duration (canceled later)
+                if (lhsState == RaceVehicleState.STATE_CANCELED && rhsState == RaceVehicleState.STATE_CANCELED) return (int)(rhs.getFinishTs() - lhs.getFinishTs());
+
+                // Finished vehicles before canceled
+                if (lhsState == RaceVehicleState.STATE_FINISHED && rhsState != RaceVehicleState.STATE_FINISHED) return -1;
+                if (lhsState != RaceVehicleState.STATE_FINISHED && rhsState == RaceVehicleState.STATE_FINISHED) return -1;
+
+                return 0;
             }
         });
     }

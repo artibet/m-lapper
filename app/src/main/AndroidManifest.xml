@@ -15,6 +15,7 @@
         <activity android:name=".activities.ActiveRacesVehiclesActivity"></activity>
         <activity android:name=".activities.InProgressRacesVehiclesActivity"></activity>
         <activity android:name=".activities.CompletedRacesVehiclesActivity"></activity>
+        <activity android:name=".activities.CheckpointsActivity"></activity>
         <activity android:name=".activities.RaceFormActivity" />
         <activity android:name=".activities.SensorFormActivity" />
         <activity android:name=".activities.VehicleFormActivity" />

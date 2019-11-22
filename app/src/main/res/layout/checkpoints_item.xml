@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="4dp"
+    android:layout_marginBottom="4dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="4dp">
+
+
+        <TextView
+            android:id="@+id/tvDt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="last_dt"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvSector"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Sector"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDt" />
+
+        <TextView
+            android:id="@+id/tvSectorInterval"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:text="Sector interval"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvSector"
+            app:layout_constraintStart_toEndOf="@+id/tvSector"
+            app:layout_constraintTop_toTopOf="@+id/tvSector" />
+
+        <TextView
+            android:id="@+id/tvLapLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/lap"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvSector" />
+
+        <TextView
+            android:id="@+id/tvLap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:text="lap/laps"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvLapLabel"
+            app:layout_constraintStart_toEndOf="@+id/tvLapLabel"
+            app:layout_constraintTop_toTopOf="@+id/tvLapLabel" />
+
+        <TextView
+            android:id="@+id/tvLapIntervalLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:text="@string/lap_interval"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/tvLap"
+            app:layout_constraintStart_toEndOf="@+id/tvLap"
+            app:layout_constraintTop_toTopOf="@+id/tvLap" />
+
+        <TextView
+            android:id="@+id/tvLapInterval"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:text="Lap interval"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvLapIntervalLabel"
+            app:layout_constraintStart_toEndOf="@+id/tvLapIntervalLabel"
+            app:layout_constraintTop_toTopOf="@+id/tvLapIntervalLabel" />
+
+        <ImageView
+            android:id="@+id/ivSectorUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:src="@drawable/ic_arrow_up_red"
+            app:layout_constraintBottom_toBottomOf="@+id/tvSectorInterval"
+            app:layout_constraintStart_toEndOf="@+id/tvSectorInterval"
+            app:layout_constraintTop_toTopOf="@+id/tvSectorInterval"
+            android:visibility="invisible"/>
+
+        <ImageView
+            android:id="@+id/ivSectorDown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:src="@drawable/ic_arrow_down_green"
+            app:layout_constraintBottom_toBottomOf="@+id/tvSectorInterval"
+            app:layout_constraintStart_toEndOf="@+id/tvSectorInterval"
+            app:layout_constraintTop_toTopOf="@+id/tvSectorInterval"
+            android:visibility="invisible"/>
+
+        <ImageView
+            android:id="@+id/ivLapUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:src="@drawable/ic_arrow_up_red"
+            app:layout_constraintBottom_toBottomOf="@+id/tvLapInterval"
+            app:layout_constraintStart_toEndOf="@+id/tvLapInterval"
+            app:layout_constraintTop_toTopOf="@+id/tvLapInterval"
+            android:visibility="invisible"/>
+
+        <ImageView
+            android:id="@+id/ivLapDown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:src="@drawable/ic_arrow_down_green"
+            app:layout_constraintBottom_toBottomOf="@+id/tvLapInterval"
+            app:layout_constraintStart_toEndOf="@+id/tvLapInterval"
+            app:layout_constraintTop_toTopOf="@+id/tvLapInterval"
+            android:visibility="invisible"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

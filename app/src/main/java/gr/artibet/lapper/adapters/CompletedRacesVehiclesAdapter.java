@@ -112,7 +112,7 @@ public class CompletedRacesVehiclesAdapter extends RecyclerView.Adapter<Complete
     public CompletedRacesVehiclesAdapter(Context context, List<RaceVehicle> raceVehicleList) {
         mContext = context;
         mRaceVehicleList = raceVehicleList;
-        Util.sortVehicleList(mRaceVehicleList);
+        Util.sortCompletedVehicleList(mRaceVehicleList);
     }
 
     @NonNull
@@ -172,7 +172,7 @@ public class CompletedRacesVehiclesAdapter extends RecyclerView.Adapter<Complete
 
     public void setRaceVehicleList(List<RaceVehicle> raceVehicleList) {
         mRaceVehicleList = raceVehicleList;
-        Util.sortVehicleList(mRaceVehicleList);
+        Util.sortCompletedVehicleList(mRaceVehicleList);
         notifyDataSetChanged();
     }
 

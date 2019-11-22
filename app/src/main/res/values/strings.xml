@@ -119,6 +119,8 @@
     <string name="cancel_vehicle_confirm_message">Do you want to cancel vehicle %1$s from race %2$s?</string>
     <string name="vehicle_canceled">Vehicle %1$s has been canceled!</string>
     <string name="checkpoints">Checkpoints</string>
+    <string name="no_checkpoints">No checkpoints</string>
+    <string name="checkpoints_title">%1$s (%2$s)</string>
 
 
 </resources>

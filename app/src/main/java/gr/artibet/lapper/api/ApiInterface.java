@@ -10,6 +10,7 @@ import gr.artibet.lapper.models.RaceVehicle;
 import gr.artibet.lapper.models.Sensor;
 import gr.artibet.lapper.models.User;
 import gr.artibet.lapper.models.Vehicle;
+import gr.artibet.lapper.models.VehicleData;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -118,9 +119,17 @@ public interface ApiInterface {
             @Field("descr") String description
     );
 
-    // Sensor DELETE
+    // Vehicle DELETE
     @DELETE("api/vehicles/{id}/")
     Call<Void> deleteVehicle(@Header("Authorization") String token, @Path("id") long id);
+
+    // Vehicle data
+    @GET("api/vehicle-data/{race_id}/{vehicle_id}/")
+    Call<VehicleData> getVehicleData(
+            @Header("Authorization") String token,
+            @Path("race_id") long raceId,
+            @Path("vehicle_id") long vehicleId
+    );
 
 
     // --------------------------------------------------------------------------

@@ -12,43 +12,48 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
 import gr.artibet.lapper.R;
 import gr.artibet.lapper.Util;
-import gr.artibet.lapper.adapters.CompletedRacesVehiclesAdapter;
+import gr.artibet.lapper.adapters.ActiveRacesVehiclesAdapter;
+import gr.artibet.lapper.adapters.CheckpointsAdapter;
 import gr.artibet.lapper.api.RetrofitClient;
-import gr.artibet.lapper.models.Race;
+import gr.artibet.lapper.models.Checkpoint;
 import gr.artibet.lapper.models.RaceVehicle;
+import gr.artibet.lapper.models.VehicleData;
 import gr.artibet.lapper.storage.SharedPrefManager;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CompletedRacesVehiclesActivity extends AppCompatActivity {
+public class CheckpointsActivity extends AppCompatActivity  {
 
-    private List<RaceVehicle> mRaceVehicleList = new ArrayList<>();
+    private VehicleData mVehicleData = new VehicleData();
     private ProgressBar mProgressBar;
     private TextView mTvMessage;
     private int mRaceId;
+    private long mVehicleId;
     private String mRaceTag;
+    private String mVehicleTag;
 
     // Recycler view members
     private RecyclerView mRecyclerView;
-    private CompletedRacesVehiclesAdapter mAdapter;
+    private CheckpointsAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_completed_races_vehicles);
+        setContentView(R.layout.activity_checkpoints);
 
-        // Get race id and tag from indent
+        // Get race and vehicle id and tag
         Intent intent = getIntent();
         mRaceId = intent.getIntExtra("raceId", -1);
+        mVehicleId = intent.getLongExtra("vehicleId", -1);
         mRaceTag = intent.getStringExtra("raceTag");
+        mVehicleTag = intent.getStringExtra("vehicleTag");
 
         // Initialize views and layouts
         mProgressBar = findViewById(R.id.progressBar);
@@ -56,7 +61,7 @@ public class CompletedRacesVehiclesActivity extends AppCompatActivity {
         mRecyclerView = findViewById(R.id.recyclerView);
         mLayoutManager = new LinearLayoutManager(this);
 
-        mAdapter = new CompletedRacesVehiclesAdapter(this, mRaceVehicleList);
+        mAdapter = new CheckpointsAdapter(this, new ArrayList<Checkpoint>());
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setAdapter(mAdapter);
@@ -66,7 +71,7 @@ public class CompletedRacesVehiclesActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         ImageView ivBack = toolbar.findViewById(R.id.ivBack);
         TextView ivTitle = toolbar.findViewById(R.id.ivTitle);
-        ivTitle.setText(getString(R.string.race_vehicles, mRaceTag));
+        ivTitle.setText(getString(R.string.checkpoints_title, mVehicleTag, mRaceTag));
         ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,23 +79,13 @@ public class CompletedRacesVehiclesActivity extends AppCompatActivity {
             }
         });
 
-        // Set vehicle item click listener
-        mAdapter.setOnItemClickListener(new CompletedRacesVehiclesAdapter.OnItemClickListener() {
-            @Override
-            public void onViewCheckpoints(int position) {
-                viewCheckpoints(position);
-            }
-        });
-
-
         // Fetch data from API and return
-        fetchRaceVehicles();
+        fetchVehicleData();
 
     }
 
-
     // Fetch race vehicles
-    private void fetchRaceVehicles() {
+    private void fetchVehicleData() {
 
         // Show progress bar and hide message text
         mProgressBar.setVisibility(View.VISIBLE);
@@ -98,22 +93,22 @@ public class CompletedRacesVehiclesActivity extends AppCompatActivity {
 
 
         String token = SharedPrefManager.getInstance(this).getToken();
-        Call<List<RaceVehicle>> call = RetrofitClient.getInstance().getApi().getRaceVehiclesForRace(token, mRaceId);
-        call.enqueue(new Callback<List<RaceVehicle>>() {
+        Call<VehicleData> call = RetrofitClient.getInstance().getApi().getVehicleData(token, mRaceId, mVehicleId);
+        call.enqueue(new Callback<VehicleData>() {
             @Override
-            public void onResponse(Call<List<RaceVehicle>> call, Response<List<RaceVehicle>> response) {
+            public void onResponse(Call<VehicleData> call, Response<VehicleData> response) {
 
                 if (!response.isSuccessful()) {
                     //Util.errorToast(SensorFormActivity.this, getString(R.string.sensor_create_failed));
-                    Util.errorToast(CompletedRacesVehiclesActivity.this, response.message());
+                    Util.errorToast(CheckpointsActivity.this, response.message());
                 }
                 else {
 
-                    mRaceVehicleList = response.body();
-                    mAdapter.setRaceVehicleList(mRaceVehicleList);
+                    mVehicleData = response.body();
+                    mAdapter.setCheckpointList(mVehicleData.getCheckpoints());
 
-                    if (mRaceVehicleList.size() == 0) {
-                        mTvMessage.setText(getResources().getString(R.string.no_vehicles));
+                    if (mVehicleData.getCheckpoints().size() == 0) {
+                        mTvMessage.setText(getResources().getString(R.string.no_checkpoints));
                         mTvMessage.setVisibility(View.VISIBLE);
                     }
                     else {
@@ -127,7 +122,7 @@ public class CompletedRacesVehiclesActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<RaceVehicle>> call, Throwable t) {
+            public void onFailure(Call<VehicleData> call, Throwable t) {
                 mTvMessage.setText(getString(R.string.unable_to_connect));
                 mTvMessage.setVisibility(View.VISIBLE);
                 mProgressBar.setVisibility(View.INVISIBLE);
@@ -135,26 +130,5 @@ public class CompletedRacesVehiclesActivity extends AppCompatActivity {
         });
     }
 
-
-    @Override
-    public void onBackPressed() {
-
-        super.onBackPressed();
-    }
-
-
-    // View vehicle checkpoints
-    private void viewCheckpoints(final int position) {
-
-        RaceVehicle rv = mRaceVehicleList.get(position);
-
-        Intent intent = new Intent(this, CheckpointsActivity.class);
-        intent.putExtra("raceId", mRaceId);
-        intent.putExtra("raceTag", mRaceTag);
-        intent.putExtra("vehicleId", rv.getVehicle().getId());
-        intent.putExtra("vehicleTag", rv.getVehicle().getTag());
-        startActivity(intent);
-
-    }
 
 }

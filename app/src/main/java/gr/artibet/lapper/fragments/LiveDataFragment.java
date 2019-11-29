@@ -18,12 +18,14 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.github.nkzawa.emitter.Emitter;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import gr.artibet.lapper.R;
+import gr.artibet.lapper.Util;
 import gr.artibet.lapper.adapters.LiveDataAdapter;
 import gr.artibet.lapper.api.RetrofitClient;
 import gr.artibet.lapper.api.SocketIO;
@@ -41,6 +43,8 @@ public class LiveDataFragment extends Fragment {
     private List<LiveData> mLiveDataList = new ArrayList<LiveData>();
     private ProgressBar mProgressBar;
     private TextView mTvMessage;
+    private FloatingActionButton mFab;
+    private String mFilteredVehicle = null;
 
     // Recycler view members
     private RecyclerView mRecyclerView;
@@ -66,11 +70,29 @@ public class LiveDataFragment extends Fragment {
         mTvMessage = v.findViewById(R.id.tvMessage);
         mRecyclerView = v.findViewById(R.id.recyclerView);
         mMainLayoutView = v.findViewById(R.id.mainLayoutView);
+        mFab = v.findViewById(R.id.fab);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mAdapter = new LiveDataAdapter(getActivity(), mLiveDataList);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setAdapter(mAdapter);
+
+        // Set click listener for fab
+        mFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cancelFilteredView();
+            }
+        });
+
+        // Set adapter item click listener
+        mAdapter.setOnItemClickListener(new LiveDataAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                setFilteredVehicle(position);
+            }
+        });
+
 
         // Fetch data from API and return
         fetchLiveData();
@@ -113,6 +135,9 @@ public class LiveDataFragment extends Fragment {
                 }
                 else {
                     mLiveDataList = response.body();
+                    if (mFilteredVehicle != null) {
+                        filterLiveDataList();
+                    }
                     mAdapter.setLiveDataList(mLiveDataList);
 
                     if (mLiveDataList.size() == 0) {
@@ -148,6 +173,9 @@ public class LiveDataFragment extends Fragment {
                     Gson gson = new Gson();
                     LiveData ld = gson.fromJson(args[0].toString(), LiveData.class);
 
+                    // Check for filtered vehicle
+                    if (mFilteredVehicle != null && !(mFilteredVehicle.equals(ld.getVehicle().getTag()))) return;
+
                     // Show data only if connected user is superuser, or race is public
                     // or race is private but connected user has vehicle into it.
                     long connectedUserΙd = SharedPrefManager.getInstance(getActivity()).getLoggedInUser().getId();
@@ -168,5 +196,42 @@ public class LiveDataFragment extends Fragment {
             });
         }
     };
+
+    // Cancel filtered view for one vehicle
+    private void cancelFilteredView() {
+        mFilteredVehicle = null;
+        fetchLiveData();
+        mFab.hide();
+    }
+
+    // Filter view for clicked vehicle
+    private void setFilteredVehicle(int position) {
+
+        // Get item and vehicle tag
+        LiveData ld = mLiveDataList.get(position);
+        String vehicleTag = ld.getVehicle().getTag();
+
+        // If vehicle tag is not mFilteredVehicle, filter view.
+        // Else ignore it
+        if (mFilteredVehicle == null || !(vehicleTag.equals(mFilteredVehicle))) {
+            mFilteredVehicle = vehicleTag;
+            filterLiveDataList();
+            mFab.show();
+        }
+
+    }
+
+    // Filter mLiveDataList if mFilterVehicle is not null
+    private void filterLiveDataList() {
+        if (mFilteredVehicle == null) return;
+        ArrayList<LiveData> newList = new ArrayList();
+        for (LiveData ld : mLiveDataList) {
+            if (mFilteredVehicle.equals(ld.getVehicle().getTag())) {
+                newList.add(ld);
+            }
+        }
+        mLiveDataList = newList;
+        mAdapter.setLiveDataList(mLiveDataList);
+    }
 
 }

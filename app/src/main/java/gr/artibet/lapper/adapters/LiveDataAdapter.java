@@ -26,6 +26,19 @@ public class LiveDataAdapter extends RecyclerView.Adapter<LiveDataAdapter.LiveDa
     // LiveData List
     private List<LiveData> mLiveDataList;
 
+    // item click listener member
+    private OnItemClickListener mItemListener;
+
+
+    // Item click interface
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        mItemListener = listener;
+    }
+
     // VIEW HOLDER CLASS
     public static class LiveDataViewHolder extends RecyclerView.ViewHolder {
 
@@ -40,7 +53,7 @@ public class LiveDataAdapter extends RecyclerView.Adapter<LiveDataAdapter.LiveDa
         public TextView mLapInterval;
         public ImageView mFinishFlag;
 
-        public LiveDataViewHolder(@NonNull View itemView) {
+        public LiveDataViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
 
             mLastDt = itemView.findViewById(R.id.tvLastDt);
@@ -53,6 +66,19 @@ public class LiveDataAdapter extends RecyclerView.Adapter<LiveDataAdapter.LiveDa
             mLapIntervalLabel = itemView.findViewById(R.id.tvLapIntervalLabel);
             mLapInterval = itemView.findViewById(R.id.tvLapInterval);
             mFinishFlag = itemView.findViewById(R.id.ivFinishFlag);
+
+            // Item click listener
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onItemClick(position);
+                        }
+                    }
+                }
+            });
         }
     }
 
@@ -66,7 +92,7 @@ public class LiveDataAdapter extends RecyclerView.Adapter<LiveDataAdapter.LiveDa
     @Override
     public LiveDataViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.live_data_item, parent, false);
-        LiveDataViewHolder viewHolder = new LiveDataViewHolder(v);
+        LiveDataViewHolder viewHolder = new LiveDataViewHolder(v, mItemListener);
         return viewHolder;
     }
 
@@ -86,6 +112,7 @@ public class LiveDataAdapter extends RecyclerView.Adapter<LiveDataAdapter.LiveDa
         }
         else {
             sector = liveData.getPrevSensor().getTag() + " - " + liveData.getLastSensor().getTag();
+            holder.mSectorInterval.setVisibility(View.VISIBLE);
         }
         holder.mSector.setText(sector);
 
@@ -116,6 +143,8 @@ public class LiveDataAdapter extends RecyclerView.Adapter<LiveDataAdapter.LiveDa
                         holder.mLapInterval.setTextColor(Color.RED);
                 }
             }
+            holder.mLapIntervalLabel.setVisibility(View.VISIBLE);
+            holder.mLapInterval.setVisibility(View.VISIBLE);
         }
         else {
             holder.mLapIntervalLabel.setVisibility(View.INVISIBLE);

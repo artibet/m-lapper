@@ -12,15 +12,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import gr.artibet.lapper.R;
 import gr.artibet.lapper.Util;
 import gr.artibet.lapper.models.Race;
-import gr.artibet.lapper.models.RaceVehicle;
-import gr.artibet.lapper.models.RaceVehicleState;
 
 public class CompletedRacesAdapter extends RecyclerView.Adapter<CompletedRacesAdapter.CompletedRacesViewHolder> {
 
@@ -167,7 +163,7 @@ public class CompletedRacesAdapter extends RecyclerView.Adapter<CompletedRacesAd
         holder.tvLaps.setText(mContext.getString(R.string.laps) + ": " + String.valueOf(race.getLaps()));
 
         // Start At
-        holder.tvStartAt.setText(mContext.getString(R.string.start_race_title) + ": " + Util.TimestampToDatetime(race.getStartTs(), false));
+        holder.tvStartAt.setText(mContext.getString(R.string.start_race_title) + ": " + Util.timestampToDatetime(race.getStartTs(), false));
 
         // Duration
         holder.tvDuration.setText(mContext.getString(R.string.duration) + ": " + race.getDuration() );

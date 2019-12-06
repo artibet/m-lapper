@@ -18,8 +18,6 @@ import android.view.MenuItem;
 import com.google.android.material.navigation.NavigationView;
 
 import gr.artibet.lapper.R;
-import gr.artibet.lapper.Util;
-import gr.artibet.lapper.api.SocketIO;
 import gr.artibet.lapper.fragments.ActiveRacesFragment;
 import gr.artibet.lapper.fragments.CanceledRacesFragment;
 import gr.artibet.lapper.fragments.CompletedRacesFragment;

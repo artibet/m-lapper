@@ -100,7 +100,7 @@ public class LiveDataAdapter extends RecyclerView.Adapter<LiveDataAdapter.LiveDa
     public void onBindViewHolder(@NonNull LiveDataViewHolder holder, int position) {
         LiveData liveData = mLiveDataList.get(position);
 
-        holder.mLastDt.setText(Util.TimestampToTime(liveData.getLastTs()));
+        holder.mLastDt.setText(Util.timestampToTime(liveData.getLastTs()));
         holder.mVehicleTag.setText(liveData.getVehicle().getTag());
         holder.mRaceTag.setText("(" + liveData.getRace().getTag() + ")");
 

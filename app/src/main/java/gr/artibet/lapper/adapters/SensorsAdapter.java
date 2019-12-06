@@ -137,7 +137,7 @@ public class SensorsAdapter extends RecyclerView.Adapter<SensorsAdapter.SensorVi
         holder.mSensorThreshold.setText(mContext.getString(R.string.threshold)+ ": " + String.valueOf(sensor.getThreshold()) + " sec");
 
         // UpdatedAt
-        holder.mSensorUpdatedAt.setText(mContext.getString(R.string.updated)+ ": " + Util.TimestampToDatetime(sensor.getUpdatedAtTs(), false));
+        holder.mSensorUpdatedAt.setText(mContext.getString(R.string.updated)+ ": " + Util.timestampToDatetime(sensor.getUpdatedAtTs(), false));
 
         // status
         if (sensor.isActive()) {

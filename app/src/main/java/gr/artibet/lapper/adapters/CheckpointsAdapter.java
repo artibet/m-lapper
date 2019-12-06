@@ -77,7 +77,7 @@ public class CheckpointsAdapter extends RecyclerView.Adapter<CheckpointsAdapter.
         Checkpoint cp = mCheckpointList.get(position);
 
         // Timestamp
-        holder.tvDt.setText(Util.TimestampToTime(cp.getLastTs()));
+        holder.tvDt.setText(Util.timestampToTime(cp.getLastTs()));
 
         // Sector, intervals and arrows
         String sector;

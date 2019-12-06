@@ -159,7 +159,7 @@ public class InProgressRacesAdapter extends RecyclerView.Adapter<InProgressRaces
         holder.tvCreator.setText("(" + race.getCreator().getUsername() + ")");
 
         // Start datetime and method
-        holder.tvStart.setText(mContext.getString(R.string.start) + ": " + Util.TimestampToDatetime(race.getStartTs(), true));
+        holder.tvStart.setText(mContext.getString(R.string.start) + ": " + Util.timestampToDatetime(race.getStartTs(), true));
         holder.tvStartMethod.setText(mContext.getString(R.string.start_method) + ": " + race.getStartMethod().getDescription());
 
         // Mode

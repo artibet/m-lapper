@@ -62,7 +62,7 @@ public class Util {
     // ---------------------------------------------------------------------------------------
     // Convert timestamp to HH:mm:ss.mmm
     // ---------------------------------------------------------------------------------------
-    public static String TimestampToTime(Double timestamp) {
+    public static String timestampToTime(Double timestamp) {
         if (timestamp == null) return "";
         long timeMills = (long)(timestamp * 1000);
         Calendar cal = Calendar.getInstance();
@@ -77,7 +77,7 @@ public class Util {
     // Convert timestamp to DD/MM/YYYY, HH:mm:ss.mmm
     // IF seconds is true show HH:mm:ss else HH:mm (defalute is false)
     // ---------------------------------------------------------------------------------------
-    public static String TimestampToDatetime(Double timestamp, boolean seconds) {
+    public static String timestampToDatetime(Double timestamp, boolean seconds) {
         if (timestamp == null) return "";
         long timeMills = (long)(timestamp * 1000);
         Calendar cal = Calendar.getInstance();

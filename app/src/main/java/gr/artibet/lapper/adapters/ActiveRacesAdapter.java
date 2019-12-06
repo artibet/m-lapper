@@ -171,7 +171,7 @@ public class ActiveRacesAdapter extends RecyclerView.Adapter<ActiveRacesAdapter.
         holder.tvLaps.setText(mContext.getString(R.string.laps) + ": " + String.valueOf(race.getLaps()));
 
         // Updated At
-        holder.tvUpdatedAt.setText(mContext.getString(R.string.updated) + ": " + Util.TimestampToDatetime(race.getUpdatedAtTs(), false));
+        holder.tvUpdatedAt.setText(mContext.getString(R.string.updated) + ": " + Util.timestampToDatetime(race.getUpdatedAtTs(), false));
 
      }
 

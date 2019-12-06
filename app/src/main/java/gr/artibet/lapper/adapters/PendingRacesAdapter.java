@@ -10,17 +10,13 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.view.menu.MenuBuilder;
-import androidx.appcompat.view.menu.MenuPopupHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import gr.artibet.lapper.App;
 import gr.artibet.lapper.R;
 import gr.artibet.lapper.Util;
 import gr.artibet.lapper.models.Race;
-import gr.artibet.lapper.models.Vehicle;
 
 public class PendingRacesAdapter extends RecyclerView.Adapter<PendingRacesAdapter.PendingRacesViewHolder> {
 
@@ -198,7 +194,7 @@ public class PendingRacesAdapter extends RecyclerView.Adapter<PendingRacesAdapte
         holder.tvLaps.setText(mContext.getString(R.string.laps) + ": " + String.valueOf(race.getLaps()));
 
         // Updated At
-        holder.tvUpdatedAt.setText(mContext.getString(R.string.updated) + ": " + Util.TimestampToDatetime(race.getUpdatedAtTs(), false));
+        holder.tvUpdatedAt.setText(mContext.getString(R.string.updated) + ": " + Util.timestampToDatetime(race.getUpdatedAtTs(), false));
 
      }
 

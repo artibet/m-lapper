@@ -10,7 +10,7 @@ public class SocketIO {
 
     //private static final String SOCKET_URL = "http://lapper-ws.herokuapp.com/";
     //private static final String SOCKET_URL = "http://10.0.2.2:3000/";
-    private static final String SOCKET_URL = "http://lapper-ws.artibet.gr";
+    private static final String SOCKET_URL = "https://lapper-ws.artibet.gr";
     private static SocketIO mInstance;
     private Socket mSocket;
 

@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 // Retrofit client SINGLETON class
 public class RetrofitClient {
 
-    private static final String BASE_URL = "http://lapper-api.artibet.gr/";
+    private static final String BASE_URL = "https://lapper-api.artibet.gr/";
     private static RetrofitClient mInstance;
     private Retrofit retrofit;
 
